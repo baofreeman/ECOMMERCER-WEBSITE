@@ -1,0 +1,9 @@
+export { default as image1 } from "./image1.jpg";
+export { default as image2 } from "./image2.jpg";
+export { default as image3 } from "./image3.jpg";
+export { default as image4 } from "./image4.jpg";
+export { default as giay } from "./giay.jpg";
+export { default as thatlung } from "./thatlung.jpg";
+export { default as non } from "./non.jpg";
+export { default as quan } from "./quan.jpg";
+export { default as ao } from "./ao.jpg";

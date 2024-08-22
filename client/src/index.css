@@ -1,0 +1,252 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-black: #080404;
+    --color-silver: #929292;
+    --color-gray: #303030;
+    --color-white: #ffffff;
+    --color-light: #d9d9d9;
+    --color-primary: #ff8700;
+    --color-active: #f6ae2d;
+    --color-success: #ade25d;
+    --color-info: #3e00f9;
+    --color-warn: #eaff72;
+    --color-error: #f95200;
+    --header-height: "62px";
+    --footer-height: "28px";
+  }
+
+  html {
+    font-family: "IBM Plex Mono", system-ui, monospace;
+    font-weight: 500;
+    font-size: 62.5%;
+    color: #080404;
+    scrollbar-width: 0;
+  }
+  img {
+    height: auto;
+  }
+  * {
+    box-sizing: border-box;
+  }
+}
+@layer utilities {
+  .zz3d {
+    color: var(--color-white);
+    background-color: var(--color-black);
+    outline-color: var(--color-white);
+  }
+  .page-tab-layout-md {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 0.1rem;
+    grid-template:
+      "HEADER_LAYOUT" minmax(48px, 48px)
+      "SIDEBAR_LEFT_LAYOUT" minmax(48px, 48px)
+      "MAIN_LAYOUT" minmax(0px, 2.55fr)
+      "FOOTER_LAYOUT" minmax(32px, 32px)
+      / minmax(0px, 7fr);
+  }
+  .page-tab-layout-md-cart {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 0.1rem;
+    grid-template:
+      "HEADER_LAYOUT" minmax(48px, 48px)
+      "SIDEBAR_LEFT_LAYOUT" minmax(48px, 48px)
+      "MAIN_LAYOUT" minmax(0px, 0.7fr)
+      "SIDEBAR_RIGHT_LAYOUT" minmax(0px, 0.3fr)
+      "FOOTER_LAYOUT" minmax(32px, 32px)
+      / minmax(0px, 7fr);
+  }
+  .page-tab-layout-md-shop-detail {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 0.1rem;
+    grid-template:
+      "HEADER_LAYOUT" minmax(48px, 48px)
+      "MAIN_LAYOUT" minmax(0px, 0px)
+      "SIDEBAR_RIGHT_LAYOUT" minmax(0px, 7fr)
+      "FOOTER_LAYOUT" minmax(32px, 32px)
+      / minmax(0px, 7fr);
+  }
+  .page-tab-layout {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 0.1rem;
+    grid-template:
+      "NONE_LEFT_LAYOUT HEADER_LAYOUT NONE_RIGHT_LAYOUT" minmax(84px, 84px)
+      "SIDEBAR_LEFT_LAYOUT MAIN_LAYOUT SIDEBAR_RIGHT_LAYOUT" minmax(0px, 2.55fr)
+      "FOOTER_LAYOUT FOOTER_LAYOUT FOOTER_LAYOUT" minmax(32px, 32px)
+      / minmax(0, 2fr) minmax(0px, 7fr) minmax(0, 3fr);
+  }
+
+  .page-tab-layout-left {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 0.1rem;
+    grid-template:
+      "HEADER_LAYOUT NONE_RIGHT_LAYOUT" minmax(84px, 84px)
+      "MAIN_LAYOUT SIDEBAR_RIGHT_LAYOUT" minmax(0px, 2.55fr)
+      "FOOTER_LAYOUT FOOTER_LAYOUT" minmax(32px, 32px)
+      / 9fr 3fr;
+  }
+
+  .page-tab-layout-right {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 0.1rem;
+    grid-template:
+      "NONE_LEFT_LAYOUT HEADER_LAYOUT" minmax(84px, 84px)
+      "SIDEBAR_LEFT_LAYOUT MAIN_LAYOUT" minmax(0px, 2.55fr)
+      "FOOTER_LAYOUT FOOTER_LAYOUT" minmax(32px, 32px)
+      / 2fr 10fr;
+  }
+
+  .page-tab-layout-admin {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 0.1rem;
+    grid-template:
+      "NONE_LEFT_LAYOUT HEADER_LAYOUT" minmax(48px, 48px)
+      "SIDEBAR_LEFT_LAYOUT MAIN_LAYOUT" minmax(0px, 2.55fr)
+      "FOOTER_LAYOUT FOOTER_LAYOUT" minmax(32px, 32px)
+      / minmax(0, 2.15fr) minmax(0px, 7fr);
+  }
+
+  .page-tab-layout-nosb {
+    display: grid;
+    width: 100%;
+    height: 100%;
+    gap: 0.1rem;
+    grid-template:
+      "HEADER_LAYOUT" minmax(84px, 84px)
+      "MAIN_LAYOUT" minmax(0px, 1fr)
+      "FOOTER_LAYOUT" minmax(32px, 32px)
+      / minmax(0px, 12fr);
+  }
+  #HEADER_LAYOUT {
+    grid-area: HEADER_LAYOUT;
+  }
+  #NONE_LEFT_LAYOUT {
+    grid-area: NONE_LEFT_LAYOUT;
+    animation: slideInLeft 0.3s forwards;
+  }
+  #NONE_RIGHT_LAYOUT {
+    grid-area: NONE_RIGHT_LAYOUT;
+    animation: slideInRight 0.3s forwards;
+  }
+  #SIDEBAR_LEFT_LAYOUT {
+    grid-area: SIDEBAR_LEFT_LAYOUT;
+    animation: slideInLeft 0.3s forwards;
+  }
+  #SIDEBAR_RIGHT_LAYOUT {
+    grid-area: SIDEBAR_RIGHT_LAYOUT;
+    animation: slideInRight 0.3s forwards;
+  }
+  #FOOTER_LAYOUT {
+    grid-area: FOOTER_LAYOUT;
+  }
+  #MAIN_LAYOUT {
+    grid-area: MAIN_LAYOUT;
+    transition: width 0.5s ease, transform 0.5s ease;
+  }
+
+  .custom-option {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 60px;
+    cursor: pointer;
+    transition: all 0.5s;
+    border-bottom: 0.1rem solid #ffffff;
+  }
+
+  .container {
+    scroll-snap-type: y mandatory; /* Enables scroll snapping on the y-axis for each section */
+    overflow-y: scroll; /* Activates vertical scrolling */
+    height: 100vh; /* Sets the container's height to the full viewport height */
+  }
+  .section {
+    height: 100vh; /* Makes each section occupy the full viewport height */
+    scroll-snap-align: start; /* Ensures each section aligns at the start when scrolling */
+  }
+}
+
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari, and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      scrollbar-width: none;
+    }
+
+    /* Hide scrollbar for IE, Edge, and Firefox */
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    }
+
+    /* width */
+    ::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+      background: var(--color-silver);
+      border-radius: 5px;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      background: var(--color-active);
+      border-radius: 5px;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color-primary);
+    }
+  }
+  @keyframes marque {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-100%, 0, 0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+}

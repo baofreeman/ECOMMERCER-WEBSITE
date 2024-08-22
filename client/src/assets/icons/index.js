@@ -1,0 +1,11 @@
+export { default as EditIcon } from "./EditIcon";
+export { default as ArrowIcon } from "./ArrowIcon";
+export { default as CartIcon } from "./CartIcon";
+export { default as DarkIcon } from "./DarkIcon";
+export { default as DeleteIcon } from "./DeleteIcon";
+export { default as FbIcon } from "./FbIcon";
+export { default as ImgIcon } from "./ImgIcon";
+export { default as InsIcon } from "./InsIcon";
+export { default as Logo } from "./Logo";
+export { default as SearchIcon } from "./SearchIcon";
+export { default as SunIcon } from "./SunIcon";
