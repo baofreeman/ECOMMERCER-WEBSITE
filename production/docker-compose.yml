@@ -6,12 +6,11 @@ services:
     restart: unless-stopped
     environment:
       - DATABASE=host.docker.internal
+      - CLIENT_URL=http://localhost
     ports:
       - 8000:8000
     expose:
       - 8000
-    env_file:
-      - ../server/.env
 
   nginx:
     image: nginx:1.23.3
