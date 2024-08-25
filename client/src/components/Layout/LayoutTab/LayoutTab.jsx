@@ -68,7 +68,8 @@ const LayoutTab = () => {
         "sm:page-tab-layout-md-shop-detail md:page-tab-layout-md-shop-detail":
           isProductOnMobile && !isAdminLayout,
         "sm:page-tab-layout-md md:page-tab-layout-md": isShopOnMobile,
-        "page-tab-layout-admin": isAdminLayout,
+        "page-tab-layout-admin sm:page-tab-layout-md md:page-tab-layout-md":
+          isAdminLayout,
       }),
     [
       isSidebarLeftOpen,

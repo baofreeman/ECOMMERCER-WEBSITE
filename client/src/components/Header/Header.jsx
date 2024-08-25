@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import { useLocation } from "react-router-dom";
 import clsx from "clsx";
 
@@ -78,4 +78,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

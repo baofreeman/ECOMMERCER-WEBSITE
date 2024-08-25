@@ -9,7 +9,11 @@ class ProductController {
     try {
       const { page } = req.query;
       const limit = 8;
-      const skip = page ? (parseInt(page, 10) - 1) * limit : 1;
+      const currentPage = page ? parseInt(page, 10) : 1;
+      const skip = (currentPage - 1) * limit;
+
+      const total = await ProductModal.countDocuments(); // Tính tổng số sản phẩm
+      const totalPages = Math.ceil(total / limit); // Tính tổng số trang
 
       let products;
       if (page === undefined) {
@@ -20,7 +24,7 @@ class ProductController {
         products = await ProductModal.find().skip(skip).limit(limit);
       }
 
-      return res.status(200).json(products);
+      return res.status(200).json({ products, totalPages });
     } catch (error) {
       // Log and handle errors
       console.error("Error fetching products:", error);

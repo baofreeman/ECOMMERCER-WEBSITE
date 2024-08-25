@@ -17,8 +17,8 @@ export const productAdapter = createEntityAdapter({
 });
 
 // InitState Product
-export const initialState = productAdapter.getInitialState();
-let preArgs;
+export const initialState = productAdapter.getInitialState({ totalPages: 0 });
+
 export const productsApiSlice = productSlice.injectEndpoints({
   endpoints: (builder) => ({
     // GET All product with lazy loading
@@ -33,8 +33,15 @@ export const productsApiSlice = productSlice.injectEndpoints({
       },
 
       transformResponse: (res) => {
-        const loadProducts = res.map((product) => product);
-        return productAdapter.setAll(initialState, loadProducts);
+        console.log(res);
+        const loadProducts = res?.products
+          ? res.products.map((product) => product)
+          : [];
+        const totalPages = res?.totalPages || 0;
+        return productAdapter.setAll(
+          { ...initialState, totalPage: totalPages },
+          loadProducts
+        );
       },
       keepUnusedDataFor: 5,
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -46,10 +53,13 @@ export const productsApiSlice = productSlice.injectEndpoints({
         if (page >= 1) {
           const select = productAdapter.getSelectors().selectAll(newItems);
           const currentCached = productAdapter.getSelectors().selectAll(cached);
-          return productAdapter.setAll(initialState, [
-            ...currentCached,
-            ...select,
-          ]);
+          return productAdapter.setAll(
+            {
+              ...cached,
+              totalPage: newItems.totalPage,
+            },
+            [...currentCached, ...select]
+          );
         }
       },
       providesTags: (result) => {
@@ -69,9 +79,6 @@ export const productsApiSlice = productSlice.injectEndpoints({
         console.log(category, search, page);
         const parser = queryString.stringify(search);
         const url = `/product/${category}?${parser}&page=${page}`;
-        // if (page === 1) {
-        //   preArgs = { category, page };
-        // }
         return {
           url: url,
           method: "GET",
@@ -88,7 +95,6 @@ export const productsApiSlice = productSlice.injectEndpoints({
         const { page, category } = arg;
         const select = productAdapter.getSelectors().selectAll(newItems);
         if (page === 1) {
-          preArgs = arg;
           return productAdapter.setAll(initialState, [...select]);
         }
         const currentCached = productAdapter.getSelectors().selectAll(cached);
@@ -199,5 +205,9 @@ export const getSelectors = (query) => {
     ),
     selectById: (id) =>
       createSelector(adapterSelectors, (state) => state.selectById(state, id)),
+    selectTotalPage: createSelector(
+      selectSetup,
+      (state) => state?.data?.totalPage ?? 0
+    ),
   };
 };

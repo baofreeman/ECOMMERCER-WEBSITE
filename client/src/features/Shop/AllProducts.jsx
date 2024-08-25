@@ -26,16 +26,18 @@ const AllProducts = () => {
     setPage(1);
   }, [location.pathname]);
 
-  const { isFetching, isSuccess } = useGetProductsQuery(
+  const { data, isFetching, isSuccess } = useGetProductsQuery(
     { page: page },
-    { refetchOnMountOrArgChange: true }
+    {
+      refetchOnMountOrArgChange: true,
+    }
   );
 
-  const { selectIds } = getSelectors({
+  const { selectIds, selectTotalPage } = getSelectors({
     page: page,
   });
   const products = useSelector(selectIds);
-
+  const totalPage = useSelector(selectTotalPage);
   const [executeScroll, elRef] = useScroll();
   useEffect(() => {
     executeScroll();
@@ -49,15 +51,23 @@ const AllProducts = () => {
   });
 
   useEffect(() => {
-    isSuccess && setIsLoading(false);
+    setIsLoading(false);
   }, [page]);
 
+  // Increase page when inView is true and not currently fetching
   useEffect(() => {
-    if (inView) {
+    if (inView && !isFetching && !isLoading && page < totalPage) {
       setPage((prev) => prev + 1);
       setIsLoading(true);
     }
-  }, [inView]);
+  }, [inView, isFetching, isLoading, page, totalPage]);
+
+  // // Set isLoading to false when fetching completes
+  // useEffect(() => {
+  //   if (!isFetching) {
+  //     setIsLoading(false);
+  //   }
+  // }, [isFetching]);
 
   // Toggle sidebar.
   const openSiderRight = useSelector(selectSidebarRight);
@@ -66,9 +76,9 @@ const AllProducts = () => {
     openSidebarLeft && openSiderRight
       ? "grid-cols-4 grid-auto sm:grid-cols-2"
       : !openSidebarLeft && !openSiderRight
-      ? "grid-cols-8 grid-auto"
+      ? "grid-cols-8 grid-auto sm:grid-cols-2"
       : !openSidebarLeft || !openSiderRight
-      ? "grid-cols-6 grid-auto"
+      ? "grid-cols-6 grid-auto sm:grid-cols-2"
       : null;
   let tabItem = null;
 
@@ -87,14 +97,14 @@ const AllProducts = () => {
     <>
       <div ref={elRef} />
       <div className={`grid gap-4 relative ${gridCols}`}>
+        {tabItem}
         {isFetching && (
-          <div className="w-full col-span-4 m-auto flex items-center justify-center">
+          <div className="w-full col-span-4 sm:col-span-2 m-auto flex items-center justify-center">
             <Loading />
           </div>
         )}
-        {tabItem}
       </div>
-      {products.length > 0 && (
+      {products.length > 0 && page < totalPage && (
         <div
           ref={ref}
           className="w-full col-span-4 m-auto py-10 flex items-center justify-center"

@@ -52,6 +52,7 @@
       "FOOTER_LAYOUT" minmax(32px, 32px)
       / minmax(0px, 7fr);
   }
+
   .page-tab-layout-md-cart {
     display: grid;
     width: 100%;

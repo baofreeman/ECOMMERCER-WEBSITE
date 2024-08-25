@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, memo } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { useLogoutUserMutation } from "../../api/endpoints/authApiSlice";
@@ -93,4 +93,4 @@ const Profile = () => {
   );
 };
 
-export default Profile;
+export default memo(Profile);

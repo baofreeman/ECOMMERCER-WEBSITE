@@ -51,7 +51,7 @@ const ModalDetail = () => {
 
   // Add to cart
   const handleAddToCart = async () => {
-    if (data?.[0]) {
+    if (data[0]) {
       try {
         await dispatch(addToCart(data[0]));
         setSelectedSizeId("");
@@ -63,7 +63,6 @@ const ModalDetail = () => {
       toast.error(error?.message || "An error occurred");
     }
   };
-
   if (!productId) {
     return (
       <span className="text-silver flex justify-center items-center h-full w-full">
@@ -71,7 +70,6 @@ const ModalDetail = () => {
       </span>
     );
   }
-
   return (
     <div className="flex w-full sm:flex-col overflow-hidden h-[100%]">
       <div className="flex w-full items-start justify-center gap-6">
@@ -151,7 +149,7 @@ const ModalDetail = () => {
             </div>
             <Button
               size="m"
-              design={!selectedSizeId ? "disable" : "primary"}
+              design={"primary"}
               width="full"
               onClick={handleAddToCart}
               disabled={!selectedSizeId}

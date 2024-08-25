@@ -71,7 +71,7 @@ const ListFilterProducts = () => {
   const isSidebarLeftOpen = useSelector(selectSidebarLeft);
   const gridColumns =
     isSidebarLeftOpen && isSidebarRightOpen
-      ? "grid-cols-4 grid-auto"
+      ? "grid-cols-4 grid-auto sm:grid-cols-2"
       : !isSidebarLeftOpen && !isSidebarRightOpen
       ? "grid-cols-8 grid-auto"
       : "grid-cols-6 grid-auto";
