@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cors = require("cors");
+const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
 require("dotenv").config();
 
@@ -16,6 +17,9 @@ require("./v1/config/passport-jwt-strategy.js");
 const dbConnect = require("./v1/config/dbConnect.js");
 // Connect Database
 dbConnect();
+
+// Helmet
+app.use(helmet());
 
 // Cors
 const corsOptions = {
@@ -40,6 +44,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Passport Middleware
 app.use(passport.initialize());
+app.disable("x-powered-by");
 
 // Router
 app.use("/api/v1/auth", auth);
