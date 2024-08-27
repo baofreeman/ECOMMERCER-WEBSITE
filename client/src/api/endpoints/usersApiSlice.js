@@ -41,6 +41,15 @@ export const userApiSlice = apiSlice.injectEndpoints({
       },
     }),
 
+    updateUser: builder.mutation({
+      query: (body) => ({
+        url: "/user/update-user",
+        method: "PUT",
+        body,
+      }),
+      invalidatesTags: (result, error, arg) => [{ type: "User", id: arg?._id }],
+    }),
+
     // Delete a user with admin role
     deleteUser: builder.mutation({
       query: (body) => ({
@@ -54,7 +63,11 @@ export const userApiSlice = apiSlice.injectEndpoints({
 });
 
 // Export hooks for using in components
-export const { useGetUsersQuery, useDeleteUserMutation } = userApiSlice;
+export const {
+  useGetUsersQuery,
+  useDeleteUserMutation,
+  useUpdateUserMutation,
+} = userApiSlice;
 
 // Selectors
 const selectUserResult = userApiSlice.endpoints.getUsers.select();

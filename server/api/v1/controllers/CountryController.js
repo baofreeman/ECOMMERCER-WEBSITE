@@ -12,7 +12,6 @@ class CountryController {
   // GET /v1/country/districts/:provinceId
   async districts(req, res) {
     const { provinceId } = req.params;
-    console.log(provinceId);
     try {
       const result = await axios.get(
         `https://vapi.vnappmob.com/api/province/district/${provinceId}`

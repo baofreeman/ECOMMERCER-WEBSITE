@@ -19,7 +19,7 @@ const productSlice = createApi({
     credentials: "include",
     paramsSerializer: (params) => queryString.stringify(params),
   }),
-  tagTypes: ["Product", "Search", "Variant"],
+  tagTypes: ["Product", "Search", "Variant", "Filter"],
   endpoints: () => ({}),
 });
 

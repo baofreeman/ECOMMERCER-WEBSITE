@@ -25,7 +25,7 @@ import {
   VerifyEmail,
   RequireAuth,
 } from "./features/Auth";
-import { AllProducts, FilteredProducts } from "./features/Shop";
+import { AllProducts, ListFilterProducts } from "./features/Shop";
 import { CheckoutDetail, CheckoutSuccess } from "./features/Checkout";
 
 // Import role constants for authorization
@@ -57,7 +57,7 @@ function App() {
           {/* Layout with tab navigation */}
           <Route element={<LayoutTab />}>
             {/* Admin routes with role-based access control */}
-            <Route element={<RequireAuth allowedRoles={[ROLES.admin]} />}>
+            <Route element={<RequireAuth allowedRoles={["admin"]} />}>
               <Route path="/admin" element={<Admin />}>
                 <Route index element={<Products />} />
                 <Route path="products">
@@ -76,8 +76,10 @@ function App() {
             {/* Shop routes */}
             <Route path="/shop" element={<Shop />}>
               <Route index element={<AllProducts />} />
-              <Route path=":category" element={<FilteredProducts />} />
+              <Route path=":category" element={<ListFilterProducts />} />
             </Route>
+
+            {/* Cart routes */}
             <Route path="/cart" element={<Cart />}>
               <Route index element={<CartDetail />} />
             </Route>

@@ -69,7 +69,6 @@ const cartSlice = createSlice({
 
     // Delete product in cart
     deleteCart: (state, action) => {
-      console.log(action.payload);
       const itemIndex = state.cartItems.findIndex(
         // Find product based on Index. Filter product Id and Sku.
         (item) =>

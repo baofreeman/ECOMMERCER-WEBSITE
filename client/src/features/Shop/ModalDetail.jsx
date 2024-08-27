@@ -9,14 +9,17 @@ import {
 import { addToCart } from "../../api/slices/cartSlice";
 
 import { Select, Button, Errors } from "../../components/ui";
-import { Loading } from "../../components/shared";
+import { Loading, Modal } from "../../components/shared";
 import { convertPrice } from "../../config";
 import { toast } from "react-toastify";
+import { useModal } from "../../context/ModalContext";
+import SizePattern from "./SizePattern";
 
 const ModalDetail = () => {
   const [searchParams] = useSearchParams();
   const [selectedSizeId, setSelectedSizeId] = useState("");
   const [selectedColorId, setSelectedColorId] = useState("");
+  const { openModal, closeModal } = useModal();
 
   const productId = searchParams.get("productId"); // GET productId params
   const dispatch = useDispatch();
@@ -63,6 +66,11 @@ const ModalDetail = () => {
       toast.error(error?.message || "An error occurred");
     }
   };
+
+  const showDeleteModal = () => {
+    openModal(<SizePattern />);
+  };
+
   if (!productId) {
     return (
       <span className="text-silver flex justify-center items-center h-full w-full">
@@ -74,7 +82,7 @@ const ModalDetail = () => {
     <div className="flex w-full sm:flex-col overflow-hidden h-[100%]">
       <div className="flex w-full items-start justify-center gap-6">
         <div className="flex h-full w-[30%] flex-col gap-2">
-          <h1 className="line-clamp-2 pr-[10px] select-none">
+          <h1 className="line-clamp-2 pr-[10px] font-bold text-primary select-none">
             {product?.name}
           </h1>
           <div className="w-full h-[80px] overflow-scroll no-scrollbar">
@@ -137,7 +145,10 @@ const ModalDetail = () => {
               </div>
             ))}
           </div>
-          <div className="flex flex-col sm:flex-row sm:w-full gap-2 items-center justify-center w-[30%]">
+          <div className="flex flex-col sm:w-full gap-2 items-start justify-between w-[30%] px-4">
+            <Button size="s-link" design="link-basic" onClick={showDeleteModal}>
+              Hướng dẫn kích cỡ
+            </Button>
             <div className="flex w-full gap-4">
               <h1 className="text-silver">GIÁ: </h1>
               {isLoading && <Loading />}

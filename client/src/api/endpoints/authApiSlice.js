@@ -37,7 +37,6 @@ export const authApiSlice = apiSlice.injectEndpoints({
         headers: { "Content-Type": "application/json" },
       }),
       invalidatesTags: (result) => {
-        console.log(result);
         return result ? ["UNAUTHORIZED"] : [];
       },
     }),

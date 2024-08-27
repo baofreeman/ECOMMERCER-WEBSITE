@@ -5,11 +5,11 @@
 import { configureStore } from "@reduxjs/toolkit";
 import {
   apiSlice,
-  productSlice,
   sidebarSlice,
   cartSlice,
   countrySlice,
-} from "./index";
+  productSlice,
+} from "./";
 
 const store = configureStore({
   reducer: {

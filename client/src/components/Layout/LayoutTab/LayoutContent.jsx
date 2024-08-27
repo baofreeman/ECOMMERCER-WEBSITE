@@ -2,6 +2,7 @@ import { ModalDetail } from "../../../features/Shop";
 import { Outlet, useLocation } from "react-router-dom";
 
 import ButtonSidebar from "./ButtonSidebar";
+import { memo } from "react";
 
 const LayoutContent = ({ contentRef, width, height, overlayRef, id }) => {
   // Get the current pathname from the router
@@ -49,4 +50,4 @@ const LayoutContent = ({ contentRef, width, height, overlayRef, id }) => {
   );
 };
 
-export default LayoutContent;
+export default memo(LayoutContent);

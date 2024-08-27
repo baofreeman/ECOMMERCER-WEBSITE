@@ -33,7 +33,7 @@ const Search = ({ toggleModal, setToggleModal }) => {
    * Navigate to the product page and close the modal.
    */
   const handleLink = (item) => {
-    const { productId } = item;
+    const { _id: productId } = item;
     if (productId) {
       navigate({
         pathname: "/shop",
@@ -53,7 +53,7 @@ const Search = ({ toggleModal, setToggleModal }) => {
   };
 
   return (
-    <div className="relative flex items-center flex-1 sm:hidden h-[36px]">
+    <div className="relative flex flex-1 items-center sm:hidden h-[36px]">
       <div className="absolute top-0 left-[12px] flex items-center justify-center h-full">
         <div className="w-[36px] sm:w-[24px]">
           <SearchIcon />

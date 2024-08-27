@@ -23,12 +23,9 @@ const Orders = () => {
           <table className="w-full">
             <thead>
               <tr>
-                <th className="text-left px-8 py-4">Id</th>
-                <th className="text-left px-8 py-4">Thông tin</th>
-                <th className="text-left px-8 py-4">Sản phẩm</th>
-                <th className="text-left px-8 py-4">Số lượng</th>
-                <th className="text-left px-8 py-4">Tổng cộng</th>
-                <th className="text-left px-8 py-4">Thanh toán</th>
+                <th className="text-left px-8 py-4">Thông tin người đặt</th>
+                <th className="text-left px-8 py-4">Chi tiết sản phẩm</th>
+                <th className="text-left px-8 py-4">Chi tiết thanh toán</th>
                 <th className="text-left px-8 py-4">Ghi chú</th>
                 <th className="text-left px-8 py-4">Ngày tạo</th>
                 <th className="text-left px-8 py-4">Trạng thái</th>

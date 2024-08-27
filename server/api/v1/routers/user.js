@@ -15,6 +15,13 @@ router
     UserController.getUsers
   );
 router
+  .route("/update-user")
+  .put(
+    accessTokenAutoRefresh,
+    passport.authenticate("jwt", { session: false }),
+    UserController.updateUser
+  );
+router
   .route("/delete-user")
   .delete(
     accessTokenAutoRefresh,

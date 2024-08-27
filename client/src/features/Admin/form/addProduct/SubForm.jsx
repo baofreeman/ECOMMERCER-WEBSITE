@@ -18,9 +18,6 @@ const SubForm = ({
     control,
   });
   const watchCategory = watch("category");
-
-  console.log(watchCategory);
-
   const filterSub = SUBCATEGORY.filter(
     (item) => item.category === watchCategory
   );

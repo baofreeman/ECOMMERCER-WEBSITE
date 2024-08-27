@@ -11,6 +11,36 @@ class UserController {
     res.status(200).json(users);
   }
 
+  async updateUser(req, res) {
+    try {
+      const { userId, roles } = req.body; // Extract userId and roles from the request body
+
+      if (!userId) {
+        return res.status(400).json({ message: "Thiếu UserId" }); // Check if userId is provided
+      }
+
+      const user = await Users.findById(userId).exec(); // Find the user by userId
+
+      if (!user) {
+        return res.status(400).json({ message: "Không tìm thấy người dùng" }); // If user is not found, return an error
+      }
+
+      // Update roles if new roles are provided
+      if (roles) {
+        user.roles = roles; // Set the user's roles to the new roles
+      }
+
+      await user.save(); // Save the user after updating
+
+      res.json({
+        message: `Username ${user.username} với Id ${user._id} đã cập nhật vai trò`, // Return success message
+      });
+    } catch (error) {
+      // Handle any errors that occur during the process and return an error message
+      res.status(500).json({ message: "Lỗi máy chủ", error: error.message });
+    }
+  }
+
   // DELETE path: /v1/user
   async deleteUser(req, res, next) {
     const { userId } = req.body;

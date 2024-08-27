@@ -1,4 +1,4 @@
-import { memo, useState } from "react";
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
@@ -12,36 +12,38 @@ import { EditIcon, DeleteIcon } from "../../../assets/icons";
 import { useModal } from "../../../context/ModalContext";
 
 const ProductExtent = ({ productId }) => {
-  const { product } = useGetProductsQuery("getProducts", {
-    selectFromResult: ({ data }) => ({
-      product: data?.entities[productId],
-    }),
-    refetchOnMountOrArgChange: true,
-  }); // GET product based on productId.
+  const { product } = useGetProductsQuery(
+    {},
+    {
+      selectFromResult: ({ data }) => ({
+        product: data?.entities[productId],
+      }),
+      refetchOnMountOrArgChange: true,
+    }
+  ); // GET product based on productId.
 
-  const { openModal } = useModal();
+  const { closeModal, openModal } = useModal();
 
   const [deleteProduct] = useDeleteProductMutation(); // Delete mutation.
 
   // Delete product based on productId.
-  const handleDelete = async (productId) => {
+  const handleDelete = async () => {
     try {
       const res = await deleteProduct({ productId });
       if (res.data) {
         toast.success(res.data.message);
-        window.location.reload();
       }
+      closeModal();
     } catch (error) {
       toast.error(error.message);
       return error;
     }
   };
 
-  const showDeleteModal = (productId) => {
+  const showDeleteModal = () => {
     openModal(
       <Modal
-        callback={() => handleDelete(productId)}
-        data={productId}
+        callback={handleDelete}
         title={"Bạn có muốn xóa sản phẩm khỏi giỏ hàng?"}
       />
     );
@@ -63,10 +65,7 @@ const ProductExtent = ({ productId }) => {
             <EditIcon />
           </Link>
         </td>
-        <td
-          className="border px-8 py-4"
-          onClick={() => showDeleteModal(productId)}
-        >
+        <td className="border px-8 py-4" onClick={showDeleteModal}>
           <DeleteIcon />
         </td>
       </tr>

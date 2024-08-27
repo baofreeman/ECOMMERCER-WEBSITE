@@ -1,11 +1,14 @@
 "use client";
 
-import { useEffect, useMemo } from "react";
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import clsx from "clsx";
 
-import { useGetProductsQuery } from "../../../api/endpoints/productsApiSlice";
+import {
+  useGetProductsQuery,
+  useLazyGetProductsQuery,
+} from "../../../api/endpoints/productsApiSlice";
 import {
   selectSidebarLeft,
   selectSidebarRight,
@@ -31,7 +34,15 @@ import { Loading } from "../../../components/shared";
 const LayoutTab = () => {
   const { pathname, search } = useLocation();
   const dispatch = useDispatch();
-  const { isLoading, isSuccess } = useGetProductsQuery({});
+
+  const [trigger, { isLoading, isSuccess, isUninitialized }] =
+    useLazyGetProductsQuery();
+  useEffect(() => {
+    if (isUninitialized) {
+      trigger({});
+    }
+  }, [isUninitialized]);
+
   const { contentRef, overlayRef, width, height } = useResize();
 
   const isSidebarLeftOpen = useSelector(selectSidebarLeft);
@@ -109,4 +120,4 @@ const LayoutTab = () => {
   return null;
 };
 
-export default LayoutTab;
+export default memo(LayoutTab);

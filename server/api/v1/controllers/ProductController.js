@@ -177,10 +177,11 @@ class ProductController {
 
   // GET v1/product/traits
   async getFilterProducts(req, res) {
-    const { tag, color, size, page = 1 } = req.query;
+    const { tag, color, size, page } = req.query;
     const { category } = req.params;
     const limit = 8;
-    const skip = (page - 1) * limit;
+    const currentPage = page ? parseInt(page, 10) : 1;
+    const skip = (currentPage - 1) * limit;
 
     // Build the query object
     let query = {};
@@ -196,7 +197,10 @@ class ProductController {
         return res.status(400).json({ message: "Không tìm thấy sản phẩm" });
       }
 
-      return res.status(200).json(products);
+      const totalProducts = await ProductModal.countDocuments(query);
+      const totalPages = Math.ceil(totalProducts / limit);
+
+      return res.status(200).json({ products, totalPages });
     } catch (error) {
       console.error("Error fetching products:", error);
       return res.status(500).json({ message: "Lỗi máy chủ" });

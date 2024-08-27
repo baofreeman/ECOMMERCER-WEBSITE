@@ -22,9 +22,7 @@ const Header = () => {
       )}
     >
       <nav className="w-full flex items-center justify-between text-silver my-0 mx-auto sm:gap-2">
-        <div
-          className={`flex gap-16 sm:gap-1 items-center flex-1 sm:flex-none`}
-        >
+        <div className="flex flex-1 space-x-4 sm:space-x-2 items-center justify-start">
           {/* Logo */}
           <div className={displayLogo}>
             <Button size="m" to={"/"}>
@@ -33,7 +31,7 @@ const Header = () => {
           </div>
 
           {/* Navigation links */}
-          <ul className="flex gap-2 items-center">
+          <ul className="flex flex-1 space-x-4 sm:space-x-2 items-center">
             <li>
               <Button
                 size="l"
@@ -71,8 +69,10 @@ const Header = () => {
         />
 
         {/* Profile and theme toggle */}
-        <DarkModeSwitch />
-        <Profile />
+        <div className="flex flex-1 space-x-4 sm:space-x-2 justify-end">
+          <DarkModeSwitch />
+          <Profile />
+        </div>
       </nav>
     </header>
   );

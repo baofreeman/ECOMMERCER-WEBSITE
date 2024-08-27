@@ -15,8 +15,6 @@ const useAuth = () => {
     [currentUser]
   );
 
-  console.log(currentUser);
-
   return user;
 };
 

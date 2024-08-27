@@ -50,10 +50,23 @@ export const ordersApiSlice = apiSlice.injectEndpoints({
       },
       invalidatesTags: [{ type: "Order", id: "LIST" }],
     }),
+    updateOrder: builder.mutation({
+      // Add new order based on CartState.
+      query: (body) => {
+        return {
+          url: "/order/update-order",
+          method: "PUT",
+          body: body,
+          formData: true,
+        };
+      },
+      invalidatesTags: [{ type: "Order", id: "LIST" }],
+    }),
   }),
 });
 
-export const { useGetOrderQuery, useAddOrderMutation } = ordersApiSlice; // Used.
+export const { useGetOrderQuery, useAddOrderMutation, useUpdateOrderMutation } =
+  ordersApiSlice; // Used.
 
 export const selectOrderResult = ordersApiSlice.endpoints.getOrder.select();
 

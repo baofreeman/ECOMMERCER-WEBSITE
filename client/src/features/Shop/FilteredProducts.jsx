@@ -1,8 +1,8 @@
 import { useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
-import { useGetFilterProductsQuery } from "../../api/endpoints/productsApiSlice";
+import { useLazyGetFilterProductsQuery } from "../../api/endpoints/productsApiSlice";
 import {
   selectSidebarLeft,
   selectSidebarRight,
@@ -13,60 +13,52 @@ import queryString from "query-string";
 import { Loading } from "../../components/shared";
 
 const ListFilterProducts = () => {
-  const location = useLocation();
-  const searchParams = queryString.parse(location.search);
+  const { search } = useLocation();
+  const searchParams = queryString.parse(search);
   const { category } = useParams();
-
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isPageInitialized, setIsPageInitialized] = useState(false);
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
 
-  // Initialize page state and trigger refetch
+  const [trigger, { data: products, isFetching, isSuccess }] =
+    useLazyGetFilterProductsQuery();
+
   useEffect(() => {
-    setCurrentPage(1);
-    setIsPageInitialized(true);
-  }, [category, location.pathname]);
+    setPage(1);
+    // Trigger API call when category or search changes
+    trigger({ category, search: searchParams, page: 1 });
+  }, [category, search]);
 
-  // Fetch filtered products only after currentPage is set to 1
-  const { products, refetch } = useGetFilterProductsQuery(
-    { category, search: searchParams, page: currentPage },
-    {
-      skip: !isPageInitialized,
-      selectFromResult: ({ data }) => ({
-        products: data?.ids.map((id) => id) || [],
-      }),
-      refetchOnMountOrArgChange: true,
-    }
-  );
-
-  // Refetch data after page is initialized
+  // Fetch filtered products when page changes
   useEffect(() => {
-    if (isPageInitialized) {
-      refetch();
+    // If page is greater than 1, fetch the products for that page
+    if (page > 1) {
+      trigger({ category, search: searchParams, page });
     }
-  }, [isPageInitialized, refetch]);
+  }, [page]);
 
-  // Scroll to top on component mount
-  const [executeScroll, scrollRef] = useScroll();
+  const [executeScroll, elRef] = useScroll();
   useEffect(() => {
     executeScroll();
   }, []);
 
-  // Setup infinite scrolling
-  const { ref: inViewRef, inView } = useInView();
-
-  useEffect(() => {
-    if (inView && !isLoading) {
-      setIsLoading(true);
-      setCurrentPage((prevPage) => prevPage + 1);
-    }
-  }, [inView, Loading]);
+  const { ref, inView } = useInView({
+    trackVisibility: true,
+    delay: 500,
+    root: null,
+    rootMargin: "200px",
+  });
 
   useEffect(() => {
     setIsLoading(false);
-  }, [currentPage]);
+  }, [page]);
 
-  // Determine grid columns based on sidebar visibility
+  useEffect(() => {
+    if (inView && !isFetching && !isLoading && page < products?.totalPages) {
+      setPage((prev) => prev + 1);
+      setIsLoading(true);
+    }
+  }, [inView, isFetching, isLoading, page, products?.totalPages]);
+
   const isSidebarRightOpen = useSelector(selectSidebarRight);
   const isSidebarLeftOpen = useSelector(selectSidebarLeft);
   const gridColumns =
@@ -76,22 +68,29 @@ const ListFilterProducts = () => {
       ? "grid-cols-8 grid-auto"
       : "grid-cols-6 grid-auto";
 
-  // Render product items or show a "no products" message
-  const productItems = products?.length ? (
-    products.map((productId) => (
-      <ProductExtend key={productId} productId={productId} />
-    ))
-  ) : (
-    <span className="text-center m-auto col-span-4">Không có sản phẩm</span>
-  );
+  const productItems =
+    isSuccess && products?.ids?.length ? (
+      products?.ids.map((productId) => (
+        <ProductExtend key={productId} productId={productId} />
+      ))
+    ) : (
+      <span className="text-center m-auto col-span-4">Không có sản phẩm</span>
+    );
 
   return (
     <>
-      <div ref={scrollRef} />
-      <div className={`grid ${gridColumns} gap-4 relative`}>{productItems}</div>
-      {products?.length > 0 && (
+      <div ref={elRef} />
+      <div className={`grid ${gridColumns} gap-4 relative`}>
+        {productItems}
+        {isFetching && (
+          <div className="w-full col-span-4 sm:col-span-2 m-auto flex items-center justify-center">
+            <Loading />
+          </div>
+        )}
+      </div>
+      {products?.ids?.length > 0 && page < products?.totalPages && (
         <div
-          ref={inViewRef}
+          ref={ref}
           className="w-full col-span-4 m-auto py-10 flex items-center justify-center"
         >
           {isLoading && <Loading />}

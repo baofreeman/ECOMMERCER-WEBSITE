@@ -48,6 +48,7 @@ module.exports = {
     },
     colors: {
       DEFAULT: "var(--color-black)",
+      primary: "var(--color-primary)",
       light: "var(--color-light)",
       silver: "var(--color-silver)",
       black: "var(--color-black)",

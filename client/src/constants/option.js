@@ -68,3 +68,23 @@ export const FOOTER_LINK = [
   { name: "Order Status", path: "/" },
   { name: "Website Terms and Conditions", path: "/" },
 ];
+export const PRODUCT_SIZES = {
+  shirt: [
+    { name: "Cổ", S: 20, M: 21, L: 22, XL: 23, XXL: 24 },
+    { name: "Vai", S: 35, M: 36, L: 37, XL: 38, XXL: 39 },
+    { name: "Ngực", S: 40, M: 41, L: 42, XL: 43, XXL: 44 },
+  ],
+  pants: [
+    { name: "Eo", S: 30, M: 32, L: 34, XL: 36, XXL: 38 },
+    { name: "Hông", S: 40, M: 42, L: 44, XL: 46, XXL: 48 },
+    { name: "Chiều dài", S: 100, M: 102, L: 104, XL: 106, XXL: 108 },
+  ],
+  belt: [
+    { name: "Chiều dài", S: 90, M: 95, L: 100, XL: 105, XXL: 110 },
+    { name: "Chiều rộng", S: 2, M: 2.5, L: 3, XL: 3.5, XXL: 4 },
+  ],
+  hat: [{ name: "Vòng đầu", S: 56, M: 57, L: 58, XL: 59, XXL: 60 }],
+  shoes: [{ name: "Chiều dài chân", S: 24, M: 25, L: 26, XL: 27, XXL: 28 }],
+};
+
+export const DELIVERY_STATUS = ["pending", "shipped", "delivered", "cancelled"];

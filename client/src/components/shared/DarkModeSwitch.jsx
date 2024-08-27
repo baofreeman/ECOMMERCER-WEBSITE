@@ -22,8 +22,6 @@ const DarkModeSwitch = () => {
     setIsDarkMode((prev) => !prev);
   }, []);
 
-  console.log(isDarkMode);
-
   return (
     <div className="flex flex-1 sm:flex-none gap-2 items-center justify-end">
       <div

@@ -18,4 +18,12 @@ router
     OrderController.getOrder
   );
 
+router
+  .route("/update-order")
+  .put(
+    accessTokenAutoRefresh,
+    passport.authenticate("jwt", { session: false }),
+    OrderController.updateOrder
+  );
+
 module.exports = router;

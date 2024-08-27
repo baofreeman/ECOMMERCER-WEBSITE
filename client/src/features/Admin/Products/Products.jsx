@@ -18,15 +18,16 @@ const Products = () => {
   useLayoutEffect(() => {
     setPage(1);
   }, [location.pathname]);
-  const { isFetching, isSuccess } = useGetProductsQuery(
-    { page: page },
-    { refetchOnMountOrArgChange: true }
-  );
+  const {
+    data: products,
+    isFetching,
+    isSuccess,
+  } = useGetProductsQuery({ page: page }, { refetchOnMountOrArgChange: true });
 
-  const { selectIds } = getSelectors({
-    page: page,
-  });
-  const products = useSelector(selectIds);
+  // const { selectIds } = getSelectors({
+  //   page: page,
+  // });
+  // const products = useSelector(selectIds);
   const [executeScroll, elRef] = useScroll();
   useEffect(() => {
     executeScroll();
@@ -53,8 +54,8 @@ const Products = () => {
   let content;
 
   content =
-    isSuccess && products?.length > 0
-      ? products.map((productId) => (
+    isSuccess && products?.ids?.length > 0
+      ? products?.ids.map((productId) => (
           <ProductExtent key={productId} productId={productId} />
         ))
       : (content = (
@@ -73,7 +74,7 @@ const Products = () => {
               <Loading />
             </div>
           )}
-          {products && products.length ? (
+          {products && products?.ids?.length ? (
             <table className="w-full uppercase">
               <thead>
                 <tr>
@@ -92,7 +93,7 @@ const Products = () => {
               <h1>Không có sản phẩm</h1>
             </div>
           )}
-          {products.length > 0 && (
+          {products?.ids?.length > 0 && (
             <div
               ref={ref}
               className="w-full col-span-4 m-auto py-10 flex items-center justify-center"

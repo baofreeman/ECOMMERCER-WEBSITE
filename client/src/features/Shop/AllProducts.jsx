@@ -26,7 +26,7 @@ const AllProducts = () => {
     setPage(1);
   }, [location.pathname]);
 
-  const { data, isFetching, isSuccess } = useGetProductsQuery(
+  const { isFetching, isSuccess } = useGetProductsQuery(
     { page: page },
     {
       refetchOnMountOrArgChange: true,
@@ -36,8 +36,10 @@ const AllProducts = () => {
   const { selectIds, selectTotalPage } = getSelectors({
     page: page,
   });
+
   const products = useSelector(selectIds);
   const totalPage = useSelector(selectTotalPage);
+
   const [executeScroll, elRef] = useScroll();
   useEffect(() => {
     executeScroll();
@@ -61,13 +63,6 @@ const AllProducts = () => {
       setIsLoading(true);
     }
   }, [inView, isFetching, isLoading, page, totalPage]);
-
-  // // Set isLoading to false when fetching completes
-  // useEffect(() => {
-  //   if (!isFetching) {
-  //     setIsLoading(false);
-  //   }
-  // }, [isFetching]);
 
   // Toggle sidebar.
   const openSiderRight = useSelector(selectSidebarRight);

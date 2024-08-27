@@ -1,6 +1,7 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { OPTION_CATEGORIES } from "../../constants/option";
 import { Button } from "../../components/ui";
+import { memo, useCallback } from "react";
 
 const ShopHeader = () => {
   const { category } = useParams();
@@ -19,10 +20,10 @@ const ShopHeader = () => {
   };
 
   // Handler for category change
-  const handleCategoryChange = (value) => {
+  const handleCategoryChange = useCallback((value) => {
     resetSearch();
     navigate(value === "tất cả" || "" ? "/shop" : `/shop/${value}`);
-  };
+  }, []);
 
   return (
     <ul className="flex w-full dark:text-silver">

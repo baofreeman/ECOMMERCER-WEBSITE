@@ -28,7 +28,7 @@ const Modal = ({ callback, data, title }) => {
             {title}
           </p>
           <div className="flex gap-2 mt-4">
-            <Button size="s" design="primary" onClick={() => callback(data)}>
+            <Button size="s" design="primary" onClick={callback}>
               Xoá
             </Button>
             <Button size="s" design="basic" onClick={closeModal}>

@@ -10,6 +10,7 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { productSlice } from "../slices/apiSlice";
 import queryString from "query-string";
+import { shallowEqual } from "react-redux";
 
 // Product Apdapter
 export const productAdapter = createEntityAdapter({
@@ -17,14 +18,13 @@ export const productAdapter = createEntityAdapter({
 });
 
 // InitState Product
-export const initialState = productAdapter.getInitialState({ totalPages: 0 });
+export const initialState = productAdapter.getInitialState({ totalPages: 1 });
 
 export const productsApiSlice = productSlice.injectEndpoints({
   endpoints: (builder) => ({
     // GET All product with lazy loading
     getProducts: builder.query({
       query: ({ page }) => {
-        console.log(page);
         return {
           url: page ? `/product?page=${page}` : "/product",
           method: "GET",
@@ -33,17 +33,16 @@ export const productsApiSlice = productSlice.injectEndpoints({
       },
 
       transformResponse: (res) => {
-        console.log(res);
         const loadProducts = res?.products
           ? res.products.map((product) => product)
           : [];
-        const totalPages = res?.totalPages || 0;
+        const totalPages = res?.totalPages || 1;
         return productAdapter.setAll(
-          { ...initialState, totalPage: totalPages },
+          { ...initialState, totalPages: totalPages },
           loadProducts
         );
       },
-      keepUnusedDataFor: 5,
+      keepUnusedDataFor: 5000,
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         if (Object.keys(queryArgs).length === 0) return endpointName;
         if (queryArgs) return `scrollingPage`;
@@ -56,7 +55,7 @@ export const productsApiSlice = productSlice.injectEndpoints({
           return productAdapter.setAll(
             {
               ...cached,
-              totalPage: newItems.totalPage,
+              totalPages: newItems.totalPages,
             },
             [...currentCached, ...select]
           );
@@ -73,10 +72,8 @@ export const productsApiSlice = productSlice.injectEndpoints({
     }),
 
     // GET filter product with lazy loading
-    // productsApiSlice.js
     getFilterProducts: builder.query({
       query: ({ category, search, page }) => {
-        console.log(category, search, page);
         const parser = queryString.stringify(search);
         const url = `/product/${category}?${parser}&page=${page}`;
         return {
@@ -86,30 +83,42 @@ export const productsApiSlice = productSlice.injectEndpoints({
         };
       },
       transformResponse: (res) => {
-        const loadProducts = res.map((product) => product);
-        return productAdapter.setAll(initialState, loadProducts);
+        const loadProducts = res?.products
+          ? res.products.map((product) => product)
+          : [];
+        const totalPages = res?.totalPages || 0;
+        return productAdapter.setAll(
+          { ...initialState, totalPages: totalPages },
+          loadProducts
+        );
       },
-      keepUnusedDataFor: 0,
-      serializeQueryArgs: ({ endpointName, queryArgs }) => endpointName,
+      keepUnusedDataFor: 1,
+      serializeQueryArgs: ({ endpointName }) => endpointName,
       merge: (cached, newItems, { arg }) => {
-        const { page, category } = arg;
+        const { page } = arg;
         const select = productAdapter.getSelectors().selectAll(newItems);
         if (page === 1) {
-          return productAdapter.setAll(initialState, [...select]);
+          return productAdapter.setAll(
+            {
+              ...initialState,
+              totalPages: newItems.totalPages,
+            },
+            select || []
+          );
         }
-        const currentCached = productAdapter.getSelectors().selectAll(cached);
-        return productAdapter.setAll(initialState, [
-          ...currentCached,
-          ...select,
-        ]);
+        const currentCached =
+          productAdapter.getSelectors().selectAll(cached) || [];
+        return productAdapter.setAll(
+          {
+            ...cached,
+            totalPages: newItems.totalPages,
+          },
+          [...currentCached, ...(select || [])] // Đảm bảo select không phải là undefined
+        );
       },
+
       providesTags: (result) => {
-        if (result?.ids) {
-          return [
-            { type: "Product", id: "LIST" },
-            ...result?.ids.map((id) => ({ type: "Product", id })),
-          ];
-        } else return [{ type: "Product", id: "LIST" }];
+        return [{ type: "Product", id: "LIST" }];
       },
     }),
 
@@ -176,7 +185,9 @@ export const productsApiSlice = productSlice.injectEndpoints({
 
 export const {
   useGetProductsQuery,
+  useLazyGetProductsQuery,
   useGetFilterProductsQuery,
+  useLazyGetFilterProductsQuery,
   useAddProductMutation,
   useLazySearchProductQuery,
   useDeleteProductMutation,
@@ -207,7 +218,7 @@ export const getSelectors = (query) => {
       createSelector(adapterSelectors, (state) => state.selectById(state, id)),
     selectTotalPage: createSelector(
       selectSetup,
-      (state) => state?.data?.totalPage ?? 0
+      (state) => state?.data?.totalPages ?? 0
     ),
   };
 };

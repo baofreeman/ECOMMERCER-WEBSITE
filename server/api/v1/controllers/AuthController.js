@@ -120,7 +120,6 @@ class AuthController {
         .status(200)
         .json({ status: "success", message: "Email verified successfully" });
     } catch (error) {
-      console.log(error);
       res.status(500).json({
         status: "failed",
         message: "Không thể xác minh Email, Vui lòng thử lại sau",
@@ -209,7 +208,6 @@ class AuthController {
         access_token: newAccessToken,
       });
     } catch (error) {
-      console.log(error);
       res.status(500).json({ status: "failed", message: "Lỗi máy chủ" });
     }
   }
@@ -249,7 +247,6 @@ class AuthController {
         .status(200)
         .json({ status: "success", message: "Mật khẩu đã đổi thành công" });
     } catch (error) {
-      console.log(error);
       res.status(500).json({
         status: "failed",
         message: "Không thể đổi mật khẩu, vui lòng thử lại",
@@ -294,7 +291,6 @@ class AuthController {
         message: "Đường dẫn đã được gửi đến Email, vui lòng kiểm tra",
       });
     } catch (error) {
-      console.log(error);
       return res.status(500).json({
         status: "failed",
         message: "Không thể gửi đường dẫn đến Email, vui lòng thử lại sau",
@@ -381,7 +377,6 @@ class AuthController {
         .status(200)
         .json({ status: "success", message: "Đăng xuất thành công" });
     } catch (error) {
-      console.log(error);
       return res.status(500).json({
         status: "failed",
         message: "Không thể đăng xuất, vui lòng thử lại sau",

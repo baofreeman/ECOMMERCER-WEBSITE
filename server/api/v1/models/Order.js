@@ -1,5 +1,9 @@
 const mongoose = require("mongoose");
 
+const defaultUserId = process.env.DEFAULT_USER_ID
+  ? new mongoose.Types.ObjectId(process.env.DEFAULT_USER_ID)
+  : null;
+
 const OrderItem = mongoose.Schema(
   {
     billingAddress: {
@@ -9,9 +13,14 @@ const OrderItem = mongoose.Schema(
       address: { type: String, required: true },
       phone: { type: String, required: true },
     },
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", default: "" },
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      default: defaultUserId,
+    },
     deliveryStatus: {
       type: String,
+      enum: ["pending", "shipped", "delivered", "cancelled"],
       default: "pending",
     },
     paymentMethod: {
@@ -21,8 +30,8 @@ const OrderItem = mongoose.Schema(
     },
     items: { type: Array, required: true },
     note: { type: String, default: "Nothing" },
-    totalQuantity: { type: String, required: true },
-    shippingPrice: { type: Number, default: 30000 },
+    totalQuantity: { type: Number, required: true },
+    shippingPrice: { type: Number },
     itemsPrice: { type: Number, required: true },
     totalPrice: { type: Number, required: true },
   },

@@ -10,6 +10,7 @@ import { CheckoutHeader } from "../../../features/Checkout";
 import { CartHeader } from "../../../features/Cart";
 
 import { CartIcon } from "../../../assets/icons";
+import { memo } from "react";
 
 /**
  * LayoutHeader component renders the header based on the current route.
@@ -56,4 +57,4 @@ const LayoutHeader = ({ id }) => {
   );
 };
 
-export default LayoutHeader;
+export default memo(LayoutHeader);

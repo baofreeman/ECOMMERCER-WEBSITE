@@ -4,11 +4,14 @@ import { toast } from "react-toastify";
 import {
   useDeleteUserMutation,
   useGetUsersQuery,
+  useUpdateUserMutation,
 } from "../../../api/endpoints/usersApiSlice";
 
 import { Modal } from "../../../components/shared";
 import { DeleteIcon } from "../../../assets/icons";
 import { useModal } from "../../../context/ModalContext";
+import { ROLES } from "../../../constants";
+import { Button } from "../../../components/ui";
 
 const UserExtent = ({ userId }) => {
   const { user } = useGetUsersQuery("allUsers", {
@@ -17,11 +20,33 @@ const UserExtent = ({ userId }) => {
     }),
   }); // GET user based on userId
   const { openModal, closeModal } = useModal();
+  const [roles, setRoles] = useState(user?.roles || ["user"]);
 
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
   const [deleteUser] = useDeleteUserMutation();
 
-  // Delete user.
-  const handleDelete = async (userId) => {
+  const handleChange = (e) => {
+    const selectedRole = e.target.value;
+    setRoles(
+      (prevRoles) =>
+        prevRoles.includes(selectedRole)
+          ? prevRoles.filter((role) => role !== selectedRole) // Nếu role đã có trong mảng, loại bỏ nó
+          : [...prevRoles, selectedRole] // Nếu role chưa có, thêm nó vào mảng
+    );
+  };
+
+  // Update user
+  const handleUpdate = async () => {
+    try {
+      const res = await updateUser({ userId, roles });
+      toast.success(res?.data?.message);
+    } catch (error) {
+      return error;
+    }
+  };
+
+  // Delete user
+  const handleDelete = async () => {
     try {
       const res = await deleteUser({ userId });
       toast.success(res?.data?.message);
@@ -31,10 +56,10 @@ const UserExtent = ({ userId }) => {
     }
   };
 
-  const showDeleteModal = (userId) => {
+  const showDeleteModal = () => {
     openModal(
       <Modal
-        callback={() => handleDelete(userId)}
+        callback={handleDelete}
         data={userId}
         title={"Bạn có muốn xóa người dùng khỏi hệ thống?"}
       />
@@ -49,17 +74,33 @@ const UserExtent = ({ userId }) => {
         <h1>{user?.username}</h1>
       </td>
       <td className="border px-8 py-4">
-        {user?.roles.map((role, index) => (
-          <h1 key={index}>{role}</h1>
+        {ROLES.map((role, index) => (
+          <div key={index}>
+            <input
+              type="checkbox"
+              id={`role-${role}`}
+              value={role}
+              checked={roles.includes(role)}
+              onChange={handleChange}
+            />
+            <label htmlFor={`role-${role}`} className="ml-2 uppercase">
+              {role}
+            </label>
+          </div>
         ))}
+        <Button
+          size="s"
+          design="link-basic"
+          disabled={isLoading}
+          onClick={handleUpdate}
+        >
+          Cập nhật
+        </Button>
       </td>
       <td className="border px-8 py-4">
         <h1>{user?.is_verified ? "true" : "false"}</h1>
       </td>
-      <td
-        className="border px-8 py-4"
-        onClick={() => showDeleteModal(user?._id)}
-      >
+      <td className="border px-8 py-4" onClick={showDeleteModal}>
         <DeleteIcon />
       </td>
     </tr>
