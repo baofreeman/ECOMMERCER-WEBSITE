@@ -69,7 +69,7 @@ const ListFilterProducts = () => {
       : "grid-cols-6 grid-auto";
 
   const productItems =
-    isSuccess && products?.ids?.length ? (
+    isSuccess && products?.ids?.length > 0 ? (
       products?.ids.map((productId) => (
         <ProductExtend key={productId} productId={productId} />
       ))

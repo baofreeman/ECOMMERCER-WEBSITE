@@ -35,13 +35,15 @@ const LayoutTab = () => {
   const { pathname, search } = useLocation();
   const dispatch = useDispatch();
 
-  const [trigger, { isLoading, isSuccess, isUninitialized }] =
-    useLazyGetProductsQuery();
-  useEffect(() => {
-    if (isUninitialized) {
-      trigger({});
-    }
-  }, [isUninitialized]);
+  const { isLoading, isSuccess } = useGetProductsQuery({});
+
+  // const [trigger, { isLoading, isSuccess, isUninitialized }] =
+  //   useLazyGetProductsQuery();
+  // useEffect(() => {
+  //   if (isUninitialized) {
+  //     trigger({});
+  //   }
+  // }, [isUninitialized]);
 
   const { contentRef, overlayRef, width, height } = useResize();
 

@@ -42,7 +42,7 @@ export const productsApiSlice = productSlice.injectEndpoints({
           loadProducts
         );
       },
-      keepUnusedDataFor: 5000,
+      keepUnusedDataFor: 3600,
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         if (Object.keys(queryArgs).length === 0) return endpointName;
         if (queryArgs) return `scrollingPage`;
@@ -92,7 +92,7 @@ export const productsApiSlice = productSlice.injectEndpoints({
           loadProducts
         );
       },
-      keepUnusedDataFor: 1,
+      keepUnusedDataFor: 10,
       serializeQueryArgs: ({ endpointName }) => endpointName,
       merge: (cached, newItems, { arg }) => {
         const { page } = arg;
@@ -103,7 +103,7 @@ export const productsApiSlice = productSlice.injectEndpoints({
               ...initialState,
               totalPages: newItems.totalPages,
             },
-            select || []
+            select
           );
         }
         const currentCached =
@@ -113,12 +113,17 @@ export const productsApiSlice = productSlice.injectEndpoints({
             ...cached,
             totalPages: newItems.totalPages,
           },
-          [...currentCached, ...(select || [])] // Đảm bảo select không phải là undefined
+          [...currentCached, ...select]
         );
       },
 
       providesTags: (result) => {
-        return [{ type: "Product", id: "LIST" }];
+        if (result?.ids) {
+          return [
+            { type: "Product", id: "LIST" },
+            ...result?.ids.map((id) => ({ type: "Product", id })),
+          ];
+        } else return [{ type: "Product", id: "LIST" }];
       },
     }),
 
@@ -146,7 +151,7 @@ export const productsApiSlice = productSlice.injectEndpoints({
           body: body,
         };
       },
-      invalidatesTags: ["Product"],
+      invalidatesTags: (result, error, { id }) => [{ type: "Product", id }],
     }),
 
     // Delete product bases on productId
@@ -158,7 +163,7 @@ export const productsApiSlice = productSlice.injectEndpoints({
           body: { productId },
         };
       },
-      invalidatesTags: [{ type: "Product", id: "LIST" }],
+      invalidatesTags: (result, error, { id }) => [{ type: "Product", id }],
     }),
 
     // Get Variants of Product bases on productId

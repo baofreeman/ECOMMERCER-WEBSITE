@@ -18,13 +18,13 @@ import ProductExtend from "./ProductExtend";
 import { Loading } from "../../components/shared";
 
 const AllProducts = () => {
-  const location = useLocation();
+  const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
 
   useLayoutEffect(() => {
     setPage(1);
-  }, [location.pathname]);
+  }, []);
 
   const { isFetching, isSuccess } = useGetProductsQuery(
     { page: page },
@@ -78,7 +78,7 @@ const AllProducts = () => {
   let tabItem = null;
 
   tabItem =
-    isSuccess && products?.length
+    isSuccess && products?.length > 0
       ? products.map((productId) => (
           <ProductExtend key={productId} productId={productId} />
         ))

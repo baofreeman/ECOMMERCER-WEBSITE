@@ -29,7 +29,6 @@ import { AllProducts, ListFilterProducts } from "./features/Shop";
 import { CheckoutDetail, CheckoutSuccess } from "./features/Checkout";
 
 // Import role constants for authorization
-import { ROLES } from "./constants";
 import { CartDetail } from "./features/Cart";
 
 function App() {
