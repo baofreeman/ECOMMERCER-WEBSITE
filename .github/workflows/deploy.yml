@@ -21,4 +21,4 @@ jobs:
 
       - name: Deploy
         run: |
-          ssh -i ~/.ssh/id_rsa user@clothes-freeman.store 'cd /FINAL-CLOTHES-SHOP-ECOMMERCER && git pull origin main'
+          ssh -i ~/.ssh/id_rsa ubuntu@clothes-freeman.store 'cd /FINAL-CLOTHES-SHOP-ECOMMERCER && git pull origin main'
