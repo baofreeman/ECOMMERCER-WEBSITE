@@ -1,0 +1,26 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main  # Hoặc branch mà bạn muốn theo dõi
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to EC2
+        env:
+          PRIVATE_KEY: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+          USERNAME: ${{ secrets.EC2_SSH_USERNAME }}
+          HOST: ${{ secrets.EC2_HOST }}
+        run: |
+          ssh -i $PRIVATE_KEY $USERNAME@$HOST << 'EOF'
+            cd /path/to/your/application
+            git pull origin main
+            docker-compose up -d --build
+          EOF
