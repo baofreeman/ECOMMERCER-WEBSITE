@@ -33,6 +33,9 @@
   * {
     box-sizing: border-box;
   }
+  body {
+    font-size: 1.6rem;
+  }
 }
 @layer utilities {
   .zz3d {
