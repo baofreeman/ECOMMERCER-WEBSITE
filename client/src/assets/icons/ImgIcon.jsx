@@ -5,7 +5,7 @@ const ImgIcon = () => {
       height="60%"
       viewBox="0 0 16 15"
       fill="#929292"
-      xmlns="https://www.w3.org/2000/svg"
+      xmlns={process.env.REACT_APP_SVG_URL}
     >
       <path
         fillRule="evenodd"

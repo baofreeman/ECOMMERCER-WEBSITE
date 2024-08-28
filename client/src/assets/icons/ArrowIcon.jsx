@@ -5,7 +5,7 @@ const ArrowIcon = ({ rotate, width, height }) => {
       width={width}
       height={height}
       viewBox="0 0 12 7"
-      xmlns="https://www.w3.org/2000/svg"
+      xmlns={process.env.REACT_APP_SVG_URL}
       style={{
         transform: `rotate(${rotate})`,
         transition: "transform 0.3s ease",

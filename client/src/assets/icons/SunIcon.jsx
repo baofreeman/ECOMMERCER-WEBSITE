@@ -1,7 +1,7 @@
 const SunIcon = ({ isDarkMode }) => {
   return (
     <svg
-      xmlns="https://www.w3.org/2000/svg"
+      xmlns={process.env.REACT_APP_SVG_URL}
       width="20"
       height="20"
       viewBox="0 0 24 24"

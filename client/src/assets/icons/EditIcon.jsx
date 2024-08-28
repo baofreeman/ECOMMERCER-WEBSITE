@@ -5,7 +5,7 @@ const EditIcons = () => {
       width="14"
       height="14"
       viewBox="0 0 14 14"
-      xmlns="https://www.w3.org/2000/svg"
+      xmlns={process.env.REACT_APP_SVG_URL}
     >
       <rect
         x="3.81787"
