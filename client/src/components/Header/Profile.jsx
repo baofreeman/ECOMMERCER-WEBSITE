@@ -81,10 +81,10 @@ const Profile = () => {
       {isLoading && <Loading />}
       {renderUser || (
         <div className="flex space-x-4 sm:space-x-2">
-          <Button size="m" design="link-primary" to={"/account/login"}>
+          <Button size="s" design="link-primary" to={"/account/login"}>
             Đăng nhập
           </Button>
-          <Button size="m" design="link-primary" to={"/account/register"}>
+          <Button size="s" design="link-primary" to={"/account/register"}>
             Đăng ký
           </Button>
         </div>

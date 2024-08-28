@@ -10,7 +10,6 @@ const DetailProduct = () => {
   const [searchParams] = useSearchParams();
   const productId = searchParams.get("productId");
 
-  // // GET all product.
   const { product } = useGetProductsQuery(
     {},
     {
@@ -19,6 +18,7 @@ const DetailProduct = () => {
       }),
     }
   );
+
   // // Render image.
   const refs = product?.productImg;
   const childRefs = useMemo(
@@ -70,12 +70,12 @@ const DetailProduct = () => {
                 />
               </div>
             ))}
-            <a className="prev" onClick={preSlide}>
+            <a className="prev sm:hidden" onClick={preSlide}>
               <div className="p-3 cursor-pointer absolute left-0 select-none">
                 <ArrowIcon rotate={"90deg"} width={24} height={14} />
               </div>
             </a>
-            <a className="next" onClick={nextSlide}>
+            <a className="next sm:hidden" onClick={nextSlide}>
               <div className="p-3 cursor-pointer absolute right-0 select-none">
                 <ArrowIcon rotate={"-90deg"} width={24} height={14} />
               </div>
