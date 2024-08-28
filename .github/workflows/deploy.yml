@@ -19,4 +19,5 @@ jobs:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
       - name: Deploy to EC2
-        run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@clothes-freeman.store 'cd /FINAL-CLOTHES-SHOP-ECOMMERCER && git pull origin main'
+        run: |
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@clothes-freeman.store 'cd ~/FINAL-CLOTHES-SHOP-ECOMMERCER && git pull origin main'
