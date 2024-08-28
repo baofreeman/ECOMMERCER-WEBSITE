@@ -1,8 +1,8 @@
 # Use Node.js to build the application
-FROM node:18 as build
+FROM node:18-alpine as build
 
 # Set the working directory inside the container
-WORKDIR /app
+WORKDIR /app/client
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
@@ -20,10 +20,7 @@ RUN npm run build
 FROM nginx:stable-alpine
 
 # Copy the build files from the previous stage to the Nginx directory
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Copy the Nginx configuration file
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/client/build /usr/share/nginx/html
 
 # Expose the port where Nginx will run
 EXPOSE 80
