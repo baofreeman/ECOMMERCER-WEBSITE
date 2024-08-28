@@ -17,7 +17,7 @@ COPY . .
 RUN npm run build
 
 # Use Nginx to serve the application
-FROM nginx:stable-alpine
+FROM nginx:1.25.3
 
 # Copy the build files from the previous stage to the Nginx directory
 COPY --from=build /app/client/build /usr/share/nginx/html

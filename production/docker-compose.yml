@@ -6,7 +6,6 @@ services:
     restart: unless-stopped
     environment:
       - DATABASE=host.docker.internal
-      - CLIENT_URL=https:clothes-freeman.store
     ports:
       - "8000:8000"
     expose:
