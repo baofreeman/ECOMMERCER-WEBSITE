@@ -3,22 +3,20 @@ name: Deploy to EC2
 on:
   push:
     branches:
-      - main # Hoặc branch mà bạn muốn theo dõi
+      - main
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Setup SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H clothes-freeman.store >> ~/.ssh/known_hosts
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
-      - name: Deploy
-        run: |
-          ssh -i ~/.ssh/id_rsa ubuntu@clothes-freeman.store 'cd /FINAL-CLOTHES-SHOP-ECOMMERCER && git pull origin main'
+      - name: Deploy to EC2
+        run: ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@clothes-freeman.store 'cd /FINAL-CLOTHES-SHOP-ECOMMERCER && git pull origin main'
