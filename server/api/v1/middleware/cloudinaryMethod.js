@@ -9,10 +9,7 @@ const cloudinaryImageUploadMethod = async (file, folder) => {
           .json({ success: false, message: error.message });
       }
       resolve({
-        url:
-          process.env.NODE_ENV === "development"
-            ? result.url
-            : result.secure_url,
+        url: result.secure_url,
         id: result.public_id,
         folder: result.folder,
       });
