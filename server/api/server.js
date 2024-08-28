@@ -8,7 +8,7 @@ const server = http.createServer(app);
 mongoose.connection.once("open", () => {
   console.log(`DataBase connecting`);
   server.listen(PORT, () => {
-    console.log(`Server running ${PORT}`);
+    console.log(`Server is running ${PORT}`);
   });
 });
 
