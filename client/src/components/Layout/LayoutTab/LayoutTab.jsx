@@ -37,11 +37,13 @@ const LayoutTab = () => {
 
   const [trigger, { isLoading, isSuccess, isUninitialized }] =
     useLazyGetProductsQuery();
+
+  console.log(isUninitialized);
   useEffect(() => {
     if (isUninitialized) {
       trigger({});
     }
-  }, [isUninitialized]);
+  }, []);
 
   const { contentRef, overlayRef, width, height } = useResize();
 

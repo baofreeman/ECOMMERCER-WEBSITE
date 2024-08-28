@@ -25,6 +25,7 @@ const ListFilterProducts = () => {
   useEffect(() => {
     setPage(1);
     // Trigger API call when category or search changes
+    console.log("00000");
     trigger({ category, search: searchParams, page: 1 });
   }, [category, search]);
 
@@ -32,6 +33,7 @@ const ListFilterProducts = () => {
   useEffect(() => {
     // If page is greater than 1, fetch the products for that page
     if (page > 1) {
+      console.log("111111");
       trigger({ category, search: searchParams, page });
     }
   }, [page]);
