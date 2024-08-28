@@ -1,5 +1,5 @@
 # Use Node.js to build the application
-FROM node:18-alpine as build
+FROM node:18-alpine
 
 # Set the working directory inside the container
 WORKDIR /app/client
