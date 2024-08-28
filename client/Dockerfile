@@ -1,5 +1,5 @@
-# Use Node.js to build the application
-FROM node:18-alpine
+# Use Nginx to serve the application
+FROM nginx:1.25.3
 
 # Set the working directory inside the container
 WORKDIR /app/client
@@ -15,9 +15,6 @@ COPY . .
 
 # Build the React application
 RUN npm run build
-
-# Use Nginx to serve the application
-FROM nginx:1.25.3
 
 # Copy the build files from the previous stage to the Nginx directory
 COPY --from=build /app/client/build /usr/share/nginx/html
