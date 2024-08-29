@@ -4,6 +4,7 @@ import { useMemo } from "react";
 const useAuth = () => {
   // Fetch user data
   const { data: currentUser } = useGetUserQuery("currentUser");
+  console.log(currentUser);
 
   // Compute user object with default values and current user data
   const user = useMemo(
