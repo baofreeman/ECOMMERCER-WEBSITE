@@ -1,6 +1,5 @@
 #  Nginx to serve the frontend and backend
 FROM node:18-alpine AS build-frontend
-FROM nginx:1.25.3
 
 # Set the working directory inside the container
 WORKDIR /app/client
@@ -23,5 +22,7 @@ EXPOSE 80
 
 # Start
 CMD ["npm", "Start"]
+
+FROM nginx:1.25.3
 
 
