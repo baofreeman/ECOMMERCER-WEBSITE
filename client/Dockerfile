@@ -1,5 +1,5 @@
 # Stage 1: Build the frontend
-FROM node:18-alpine3.19 AS frontend
+FROM node:latest AS builder
 # Set the working directory inside the container
 WORKDIR /app/client
 
@@ -16,10 +16,13 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Serve the built application using Nginx
-FROM nginx:1.25.3
+FROM nginx:1.25.3-alpine-slim
 
 # Copy the built frontend assets from the previous stage to the Nginx HTML directory
 COPY --from=frontend /app/client/build /usr/share/nginx/html
 
 # Expose port 80 for the Nginx server
 EXPOSE 80
+
+# Run nginx in the foreground
+CMD ["nginx", "-g", "daemon off;"]
