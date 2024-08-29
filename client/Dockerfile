@@ -6,8 +6,8 @@ FROM nginx:1.25.3
 WORKDIR /app/client
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./app/client
-COPY package-lock.json /app/client
+COPY package*.json ./
+COPY package-lock.json ./
 
 # Install application dependencies
 RUN npm install
