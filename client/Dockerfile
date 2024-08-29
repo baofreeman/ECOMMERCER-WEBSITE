@@ -16,9 +16,6 @@ COPY . .
 # Build the React application
 RUN npm run build
 
-# Copy the build files from the frontend build stage to the Nginx directory
-COPY --from=frontend-build /app/client/build /usr/share/nginx/html
-
 # Expose the port where Nginx will run
 EXPOSE 80
 
