@@ -3,10 +3,12 @@ import { Outlet, useLocation } from "react-router-dom";
 
 import ButtonSidebar from "./ButtonSidebar";
 import { memo } from "react";
+import useResize from "../../../hooks/useResize";
 
-const LayoutContent = ({ contentRef, width, height, overlayRef, id }) => {
+const LayoutContent = ({ id }) => {
   // Get the current pathname from the router
   const { pathname } = useLocation();
+  const { contentRef, overlayRef, width, height } = useResize();
 
   // Determine if the sidebar button should be shown
   const isShowSidebarButton = pathname.includes("/admin");

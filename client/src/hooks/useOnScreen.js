@@ -12,7 +12,6 @@ const useOnScreen = (ref) => {
 
   useEffect(() => {
     observerRef.current.observe(ref.current);
-
     return () => {
       observerRef.current.disconnect();
     };

@@ -72,13 +72,13 @@ const FilterProducts = () => {
     setState({ ...state, size: value });
   };
 
-  const handleReset = useCallback(() => {
+  const handleReset = () => {
     setState({ tag: "", color: "", size: "" });
     searchParams.delete("tag");
     searchParams.delete("color");
     searchParams.delete("size");
     setSearchParams(searchParams);
-  }, [searchParams, setSearchParams]);
+  };
 
   useEffect(() => {
     handleReset();
@@ -94,7 +94,7 @@ const FilterProducts = () => {
         search: createSearchParams({ ...result }).toString(),
       });
     }
-  }, [state, category, navigate]);
+  }, [state]);
 
   // Css selected query.
   const catCss = category

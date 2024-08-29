@@ -17,10 +17,11 @@ const ListFilterProducts = () => {
   const searchParams = queryString.parse(search);
   const { category } = useParams();
   const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const [trigger, { data: products, isFetching, isSuccess }] =
+  const [trigger, { data: products, isFetching, isSuccess, isLoading }] =
     useLazyGetFilterProductsQuery();
+
+  console.log(page, products?.totalPages);
 
   useEffect(() => {
     setPage(1);
@@ -49,13 +50,8 @@ const ListFilterProducts = () => {
   });
 
   useEffect(() => {
-    setIsLoading(false);
-  }, [page]);
-
-  useEffect(() => {
     if (inView && !isFetching && !isLoading && page < products?.totalPages) {
       setPage((prev) => prev + 1);
-      setIsLoading(true);
     }
   }, [inView, isFetching, isLoading, page, products?.totalPages]);
 
