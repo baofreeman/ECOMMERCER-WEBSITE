@@ -16,8 +16,8 @@ const PublicLayout = () => {
   );
 
   return (
-    <main className="w-full relative dark:bg-black h-full overflow-hidden">
-      <section className="w-full h-full overflow-hidden">
+    <main className="w-full relative dark:bg-black h-full no-scrollbar">
+      <section className="w-full h-full">
         {/* Container for the scrollable slides */}
         <FullScreenScroll>
           {IMAGE_CATEGORIES.map((item) => (

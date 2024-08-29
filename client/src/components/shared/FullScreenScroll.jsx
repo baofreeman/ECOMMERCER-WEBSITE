@@ -60,7 +60,7 @@ const FullScreenScroll = ({ children }) => {
       }}
     >
       {React.Children.map(children, (child) => (
-        <div style={{ height: "100vh", width: "100%" }}>{child}</div>
+        <div className="w-full h-full">{child}</div>
       ))}
     </div>
   );
