@@ -15,7 +15,7 @@ RUN npm install
 RUN npm install -g @babel/core @babel/cli
 
 # Copy the source code to the working directory
-COPY . ./app/server
+COPY . .
 
 # Run build if necessary (e.g., TypeScript compilation or other build steps)
 RUN npm run build-api

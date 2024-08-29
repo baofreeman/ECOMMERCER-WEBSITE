@@ -13,7 +13,7 @@ COPY package-lock.json ./
 RUN npm install
 
 # Copy the source code to the working directory
-COPY . ./app/client
+COPY . .
 
 # Build the React application
 RUN npm run build
