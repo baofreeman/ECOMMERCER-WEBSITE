@@ -18,7 +18,7 @@ COPY . .
 RUN npm run build
 
 # Start
-CMD ["npm", "Start"]
+CMD ["npm", "start"]
 
 FROM nginx:1.25.3
 
