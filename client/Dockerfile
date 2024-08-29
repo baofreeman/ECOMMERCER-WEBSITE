@@ -4,7 +4,7 @@ FROM node:latest AS builder
 WORKDIR /app/client
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+COPY package.json .
 
 # Install dependencies
 RUN npm install
@@ -16,7 +16,7 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Serve the built application using Nginx
-FROM nginx:1.25.3-alpine-slim
+FROM nginx:1.23.3
 
 # Copy the built frontend assets from the previous stage to the Nginx HTML directory
 COPY --from=frontend /app/client/build /usr/share/nginx/html
