@@ -35,13 +35,8 @@ const LayoutTab = () => {
   const { pathname, search } = useLocation();
   const dispatch = useDispatch();
 
-<<<<<<< HEAD
-  const [trigger, { isLoading, isSuccess, isUninitialized }] =
-    useLazyGetProductsQuery();
-=======
   const [trigger, { isLoading, isUninitialized }] = useLazyGetProductsQuery();
 
->>>>>>> 1e144c2 (fix css responsive)
   useEffect(() => {
     if (isUninitialized) {
       trigger({});
