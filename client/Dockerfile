@@ -1,12 +1,26 @@
-#  Nginx to serve the frontend and backend
-FROM nginx:1.25.3
-
+# Stage 1: Build the frontend
+FROM node:18 AS frontend
 # Set the working directory inside the container
 WORKDIR /app/client
 
-# Build the React application
+# Copy package.json and package-lock.json to the working directory
+COPY package*.json ./
+COPY package-lock.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy the rest of the application code to the working directory
+COPY . .
+
+# Build the frontend application
 RUN npm run build
 
+# Stage 2: Serve the built application using Nginx
+FROM nginx:1.25.3
 
+# Copy the built frontend assets from the previous stage to the Nginx HTML directory
+COPY --from=frontend /app/client/build /usr/share/nginx/html
 
-
+# Expose port 80 for the Nginx server
+EXPOSE 80
