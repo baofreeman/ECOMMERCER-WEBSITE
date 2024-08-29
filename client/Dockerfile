@@ -17,9 +17,6 @@ COPY . .
 # Build the React application
 RUN npm run build
 
-# Expose the port where Nginx will run
-EXPOSE 80
-
 # Start
 CMD ["npm", "Start"]
 
