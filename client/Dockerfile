@@ -11,7 +11,7 @@ COPY client/package*.json ./
 RUN npm install
 
 # Copy the source code to the working directory
-COPY client/ .
+COPY . .
 
 # Build the React application
 RUN npm run build
@@ -21,9 +21,6 @@ FROM nginx:1.25.3
 
 # Copy the build files from the frontend build stage to the Nginx directory
 COPY --from=frontend-build /app/client/build /usr/share/nginx/html
-
-# Copy the built backend files (if needed) to a location in the container (optional)
-# COPY --from=backend-build /app/server/build /path/in/nginx/container
 
 # Expose the port where Nginx will run
 EXPOSE 80
