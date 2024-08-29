@@ -10,10 +10,7 @@ import { Button } from "../ui";
 import { Logo } from "../../assets/icons";
 
 const Header = () => {
-  const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const { pathname } = useLocation();
-  // Toggle display of the logo based on the current path
-  const displayLogo = pathname !== "/" ? `sm:hidden` : `sm:flex`;
 
   return (
     <header
@@ -24,11 +21,9 @@ const Header = () => {
       <nav className="w-full flex items-center justify-between text-silver my-0 mx-auto sm:gap-2">
         <div className="flex flex-1 space-x-4 sm:space-x-2 items-center justify-start">
           {/* Logo */}
-          <div className={displayLogo}>
-            <Button size="m" to={"/"}>
-              <Logo />
-            </Button>
-          </div>
+          <Button size="s" to={"/"}>
+            <Logo />
+          </Button>
 
           {/* Navigation links */}
           <ul className="flex flex-1 space-x-4 sm:space-x-2 items-center">
@@ -44,29 +39,11 @@ const Header = () => {
                 Shop
               </Button>
             </li>
-            {/* Admin link (conditionally rendered) */}
-            {false && (
-              <li>
-                <Button
-                  size="l"
-                  design={
-                    pathname.includes("/admin") ? "link-primary" : "link-basic"
-                  }
-                  width="max"
-                  to={`/admin`}
-                >
-                  Admin
-                </Button>
-              </li>
-            )}
           </ul>
         </div>
 
         {/* Search input */}
-        <Search
-          toggleModal={isSearchModalOpen}
-          setToggleModal={setIsSearchModalOpen}
-        />
+        <Search />
 
         {/* Profile and theme toggle */}
         <div className="flex flex-1 space-x-4 sm:space-x-2 justify-end">

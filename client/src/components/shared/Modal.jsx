@@ -2,7 +2,7 @@ import { Button } from "../ui";
 import { DeleteIcon } from "../../assets/icons";
 import { useModal } from "../../context/ModalContext";
 
-const Modal = ({ callback, data, title }) => {
+const Modal = ({ callback, title }) => {
   const { closeModal } = useModal();
   return (
     <div
