@@ -1,5 +1,5 @@
 # Stage 1: Build the frontend
-FROM node:18 AS frontend
+FROM node:18-alpine3.19 AS frontend
 # Set the working directory inside the container
 WORKDIR /app/client
 

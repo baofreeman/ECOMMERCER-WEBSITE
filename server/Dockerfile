@@ -1,12 +1,11 @@
 # Use Node.js version 18 as the base image
-FROM node:18-alpine
+FROM node:18-alpine3.19 AS backend
 
 # Set the working directory inside the container
 WORKDIR /app/server
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
-COPY package-lock.json ./
 
 # Install application dependencies
 RUN npm install
