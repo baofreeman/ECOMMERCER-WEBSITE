@@ -1,23 +1,29 @@
-# Use Nginx to serve the application
-FROM nginx:1.25.3
+# Build the frontend
+FROM node:18-alpine as frontend-build
 
 # Set the working directory inside the container
 WORKDIR /app/client
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+COPY client/package*.json ./
 
 # Install application dependencies
 RUN npm install
 
 # Copy the source code to the working directory
-COPY . .
+COPY client/ .
 
 # Build the React application
 RUN npm run build
 
-# Copy the build files from the previous stage to the Nginx directory
-COPY --from=build /app/client/build /usr/share/nginx/html
+# Third stage: Setup Nginx to serve the frontend and backend
+FROM nginx:1.25.3
+
+# Copy the build files from the frontend build stage to the Nginx directory
+COPY --from=frontend-build /app/client/build /usr/share/nginx/html
+
+# Copy the built backend files (if needed) to a location in the container (optional)
+# COPY --from=backend-build /app/server/build /path/in/nginx/container
 
 # Expose the port where Nginx will run
 EXPOSE 80

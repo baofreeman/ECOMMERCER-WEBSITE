@@ -1,11 +1,11 @@
-# Use Node.js version 18 as the base image
-FROM node:18-alpine
+# Build the backend
+FROM node:18-alpine as backend-build
 
 # Set the working directory inside the container
 WORKDIR /app/server
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+COPY server/package*.json ./
 
 # Install application dependencies
 RUN npm install
@@ -14,10 +14,25 @@ RUN npm install
 RUN npm install -g @babel/core @babel/cli
 
 # Copy the source code to the working directory
-COPY . .
+COPY server/ .
 
 # Run build if necessary (e.g., TypeScript compilation or other build steps)
 RUN npm run build-api
 
-# Run the application
-CMD ["npm", "run", "build"]
+# Second stage: Build the frontend
+FROM node:18-alpine as frontend-build
+
+# Set the working directory inside the container
+WORKDIR /app/client
+
+# Copy package.json and package-lock.json to the working directory
+COPY client/package*.json ./
+
+# Install application dependencies
+RUN npm install
+
+# Copy the source code to the working directory
+COPY client/ .
+
+# Build the React application
+RUN npm run build
