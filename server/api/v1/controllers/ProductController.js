@@ -191,16 +191,19 @@ class ProductController {
     if (size) query["subCategory.model.skus.size"] = size;
 
     try {
-      const products = await ProductModal.find(query).skip(skip).limit(limit);
+      // Fetch products and total count in parallel
+      const [products, totalProducts] = await Promise.all([
+        ProductModal.find(query).skip(skip).limit(limit),
+        ProductModal.countDocuments(query),
+      ]);
 
-      if (!products.length) {
-        return res.status(400).json({ message: "Không tìm thấy sản phẩm" });
+      if (!products || products.length === 0) {
+        return res.status(404).json({ message: "Không tìm thấy sản phẩm" });
       }
 
-      const totalProducts = await ProductModal.countDocuments(query);
       const totalPages = Math.ceil(totalProducts / limit);
 
-      return res.status(200).json({ products, totalPages });
+      res.status(200).json({ products, totalPages });
     } catch (error) {
       console.error("Error fetching products:", error);
       return res.status(500).json({ message: "Lỗi máy chủ" });
@@ -225,7 +228,7 @@ class ProductController {
         return res.status(404).json({ message: "Không tìm thấy sản phẩm" });
       }
 
-      return res.status(200).json(results);
+      res.status(200).json(results);
     } catch (error) {
       console.error("Error searching products:", error);
       return res.status(500).json({ message: "Lỗi máy chủ" });

@@ -17,15 +17,15 @@ const ListFilterProducts = () => {
   const searchParams = queryString.parse(search);
   const { category } = useParams();
   const [page, setPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
 
-  const [trigger, { data: products, isFetching, isSuccess }] =
+  const [trigger, { data: products, isFetching, isSuccess, isLoading }] =
     useLazyGetFilterProductsQuery();
+
+  console.log(page, products?.totalPages);
 
   useEffect(() => {
     setPage(1);
     // Trigger API call when category or search changes
-    console.log("00000");
     trigger({ category, search: searchParams, page: 1 });
   }, [category, search]);
 
@@ -33,7 +33,6 @@ const ListFilterProducts = () => {
   useEffect(() => {
     // If page is greater than 1, fetch the products for that page
     if (page > 1) {
-      console.log("111111");
       trigger({ category, search: searchParams, page });
     }
   }, [page]);
@@ -51,13 +50,8 @@ const ListFilterProducts = () => {
   });
 
   useEffect(() => {
-    setIsLoading(false);
-  }, [page]);
-
-  useEffect(() => {
     if (inView && !isFetching && !isLoading && page < products?.totalPages) {
       setPage((prev) => prev + 1);
-      setIsLoading(true);
     }
   }, [inView, isFetching, isLoading, page, products?.totalPages]);
 

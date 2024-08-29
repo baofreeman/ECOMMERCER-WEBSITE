@@ -3,6 +3,7 @@ const app = express();
 const cors = require("cors");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
+require("dotenv").config({ path: ".env.local" });
 require("dotenv").config();
 
 const product = require("./v1/routers/product.js");

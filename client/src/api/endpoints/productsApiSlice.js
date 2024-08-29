@@ -10,7 +10,6 @@
 import { createSelector, createEntityAdapter } from "@reduxjs/toolkit";
 import { productSlice } from "../slices/apiSlice";
 import queryString from "query-string";
-import { shallowEqual } from "react-redux";
 
 // Product Apdapter
 export const productAdapter = createEntityAdapter({
@@ -92,6 +91,7 @@ export const productsApiSlice = productSlice.injectEndpoints({
           loadProducts
         );
       },
+
       keepUnusedDataFor: 10,
       serializeQueryArgs: ({ endpointName }) => endpointName,
       merge: (cached, newItems, { arg }) => {

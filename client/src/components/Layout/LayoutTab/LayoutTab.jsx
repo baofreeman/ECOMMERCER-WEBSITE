@@ -35,17 +35,13 @@ const LayoutTab = () => {
   const { pathname, search } = useLocation();
   const dispatch = useDispatch();
 
-  const [trigger, { isLoading, isSuccess, isUninitialized }] =
-    useLazyGetProductsQuery();
+  const [trigger, { isLoading, isUninitialized }] = useLazyGetProductsQuery();
 
-  console.log(isUninitialized);
   useEffect(() => {
     if (isUninitialized) {
       trigger({});
     }
   }, []);
-
-  const { contentRef, overlayRef, width, height } = useResize();
 
   const isSidebarLeftOpen = useSelector(selectSidebarLeft);
   const isSidebarRightOpen = useSelector(selectSidebarRight);
@@ -98,25 +94,17 @@ const LayoutTab = () => {
   if (isLoading) return <Loading />;
 
   // Render the layout based on the fetched data
-  if (isSuccess) {
-    return (
-      <main className={layoutClassNames}>
-        <LayoutHeader id="HEADER_LAYOUT" />
-        <LayoutNone id="NONE_LEFT_LAYOUT" />
-        <LayoutNone id="NONE_RIGHT_LAYOUT" />
-        <LayoutLeft id="SIDEBAR_LEFT_LAYOUT" />
-        <LayoutContent
-          id="MAIN_LAYOUT"
-          contentRef={contentRef}
-          overlayRef={overlayRef}
-          width={width}
-          height={height}
-        />
-        <LayoutRight id="SIDEBAR_RIGHT_LAYOUT" />
-        <Footer id="FOOTER_LAYOUT" />
-      </main>
-    );
-  }
+  return (
+    <main className={layoutClassNames}>
+      <LayoutHeader id="HEADER_LAYOUT" />
+      <LayoutNone id="NONE_LEFT_LAYOUT" />
+      <LayoutNone id="NONE_RIGHT_LAYOUT" />
+      <LayoutLeft id="SIDEBAR_LEFT_LAYOUT" />
+      <LayoutContent id="MAIN_LAYOUT" />
+      <LayoutRight id="SIDEBAR_RIGHT_LAYOUT" />
+      <Footer id="FOOTER_LAYOUT" />
+    </main>
+  );
 
   // Return null if data is not yet available
   return null;
