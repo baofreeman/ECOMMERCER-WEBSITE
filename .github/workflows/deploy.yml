@@ -20,4 +20,4 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@clothes-freeman.store 'cd ~/FINAL-CLOTHES-SHOP-ECOMMERCER && git pull origin main && cd ~/FINAL-CLOTHES-SHOP-ECOMMERCER/production && docker compose up --build -d'
+          ssh -o StrictHostKeyChecking=no ubuntu@clothes-freeman.store 'cd ~/FINAL-CLOTHES-SHOP-ECOMMERCER && git pull origin main && cd ~/FINAL-CLOTHES-SHOP-ECOMMERCER/production && docker compose build --no-cache && docker compose up -d'
