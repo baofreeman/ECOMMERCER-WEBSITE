@@ -5,7 +5,7 @@ FROM node:18-alpine as frontend-build
 WORKDIR /app/client
 
 # Copy package.json and package-lock.json to the working directory
-COPY client/package*.json ./
+COPY package*.json ./
 
 # Install application dependencies
 RUN npm install

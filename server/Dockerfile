@@ -1,11 +1,11 @@
-# Build the backend
-FROM node:18-alpine as backend-build
+# Use Node.js version 18 as the base image
+FROM node:18-alpine
 
 # Set the working directory inside the container
 WORKDIR /app/server
 
 # Copy package.json and package-lock.json to the working directory
-COPY server/package*.json ./
+COPY package*.json ./
 
 # Install application dependencies
 RUN npm install
@@ -19,4 +19,5 @@ COPY . .
 # Run build if necessary (e.g., TypeScript compilation or other build steps)
 RUN npm run build-api
 
-CMD [ "npm", "run", "build" ]
+# Run the application
+CMD ["npm", "run", "build"]
