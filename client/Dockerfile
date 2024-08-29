@@ -1,5 +1,5 @@
 # Stage 1: Build the frontend
-FROM node:latest AS builder
+FROM node:lts-alpine
 # Set the working directory inside the container
 WORKDIR /app/client
 
