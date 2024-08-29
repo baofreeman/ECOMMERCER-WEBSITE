@@ -5,7 +5,8 @@ FROM node:18-alpine
 WORKDIR /app/server
 
 # Copy package.json and package-lock.json to the working directory
-COPY package*.json ./
+COPY package*.json ./app/server/package.json
+COPY package-lock.json /app/server/package-lock.json
 
 # Install application dependencies
 RUN npm install
@@ -14,7 +15,7 @@ RUN npm install
 RUN npm install -g @babel/core @babel/cli
 
 # Copy the source code to the working directory
-COPY . .
+COPY . ./app/server
 
 # Run build if necessary (e.g., TypeScript compilation or other build steps)
 RUN npm run build-api
