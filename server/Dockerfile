@@ -1,5 +1,5 @@
 # Use Node.js version 18 as the base image
-FROM node:18-alpine AS build-backend
+FROM node:18-alpine
 
 # Set the working directory inside the container
 WORKDIR /app/server
