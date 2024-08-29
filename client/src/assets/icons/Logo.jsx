@@ -1,7 +1,7 @@
 const Logo = () => {
   return (
     <svg
-      className="fill-gray hover:fill-orange dark:fill-silver dark:hover:fill-orange"
+      className="p-1 sm:p-2 fill-gray hover:fill-orange dark:fill-silver dark:hover:fill-orange"
       width="44"
       height="44"
       viewBox="0 0 44 44"
