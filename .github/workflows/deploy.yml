@@ -15,17 +15,16 @@ jobs:
 
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
 
       - name: Install dependencies
         run: npm install
-        working-directory: ../../client
+        working-directory: ./client
 
       - name: Build frontend
         run: npm run build
-        working-directory: ../../client
-
-        with:
-          ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+        working-directory: ./client
 
       - name: Deploy to EC2
         run: |

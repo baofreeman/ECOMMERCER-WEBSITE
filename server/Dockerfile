@@ -1,9 +1,6 @@
 # Use Node.js version 18 as the base image
 FROM node:20-alpine3.17
 
-# Set the working directory inside the container
-WORKDIR /app/server
-
 # Copy package.json to the working directory
 COPY package.json .
 
