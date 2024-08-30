@@ -8,18 +8,18 @@ const protectedPaths = ["/admin"];
 const MiddlewareAuth = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
-  const isRefreshToken = Cookies.get("refreshToken");
+  const isAuthenticated = Cookies.get("auth_is_authenticated");
 
   useEffect(() => {
-    if (isRefreshToken && authPaths.includes(pathname)) {
+    if (isAuthenticated && authPaths.includes(pathname)) {
       navigate("/shop", { replace: true });
     }
 
     // Check protected Paths
-    if (!isRefreshToken && protectedPaths.includes(pathname)) {
+    if (!isAuthenticated && protectedPaths.includes(pathname)) {
       navigate("/account/login", { replace: true });
     }
-  }, [pathname, navigate, isRefreshToken]);
+  }, [pathname, navigate, isAuthenticated]);
 
   return <Outlet />;
 };
