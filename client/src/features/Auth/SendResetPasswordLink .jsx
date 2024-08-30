@@ -10,7 +10,6 @@ import FormContainer from "./FormContainer";
 const SendResetPasswordLink = () => {
   const [resetPasswordLink] = useResetPasswordLinkMutation();
   const [isLoading, setIsLoading] = useState(false);
-  const [msg, setMsg] = useState();
 
   const {
     register,
@@ -25,7 +24,6 @@ const SendResetPasswordLink = () => {
     try {
       const res = await resetPasswordLink(values);
       if (res.data) {
-        setMsg(res.data.message);
         toast.success(res.data.message);
       }
 

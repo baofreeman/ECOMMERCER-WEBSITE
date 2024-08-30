@@ -53,7 +53,7 @@ const ProductExtent = ({ productId }) => {
     <>
       <tr>
         <td className="border px-8 py-4">
-          <img src={product?.productImg[0].url} width={"60px"} />
+          <img src={product?.productImg[0].url} width={"60px"} alt="product" />
         </td>
         <td className="border px-8 py-4">{product?.name}</td>
         <td className="border px-8 py-4">

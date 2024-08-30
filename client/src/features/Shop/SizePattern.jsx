@@ -1,24 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { useModal } from "../../context/ModalContext";
 import { Button } from "../../components/ui";
 import { DeleteIcon } from "../../assets/icons";
-import {
-  IMAGE_LIST,
-  PRODUCT_SIZES,
-  SIZE,
-  SIZE_PATTERN_SHIRT,
-} from "../../constants";
+import { PRODUCT_SIZES } from "../../constants";
 import { useParams } from "react-router-dom";
 
 const SizePattern = () => {
   const { closeModal } = useModal();
-  const { category } = useParams();
-  const [value, setValue] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("shirt");
   const sizes = ["S", "M", "L", "XL", "XXL"];
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
 
   return (
     <div

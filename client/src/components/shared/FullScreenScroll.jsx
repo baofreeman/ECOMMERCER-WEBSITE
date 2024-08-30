@@ -47,7 +47,7 @@ const FullScreenScroll = ({ children }) => {
         container.removeEventListener("wheel", handleScroll);
       };
     }
-  }, [isScrolling]);
+  }, [isScrolling, handleScroll]);
 
   return (
     <div

@@ -18,7 +18,6 @@ import ProductExtend from "./ProductExtend";
 import { Loading } from "../../components/shared";
 
 const AllProducts = () => {
-  const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
 

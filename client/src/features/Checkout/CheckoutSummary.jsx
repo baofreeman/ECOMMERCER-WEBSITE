@@ -63,7 +63,7 @@ const CheckoutSummary = () => {
                     height={"100%"}
                     style={{ marginLeft: "auto", marginRight: "auto" }}
                     className="w-[60px] sm:w-[20px]"
-                    alt={`Image of ${item.name}`} // Add alt text for accessibility.
+                    alt="product"
                   />
                 </td>
                 <td className="border text-center px-2 py-4 sm:p-1">

@@ -1,22 +1,17 @@
 "use client";
 
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { memo, useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import clsx from "clsx";
 
-import {
-  useGetProductsQuery,
-  useLazyGetProductsQuery,
-} from "../../../api/endpoints/productsApiSlice";
+import { useLazyGetProductsQuery } from "../../../api/endpoints/productsApiSlice";
 import {
   selectSidebarLeft,
   selectSidebarRight,
   setSidebarLeft,
   setSidebarRight,
 } from "../../../api/slices/sidebarSlice";
-
-import useResize from "../../../hooks/useResize";
 
 import LayoutLeft from "./LayoutLeft";
 import LayoutRight from "./LayoutRight";
@@ -105,9 +100,6 @@ const LayoutTab = () => {
       <Footer id="FOOTER_LAYOUT" />
     </main>
   );
-
-  // Return null if data is not yet available
-  return null;
 };
 
 export default memo(LayoutTab);
