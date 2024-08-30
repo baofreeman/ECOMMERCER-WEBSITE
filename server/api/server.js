@@ -9,11 +9,7 @@ const server = http.createServer(app);
 mongoose.connection.once("open", () => {
   console.log(`DataBase connecting`);
   server.listen(PORT, () => {
-<<<<<<< HEAD
-    console.log(`Server running ${PORT}`);
-=======
     console.log(`Server is running ${PORT}, NODE_ENV:${NODE_ENV}`);
->>>>>>> a43ac0e (nodeenv)
   });
 });
 
