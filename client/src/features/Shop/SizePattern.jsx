@@ -3,7 +3,6 @@ import { useModal } from "../../context/ModalContext";
 import { Button } from "../../components/ui";
 import { DeleteIcon } from "../../assets/icons";
 import { PRODUCT_SIZES } from "../../constants";
-import { useParams } from "react-router-dom";
 
 const SizePattern = () => {
   const { closeModal } = useModal();
