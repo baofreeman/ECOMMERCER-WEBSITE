@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 
 import {
@@ -18,7 +17,6 @@ import ProductExtend from "./ProductExtend";
 import { Loading } from "../../components/shared";
 
 const AllProducts = () => {
-  const { pathname } = useLocation();
   const [isLoading, setIsLoading] = useState(false);
   const [page, setPage] = useState(1);
 

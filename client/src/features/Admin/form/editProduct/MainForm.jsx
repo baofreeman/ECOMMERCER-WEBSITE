@@ -14,11 +14,13 @@ const MainForm = ({ product }) => {
   } = useForm();
   const [updateProduct] = useUpdateProductMutation();
 
+  const { name, category, description } = product;
+
   useEffect(() => {
-    setValue("name", product.name);
-    setValue("category", product.category);
-    setValue("description", product.description);
-  }, []);
+    setValue("name", name);
+    setValue("category", category);
+    setValue("description", description);
+  }, [name, category, description]);
 
   const onSubmit = async (data) => {
     const newData = {

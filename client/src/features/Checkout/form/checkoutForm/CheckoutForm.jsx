@@ -60,11 +60,11 @@ const CheckoutForm = () => {
 
   const fetchMyAPI = useCallback(async () => {
     await dispatch(fetchProvince());
-  }, []);
+  }, [dispatch]);
 
   const fetchDistrictApi = useCallback(async () => {
     await dispatch(fetchDistrict(province));
-  }, [province]);
+  }, [province, dispatch]);
 
   useEffect(() => {
     fetchMyAPI();

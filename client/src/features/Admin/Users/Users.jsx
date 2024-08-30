@@ -10,10 +10,9 @@ const Users = () => {
   } = useGetUsersQuery("allUsers", {
     refetchOnMountOrArgChange: true,
   }); // GET all Users.
-  let content;
   let user;
 
-  if (isLoading) return (content = <Loading />);
+  if (isLoading) return <Loading />;
   user =
     users.ids?.length > 0
       ? users.ids.map((userId) => <UserExtent key={userId} userId={userId} />)
@@ -24,7 +23,7 @@ const Users = () => {
         ));
 
   if (isSuccess)
-    return (content = (
+    return (
       <div className="p-10 w-full">
         <section className="w-full">
           <table className="w-full">
@@ -42,7 +41,7 @@ const Users = () => {
           </table>
         </section>
       </div>
-    ));
+    );
 };
 
 export default Users;

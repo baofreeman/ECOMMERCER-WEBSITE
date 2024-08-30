@@ -1,7 +1,7 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { OPTION_CATEGORIES } from "../../constants/option";
 import { Button } from "../../components/ui";
-import { memo, useCallback } from "react";
+import { useCallback } from "react";
 
 const ShopHeader = () => {
   const { category } = useParams();
@@ -10,13 +10,10 @@ const ShopHeader = () => {
 
   // Function to reset search parameters
   const resetSearch = () => {
-    setSearchParams((prev) => {
-      const newParams = new URLSearchParams(prev);
-      newParams.delete("tag");
-      newParams.delete("color");
-      newParams.delete("size");
-      return newParams;
-    });
+    searchParams.delete("tag");
+    searchParams.delete("color");
+    searchParams.delete("size");
+    setSearchParams(searchParams);
   };
 
   // Handler for category change

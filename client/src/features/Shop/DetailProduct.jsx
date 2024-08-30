@@ -70,16 +70,16 @@ const DetailProduct = () => {
                 />
               </div>
             ))}
-            <a className="prev sm:hidden" onClick={preSlide}>
+            <div className="prev sm:hidden" onClick={preSlide}>
               <div className="p-3 cursor-pointer absolute left-0 select-none">
                 <ArrowIcon rotate={"90deg"} width={24} height={14} />
               </div>
-            </a>
-            <a className="next sm:hidden" onClick={nextSlide}>
+            </div>
+            <div className="next sm:hidden" onClick={nextSlide}>
               <div className="p-3 cursor-pointer absolute right-0 select-none">
                 <ArrowIcon rotate={"-90deg"} width={24} height={14} />
               </div>
-            </a>
+            </div>
           </div>
           <div className="hidden sm:block md:block">
             <ModelDetail />

@@ -2,8 +2,7 @@ import { useForm } from "react-hook-form";
 import { createSearchParams, useNavigate } from "react-router-dom";
 import { useLazySearchProductQuery } from "../../api/endpoints/productsApiSlice";
 
-import { Input, Button } from "../../components/ui";
-import { Loading, Errors } from "../../components/shared";
+import { Input } from "../../components/ui";
 import { SearchIcon, DeleteIcon } from "../../assets/icons";
 import { useModal } from "../../context/ModalContext";
 import SearchResults from "./SearchResults";

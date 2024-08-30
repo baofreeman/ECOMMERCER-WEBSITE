@@ -9,7 +9,7 @@ import {
 import { addToCart } from "../../api/slices/cartSlice";
 
 import { Select, Button, Errors } from "../../components/ui";
-import { Loading, Modal } from "../../components/shared";
+import { Loading } from "../../components/shared";
 import { convertPrice } from "../../config";
 import { toast } from "react-toastify";
 import { useModal } from "../../context/ModalContext";
@@ -19,7 +19,7 @@ const ModalDetail = () => {
   const [searchParams] = useSearchParams();
   const [selectedSizeId, setSelectedSizeId] = useState("");
   const [selectedColorId, setSelectedColorId] = useState("");
-  const { openModal, closeModal } = useModal();
+  const { openModal } = useModal();
 
   const productId = searchParams.get("productId"); // GET productId params
   const dispatch = useDispatch();

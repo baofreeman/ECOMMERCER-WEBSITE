@@ -1,13 +1,9 @@
 import { useEffect, useLayoutEffect, useState } from "react";
-import {
-  getSelectors,
-  useGetProductsQuery,
-} from "../../../api/endpoints/productsApiSlice";
+import { useGetProductsQuery } from "../../../api/endpoints/productsApiSlice";
 import { Loading } from "../../../components/shared";
 import ProductExtent from "./ProductExtent";
 import { useInView } from "react-intersection-observer";
 import useScroll from "../../../hooks/useScroll";
-import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 
 const Products = () => {
@@ -24,10 +20,6 @@ const Products = () => {
     isSuccess,
   } = useGetProductsQuery({ page: page }, { refetchOnMountOrArgChange: true });
 
-  // const { selectIds } = getSelectors({
-  //   page: page,
-  // });
-  // const products = useSelector(selectIds);
   const [executeScroll, elRef] = useScroll();
   useEffect(() => {
     executeScroll();
