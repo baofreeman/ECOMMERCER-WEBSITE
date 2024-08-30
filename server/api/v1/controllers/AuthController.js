@@ -364,7 +364,7 @@ class AuthController {
   async logout(req, res) {
     try {
       // Optionally you can blacklist the refresh token in the database
-      const refreshToken = req.cookies.refreshToken;
+      const refreshToken = req.cookies.auth_refresh_token;
       await UserRefreshToken.findOneAndUpdate(
         {
           token: refreshToken,

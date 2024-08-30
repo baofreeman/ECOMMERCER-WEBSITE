@@ -5,7 +5,7 @@ const { verifyRefreshToken } = require("./verifyRefreshToken");
 
 const refreshAccessToken = async (req, res) => {
   try {
-    const oldRefreshToken = req.cookies.refreshToken;
+    const oldRefreshToken = req.cookies.auth_refresh_token;
     if (!oldRefreshToken) {
       return { error: "Invalid refresh token" };
     }

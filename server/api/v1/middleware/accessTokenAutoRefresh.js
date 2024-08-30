@@ -4,7 +4,7 @@ const { setTokenCookies } = require("../utils/auth/setTokenCookies");
 
 const accessTokenAutoRefresh = async (req, res, next) => {
   try {
-    const accessToken = req.cookies.accessToken;
+    const accessToken = req.cookies.auth_access_token;
 
     // Check if access token exists and is not expired
     if (accessToken && !isTokenExpired(accessToken)) {
@@ -12,7 +12,7 @@ const accessTokenAutoRefresh = async (req, res, next) => {
       return next(); // If valid, continue to the next middleware
     }
 
-    const refreshToken = req.cookies.refreshToken;
+    const refreshToken = req.cookies.auth_refresh_token;
     if (!refreshToken || isTokenExpired(refreshToken)) {
       return res.status(401).json({
         error: "Unauthorized",
