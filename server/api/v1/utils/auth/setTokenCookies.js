@@ -2,7 +2,7 @@ const setTokenCookies = (res, tokenName, tokenValue, options = {}) => {
   const NODE_ENV = process.env.NODE_ENV;
   try {
     res.cookie(tokenName, tokenValue, {
-      httpOnly: options.httpOnly || NODE_ENV === "production",
+      httpOnly: false,
       secure: options.secure || NODE_ENV === "production",
       sameSite: "Lax",
       maxAge: options.maxAge || 0, // Default to 0 if not provided
