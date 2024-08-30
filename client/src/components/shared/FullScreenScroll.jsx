@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 
 const FullScreenScroll = ({ children }) => {
   const containerRef = useRef(null);
@@ -17,7 +17,7 @@ const FullScreenScroll = ({ children }) => {
     }
   };
 
-  const handleScroll = (e) => {
+  const handleScroll = useCallback((e) => {
     if (isScrolling) return; // Prevent scrolling while already scrolling
 
     const now = performance.now(); // Get the current time
@@ -33,7 +33,7 @@ const FullScreenScroll = ({ children }) => {
     }
 
     setLastScrollTime(now); // Update the last scroll time
-  };
+  }, []);
 
   useEffect(() => {
     scrollToSection(currentSection);
