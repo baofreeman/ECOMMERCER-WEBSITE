@@ -12,9 +12,7 @@ services:
       - "8000"
 
   nginx:
-    build:
-      context: ../client
-      dockerfile: Dockerfile
+    image: nginx:1.25.3
     ports:
       - "80:80"
       - "443:443"
