@@ -1,5 +1,5 @@
 # Use Node.js version 18 as the base image
-FROM node:20-alpine3.17
+FROM node:20-alpine
 
 # Copy package.json to the working directory
 COPY package.json .
