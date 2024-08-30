@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 const useAuth = () => {
   // Fetch user data
   const isRefreshToken = Cookies.get("refreshToken");
+  console.log(isRefreshToken);
   const {
     data: currentUser,
     isLoading,
