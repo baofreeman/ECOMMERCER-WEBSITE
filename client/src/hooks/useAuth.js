@@ -23,17 +23,13 @@ const useAuth = () => {
         roles: ["user"], // default role if user is not logged in
       };
     }
-<<<<<<< HEAD
 
     return {
       username: currentUser.username,
       userId: currentUser._id,
       roles: currentUser.roles || ["user"],
     };
-  }, [isRefreshToken, currentUser, isLoading, isError]);
-=======
   }, [isAuthenticated, currentUser, isLoading, isError]);
->>>>>>> ea2cb28 (auth)
 
   return user;
 };
