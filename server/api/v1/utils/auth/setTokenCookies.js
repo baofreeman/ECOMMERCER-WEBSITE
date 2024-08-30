@@ -4,6 +4,7 @@ const setTokenCookies = (res, tokenName, tokenValue, options = {}) => {
     res.cookie(tokenName, tokenValue, {
       httpOnly: options.httpOnly || NODE_ENV === "production",
       secure: options.secure || NODE_ENV === "production",
+      sameSite: "Lax",
       maxAge: options.maxAge || 0, // Default to 0 if not provided
       ...options, // Allow overriding any other cookie options
     });
