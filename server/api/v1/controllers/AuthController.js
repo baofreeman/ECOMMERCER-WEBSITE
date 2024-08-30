@@ -170,6 +170,9 @@ class AuthController {
       setTokenCookies(res, "refreshToken", refreshToken, {
         maxAge: 60 * 60 * 24 * 1000,
       });
+      setTokenCookies(res, "is_auth_clothes", true, {
+        maxAge: 60 * 60 * 24 * 1000,
+      });
 
       // Send success response with user details
       res.status(200).json({
@@ -192,25 +195,25 @@ class AuthController {
   }
 
   // POST /v1/auth/refresh-token
-  async getNewAccessToken(req, res) {
-    try {
-      const { newAccessToken, newRefreshToken } = await refreshAccessToken(
-        req,
-        res
-      );
+  // async getNewAccessToken(req, res) {
+  //   try {
+  //     const { newAccessToken, newRefreshToken } = await refreshAccessToken(
+  //       req,
+  //       res
+  //     );
 
-      // Set New tokens to Cookie
-      setTokenCookies(res, newAccessToken, newRefreshToken);
+  //     // Set New tokens to Cookie
+  //     setTokenCookies(res, newAccessToken, newRefreshToken);
 
-      res.status(200).send({
-        status: "success",
-        message: "Token mới đã được tạo",
-        access_token: newAccessToken,
-      });
-    } catch (error) {
-      res.status(500).json({ status: "failed", message: "Lỗi máy chủ" });
-    }
-  }
+  //     res.status(200).send({
+  //       status: "success",
+  //       message: "Token mới đã được tạo",
+  //       access_token: newAccessToken,
+  //     });
+  //   } catch (error) {
+  //     res.status(500).json({ status: "failed", message: "Lỗi máy chủ" });
+  //   }
+  // }
 
   // GET /v1/auth/me
   async userProfile(req, res) {
