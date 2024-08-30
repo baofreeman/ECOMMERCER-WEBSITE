@@ -372,9 +372,9 @@ class AuthController {
         { $set: { blacklisted: true } }
       );
       // Clear access token and refresh token cookies
-      res.clearCookie("accessToken");
-      res.clearCookie("refreshToken");
-      res.clearCookie("is_auth");
+      res.clearCookie("auth_access_token");
+      res.clearCookie("auth_refresh_token");
+      res.clearCookie("auth_is_authenticated");
 
       res
         .status(200)

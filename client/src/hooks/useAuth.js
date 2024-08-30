@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 
 const useAuth = () => {
   // Fetch user data
-  const isAuthenticated = Cookies.get("auth_is_authenticated");
+  const isAuthenticated = Boolean(Cookies.get("auth_is_authenticated"));
   const {
     data: currentUser,
     isLoading,
