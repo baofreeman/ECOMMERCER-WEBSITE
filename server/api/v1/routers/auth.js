@@ -10,7 +10,7 @@ const router = express.Router();
 router.route("/register").post(AuthController.register);
 router.route("/verify-email").post(AuthController.verifyEmail);
 router.route("/login").post(AuthController.login);
-router.route("/refresh-token").post(AuthController.getNewAccessToken);
+// router.route("/refresh-token").post(AuthController.getNewAccessToken);
 router
   .route("/reset-password-link")
   .post(AuthController.sendUserPasswordResetEmail);
