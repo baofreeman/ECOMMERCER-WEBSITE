@@ -111,7 +111,7 @@ const FilterProducts = () => {
     : "text-silver px-3 py-2";
 
   return (
-    <div className="w-full h-max flex flex-col gap-4 relative md:flex-row sm:flex-row md:justify-between sm:justify-between sm:px-4">
+    <div className="w-full h-max flex flex-col gap-4 relative md:flex-row sm:flex-row md:justify-between sm:justify-between px-4">
       <h1 className="text-base sm:hidden md:hidden">Lọc</h1>
       <section className="text-md w-full flex flex-col gap-8 md:flex-row md:justify-between sm:flex-row md:gap-4 sm:gap-2 sm:justify-between sm:items-center">
         <div className="flex flex-col gap-3 md:flex-row sm:gap-1">
