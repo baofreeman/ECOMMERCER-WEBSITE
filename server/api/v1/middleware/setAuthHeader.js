@@ -2,7 +2,7 @@ const { isTokenExpired } = require("../utils/auth/isTokenExpried");
 
 const setAuthHeader = async (req, res, next) => {
   try {
-    const accessToken = req.cookies.accessToken;
+    const accessToken = req.cookies.auth_access_token;
     if (accessToken || !isTokenExpired(accessToken)) {
       req.headers["authorization"] = `Bearer ${accessToken}`;
     }
