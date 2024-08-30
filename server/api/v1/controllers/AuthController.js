@@ -164,13 +164,13 @@ class AuthController {
       const refreshToken = await generateRefreshToken(user);
 
       // Set tokens as HTTP-only cookies to secure them
-      setTokenCookies(res, "accessToken", accessToken, {
+      setTokenCookies(res, "auth_access_token", accessToken, {
         maxAge: 60 * 30 * 1000,
       });
-      setTokenCookies(res, "refreshToken", refreshToken, {
+      setTokenCookies(res, "auth_refresh_token", refreshToken, {
         maxAge: 60 * 60 * 24 * 1000,
       });
-      setTokenCookies(res, "is_auth_clothes", true, {
+      setTokenCookies(res, "auth_is_authenticated", true, {
         maxAge: 60 * 60 * 24 * 1000,
       });
 
