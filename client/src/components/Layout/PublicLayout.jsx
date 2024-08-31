@@ -17,25 +17,23 @@ const PublicLayout = () => {
 
   return (
     <main className="w-full relative dark:bg-black h-full no-scrollbar">
-      <section className="w-full h-full">
-        {/* Container for the scrollable slides */}
-        <FullScreenScroll>
-          {IMAGE_CATEGORIES.map((item) => (
-            <article
-              key={item.link} // Use link as unique key
-              onClick={() => handleLink(item.link)} // Navigate on click
-              className="h-full"
-            >
-              <img
-                src={item.image}
-                alt={item.category || "image categoies"} // Added alt for accessibility
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
-            </article>
-          ))}
-        </FullScreenScroll>
-      </section>
+      {/* Container for the scrollable slides */}
+      <FullScreenScroll>
+        {IMAGE_CATEGORIES.map((item) => (
+          <article
+            key={item.link} // Use link as unique key
+            onClick={() => handleLink(item.link)} // Navigate on click
+            className="h-full"
+          >
+            <img
+              src={item.image}
+              alt={item.category || "image categoies"} // Added alt for accessibility
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </article>
+        ))}
+      </FullScreenScroll>
 
       {/* Bottom section for additional images, visible on small screens */}
       <section className="absolute bottom-0 w-full px-[40px] h-[200px] sm:hidden">

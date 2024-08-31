@@ -18,6 +18,7 @@ const FullScreenScroll = ({ children }) => {
   };
 
   const handleScroll = useCallback((e) => {
+    e.preventDefault();
     if (isScrolling) return; // Prevent scrolling while already scrolling
 
     const now = performance.now(); // Get the current time
