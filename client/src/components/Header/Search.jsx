@@ -70,6 +70,19 @@ const Search = () => {
           <DeleteIcon />
         </div>
       </div>
+<<<<<<< HEAD
+=======
+      {isModalOpen && (
+        <SearchResults
+          data={data}
+          isLoading={isLoading}
+          isError={isError}
+          error={error}
+          onLinkClick={handleLink}
+          onClose={closeModal}
+        />
+      )}
+>>>>>>> 515c10b (search)
     </div>
   );
 };
