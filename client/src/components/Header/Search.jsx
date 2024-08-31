@@ -62,16 +62,14 @@ const Search = () => {
         </div>
       </div>
       {isModalOpen && (
-        <div className="absolute top-[36px] left-0 w-full bg-black border rounded z-50 overflow-hidden">
-          <SearchResults
-            data={data}
-            isLoading={isLoading}
-            isError={isError}
-            error={error}
-            onLinkClick={handleLink}
-            onClose={closeModal}
-          />
-        </div>
+        <SearchResults
+          data={data}
+          isLoading={isLoading}
+          isError={isError}
+          error={error}
+          onLinkClick={handleLink}
+          onClose={closeModal}
+        />
       )}
     </div>
   );
