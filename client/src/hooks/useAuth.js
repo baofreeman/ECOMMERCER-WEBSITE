@@ -5,11 +5,7 @@ import Cookies from "js-cookie";
 
 const useAuth = () => {
   // Fetch user data
-<<<<<<< HEAD
-  const isAuthenticated = Cookies.get("auth_is_authenticated");
-=======
   const isAuthenticated = Cookies.get("auth_is_authenticated") === "true";
->>>>>>> main
   const {
     data: currentUser,
     isLoading,
@@ -26,15 +22,6 @@ const useAuth = () => {
         userId: null,
         roles: ["user"], // default role if user is not logged in
       };
-<<<<<<< HEAD
-    } else {
-      return {
-        username: currentUser.username,
-        userId: currentUser._id,
-        roles: currentUser.roles || ["user"],
-      };
-    }
-=======
     }
 
     return {
@@ -42,7 +29,6 @@ const useAuth = () => {
       userId: currentUser._id,
       roles: currentUser.roles || ["user"],
     };
->>>>>>> main
   }, [isAuthenticated, currentUser, isLoading, isError]);
 
   return user;

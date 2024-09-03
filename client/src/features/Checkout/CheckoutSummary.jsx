@@ -63,11 +63,7 @@ const CheckoutSummary = () => {
                     height={"100%"}
                     style={{ marginLeft: "auto", marginRight: "auto" }}
                     className="w-[60px] sm:w-[20px]"
-<<<<<<< HEAD
-                    alt={"product"}
-=======
                     alt="product"
->>>>>>> main
                   />
                 </td>
                 <td className="border text-center px-2 py-4 sm:p-1">
