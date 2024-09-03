@@ -58,9 +58,7 @@ class OrderController {
       res.status(200).json({ url: `/checkout/success` });
     } catch (error) {
       console.error("Error creating order:", error);
-      res
-        .status(500)
-        .json({ message: "Đã xảy ra lỗi trong quá trình tạo đơn hàng" });
+      res.status(500).json({ message: "Lỗi server" });
     }
   }
 
@@ -84,7 +82,7 @@ class OrderController {
       res.status(200).json(order);
     } catch (error) {
       console.error("Error fetching order details:", error);
-      res.status(500).json({ message: "Đã xảy ra lỗi khi truy vấn đơn hàng" });
+      res.status(500).json({ message: "Lỗi server" });
     }
   }
 
@@ -133,7 +131,7 @@ class OrderController {
       });
     } catch (error) {
       console.error("Error updating order:", error);
-      res.status(500).json({ message: "Lỗi server khi cập nhật đơn hàng" });
+      res.status(500).json({ message: "Lỗi server" });
     }
   }
 }

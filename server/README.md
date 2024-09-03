@@ -2,11 +2,7 @@
 
 #### Link Github:
 
-- https://github.com/baofreeman/business-api
-
-#### Link Deploy:
-
-- https://clothesbyfreeman.vercel.app
+- https://github.com/baofreeman/clothes
 
 #### Description:
 

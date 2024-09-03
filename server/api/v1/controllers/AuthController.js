@@ -189,7 +189,7 @@ class AuthController {
       console.error("Error during login:", error); // Log error for debugging
       res.status(500).json({
         status: "failed",
-        message: "Không thể đăng nhập, vui lòng thử lại sau",
+        message: "Lỗi server",
       });
     }
   }
@@ -252,7 +252,7 @@ class AuthController {
     } catch (error) {
       res.status(500).json({
         status: "failed",
-        message: "Không thể đổi mật khẩu, vui lòng thử lại",
+        message: "Lỗi server",
       });
     }
   }
@@ -296,7 +296,7 @@ class AuthController {
     } catch (error) {
       return res.status(500).json({
         status: "failed",
-        message: "Không thể gửi đường dẫn đến Email, vui lòng thử lại sau",
+        message: "Lỗi server",
       });
     }
   }
@@ -355,7 +355,7 @@ class AuthController {
       }
       return res.status(500).json({
         status: "failed",
-        message: "Không thể đổi mật khẩu, vui lòng thử lại sau",
+        message: "Lỗi server",
       });
     }
   }
@@ -382,7 +382,7 @@ class AuthController {
     } catch (error) {
       return res.status(500).json({
         status: "failed",
-        message: "Không thể đăng xuất, vui lòng thử lại sau",
+        message: "Lỗi server",
       });
     }
   }

@@ -27,7 +27,6 @@ const FullScreenScroll = ({ children }) => {
 
     const deltaY = e.deltaY;
     const totalSections = React.Children.count(children);
-    console.log(lastScrollTime);
 
     if (deltaY > 0) {
       setCurrentSection((prevSection) =>
