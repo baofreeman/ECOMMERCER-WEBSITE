@@ -1,33 +1,31 @@
-## Website ecommerce (Frontend)
+## eCommerce Website (Frontend)
 
-#### Link Github:
+**GitHub Repository**: https://github.com/baofreeman/clothes
 
-- https://github.com/baofreeman/business-web
+**Live**: https://clothes-freeman.store
 
-#### Link Deploy:
+### Project Overview
 
-- https://clothesbyfreeman.vercel.app
+This project is a personal eCommerce website designed for selling fashion products. The interface is inspired by blur.io, offering a full range of functionalities typical of a modern online store.
 
-#### Description:
+### Team Size
 
-- This is a website selling fashion. The website interface is referenced at blur.io. Full of features functions of a sales website.
+- Individual Project (1 developer)
 
-#### Team size:
+### Technologies Used
 
-- 01 (project personal).
+- **Frontend**: HTML, CSS, JavaScript, React JS, React Router, Redux Toolkit, Tailwind CSS, React Hook Form
+- **Deployment**: Vercel
 
-#### Technology:
+### Key Features
 
-- Frontend: HTML/CSS, JavaScript, React JS, React Router, Redux toolkit, Tailwindcss, React hook form. Deploy
-  Vercel.
+- User authentication (Login/Logout)
+- Integration with backend APIs
+- Admin panel for managing products (Add, Edit, Delete, Update)
+- Shopping cart and order management
+- Product search and filtering with variants
+- Responsive design for both mobile and desktop
 
-#### Main description:
+---
 
-- Login/ Logout.
-- Call api to Backend.
-- Add, edit, delete, update products with Admin panel.
-- Shopping cart and orders.
-- Search, filter variants of product.
-- Responsive table, mobile.
-
-#### ------------- Thanks for watching -------------
+**Thank you for visiting!**
