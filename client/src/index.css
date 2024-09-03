@@ -168,18 +168,6 @@
     font-size: 1.2rem;
   }
 
-<<<<<<< HEAD
-  .container {
-    scroll-snap-type: y mandatory; /* Enables scroll snapping on the y-axis for each section */
-    overflow-y: scroll; /* Activates vertical scrolling */
-    height: 100vh; /* Sets the container's height to the full viewport height */
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .section {
-    height: 100vh; /* Makes each section occupy the full viewport height */
-    scroll-snap-align: start; /* Ensures each section aligns at the start when scrolling */
-=======
   .public-scroll {
     scroll-snap-type: y mandatory;
     overflow-y: auto;
@@ -193,7 +181,6 @@
     width: 100%;
     height: 100vh;
     scroll-snap-align: start;
->>>>>>> de15884 (public)
   }
 
   /* Hide scrollbar for Chrome, Safari, and Opera */
