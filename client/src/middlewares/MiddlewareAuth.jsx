@@ -8,7 +8,11 @@ const protectedPaths = ["/admin"];
 const MiddlewareAuth = () => {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+<<<<<<< HEAD
   const isAuthenticated = Cookies.get("auth_is_authenticated");
+=======
+  const isAuthenticated = Cookies.get("auth_is_authenticated") === "true";
+>>>>>>> main
 
   useEffect(() => {
     if (isAuthenticated && authPaths.includes(pathname)) {

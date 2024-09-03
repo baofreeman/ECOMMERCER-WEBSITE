@@ -34,7 +34,7 @@ const Products = () => {
 
   useEffect(() => {
     isSuccess && setIsLoading(false);
-  }, [page]);
+  }, [page, isSuccess]);
 
   useEffect(() => {
     if (inView) {

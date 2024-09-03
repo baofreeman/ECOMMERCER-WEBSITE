@@ -21,6 +21,7 @@ const Search = () => {
   const handleSearch = (e) => {
     const key = e.target.value;
     trigger(key); // Trigger the search
+<<<<<<< HEAD
     openModal(
       <SearchResults
         data={data}
@@ -31,6 +32,9 @@ const Search = () => {
         onClose={closeModal}
       />
     );
+=======
+    openModal();
+>>>>>>> main
   };
 
   const handleLink = (item) => {
@@ -71,7 +75,10 @@ const Search = () => {
         </div>
       </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> main
       {isModalOpen && (
         <SearchResults
           data={data}

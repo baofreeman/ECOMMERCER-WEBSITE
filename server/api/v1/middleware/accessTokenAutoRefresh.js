@@ -31,7 +31,7 @@ const accessTokenAutoRefresh = async (req, res, next) => {
     }
 
     // Set the new tokens as cookies
-    setTokenCookies(res, "accessToken", newAccessToken, {
+    setTokenCookies(res, "auth_access_token", newAccessToken, {
       maxAge: 60 * 30 * 1000,
     });
 
