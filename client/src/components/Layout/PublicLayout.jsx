@@ -21,7 +21,7 @@ const PublicLayout = () => {
           <article
             key={item.link}
             onClick={() => handleLink(item.link)}
-            className="max-h-full transform duration-300 ease-in-out"
+            className="w-full h-full transform duration-300 ease-in-out"
           >
             <img
               src={item.image}
