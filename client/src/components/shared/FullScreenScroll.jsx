@@ -4,41 +4,38 @@ const FullScreenScroll = ({ children }) => {
   const containerRef = useRef(null);
   const [currentSection, setCurrentSection] = useState(0);
   const [isScrolling, setIsScrolling] = useState(false);
-  const [lastScrollTime, setLastScrollTime] = useState(0); // Track the last scroll time
 
   const scrollToSection = (index) => {
     if (containerRef.current) {
-      setIsScrolling(true);
-      containerRef.current.scrollTo({
-        top: index * window.innerHeight,
-        behavior: "smooth",
-      });
-      setTimeout(() => setIsScrolling(false), 300); // Stop scrolling for 300ms
+      const section = containerRef.current.children[index];
+      if (section) {
+        section.scrollIntoView({ behavior: "smooth" });
+      }
     }
   };
 
-  const handleScroll = useCallback((e) => {
-    e.preventDefault();
-    if (isScrolling) return; // Prevent scrolling while already scrolling
+  const handleScroll = useCallback(
+    (e) => {
+      if (isScrolling) return;
 
-    const now = performance.now(); // Get the current time
-    if (now - lastScrollTime < 300) return; // Limit scroll frequency to avoid excessive operations
+      const deltaY = e.deltaY;
+      const totalSections = React.Children.count(children);
 
-    const deltaY = e.deltaY;
-    const totalSections = React.Children.count(children);
+      if (deltaY > 0 && currentSection < totalSections - 1) {
+        setCurrentSection((prevSection) => prevSection + 1);
+      } else if (deltaY < 0 && currentSection > 0) {
+        setCurrentSection((prevSection) => prevSection - 1);
+      }
 
-    if (deltaY > 0 && currentSection < totalSections - 1) {
-      setCurrentSection((prevSection) => prevSection + 1);
-    } else if (deltaY < 0 && currentSection > 0) {
-      setCurrentSection((prevSection) => prevSection - 1);
-    }
-
-    setLastScrollTime(now); // Update the last scroll time
-  }, []);
+      setIsScrolling(true);
+      setTimeout(() => setIsScrolling(false), 500); // Adjust timeout to match smooth scroll duration
+    },
+    [currentSection, isScrolling, children]
+  );
 
   useEffect(() => {
     scrollToSection(currentSection);
-  }, [currentSection]);
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -48,20 +45,12 @@ const FullScreenScroll = ({ children }) => {
         container.removeEventListener("wheel", handleScroll);
       };
     }
-  }, [isScrolling, handleScroll]);
+  }, [handleScroll]);
 
   return (
-    <div
-      ref={containerRef}
-      style={{
-        height: "100dvh",
-        width: "100%",
-        overflow: "hidden",
-        scrollBehavior: "smooth",
-      }}
-    >
+    <div className="container" ref={containerRef}>
       {React.Children.map(children, (child) => (
-        <div className="w-full h-full">{child}</div>
+        <div className="section">{child}</div>
       ))}
     </div>
   );

@@ -1,13 +1,12 @@
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import FullScreenScroll from "../shared/FullScreenScroll";
 import { Button } from "../ui";
 import { IMAGE_CATEGORIES, IMAGE_LIST } from "../../constants";
-import { useCallback } from "react";
 
 const PublicLayout = () => {
   const navigate = useNavigate();
 
-  // Memoized navigation handler
   const handleLink = useCallback(
     (link) => {
       navigate(link);
@@ -16,18 +15,17 @@ const PublicLayout = () => {
   );
 
   return (
-    <main className="w-full relative dark:bg-black h-full no-scrollbar">
-      {/* Container for the scrollable slides */}
+    <main className="w-full relative dark:bg-black h-full no-scrollbar overflow-hidden">
       <FullScreenScroll>
         {IMAGE_CATEGORIES.map((item) => (
           <article
-            key={item.link} // Use link as unique key
-            onClick={() => handleLink(item.link)} // Navigate on click
-            className="h-full"
+            key={item.link}
+            onClick={() => handleLink(item.link)}
+            className="max-h-full transform duration-300 ease-in-out"
           >
             <img
               src={item.image}
-              alt={item.category || "image categoies"} // Added alt for accessibility
+              alt={item.category || "image categories"}
               className="w-full h-full object-cover"
               loading="lazy"
             />
@@ -35,12 +33,11 @@ const PublicLayout = () => {
         ))}
       </FullScreenScroll>
 
-      {/* Bottom section for additional images, visible on small screens */}
       <section className="absolute bottom-0 w-full px-[40px] h-[200px] sm:hidden">
         <div className="w-full h-full relative flex gap-8 sm:gap-4 pb-[20px]">
           {IMAGE_LIST.map((item) => (
             <aside
-              key={item.link} // Use link as unique key
+              key={item.link}
               className="w-full full flex items-center justify-center relative"
             >
               <div
@@ -51,14 +48,14 @@ const PublicLayout = () => {
                   backgroundPosition: "center center",
                   backgroundSize: "cover",
                 }}
-                onClick={() => handleLink(item.link)} // Navigate on click
+                onClick={() => handleLink(item.link)}
               >
                 <div className="absolute bottom-10 px-[50%] text-lg">
                   <Button
                     size="s-link"
                     design="link-basic"
                     width="full"
-                    to={item.link} // Navigate to link
+                    to={item.link}
                   >
                     {item.category}
                   </Button>

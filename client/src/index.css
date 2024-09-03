@@ -169,15 +169,17 @@
   }
 
   .container {
-    scroll-snap-type: y mandatory; /* Enables scroll snapping on the y-axis for each section */
-    overflow-y: scroll; /* Activates vertical scrolling */
-    height: 100vh; /* Sets the container's height to the full viewport height */
+    scroll-snap-type: y mandatory;
+    overflow-y: auto;
+    height: 100vh;
+    scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
   }
 
   .section {
-    height: 100vh; /* Makes each section occupy the full viewport height */
-    scroll-snap-align: start; /* Ensures each section aligns at the start when scrolling */
+    height: 100vh;
+    scroll-snap-align: start;
+    transition: transform 0.3s ease-out; /* Smooth scrolling effect */
   }
 
   /* Hide scrollbar for Chrome, Safari, and Opera */
