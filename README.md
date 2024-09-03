@@ -68,16 +68,38 @@
    git clone https://github.com/baofreeman/FINAL-CLOTHES-SHOP-ECOMMERCER.git
    
 2. Navigate to the project directory:
+   
   ```bash
   cd clothes
 
 3. Install the dependencies:
+
   ```bash
   npm install
 
 4 .Start the development server:
+
   ```bash
   npm start
+
+### **Backend Setup**
+
+2. Navigate to the backend directory:
+
+  ```bash
+  cd clothes/backend
+
+3. Install the dependencies:
+
+  ```bash
+  npm install
+
+4. Set up environment variables (e.g., MongoDB URI, JWT secret, Cloudinary credentials).
+
+5. Start the backend server:
+
+  ```bash
+  npm run dev
 
 
 
