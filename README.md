@@ -64,43 +64,84 @@
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/baofreeman/FINAL-CLOTHES-SHOP-ECOMMERCER.git
+      ```bash
+      git clone https://github.com/baofreeman/FINAL-CLOTHES-SHOP-ECOMMERCER.git
    
 2. Navigate to the project directory:
    
-  ```bash
-  cd clothes
+     ```bash
+     cd clothes
 
 3. Install the dependencies:
 
-  ```bash
-  npm install
+     ```bash
+     npm install
 
-4 .Start the development server:
+4. Start the development server:
 
-  ```bash
-  npm start
+      ```bash
+      npm start
+     
 
 ### **Backend Setup**
 
 2. Navigate to the backend directory:
 
-  ```bash
-  cd clothes/backend
+     ```bash
+     cd clothes/backend
 
 3. Install the dependencies:
 
-  ```bash
-  npm install
+     ```bash
+     npm install
 
 4. Set up environment variables (e.g., MongoDB URI, JWT secret, Cloudinary credentials).
 
 5. Start the backend server:
 
-  ```bash
-  npm run dev
+     ```bash
+     npm run dev
 
+Running with Docker
+To make development and deployment easier, you can use Docker to containerize the application.
 
+1. Ensure Docker and Docker Compose are installed on your machine.
 
+2. Clone the repository:
+   
+      ```bash
+      git clone https://github.com/baofreeman/FINAL-CLOTHES-SHOP-ECOMMERCER.git
+
+3. Navigate to the project directory:
+
+      ```bash
+      cd clothes
+
+4. Build and start the Docker containers:
+
+      ```bash
+      docker compose up --build
+
+5. Access the application:
+   - **Frontend**: Open http://localhost:3000 in your web browser.
+   - **Backend**: The backend server will be running on http://localhost:5000.
+  
+6. Stop the Docker containers:
+
+      ```bash
+      docker compose down
+
+## **Deployment**
+
+The project is deployed on **Vercel** for the frontend and **Render** for the backend.
+
+## **Contribution**
+
+This is a personal project, but feel free to fork the repository and contribute.
+
+---
+
+**Thank you for visiting!**
+
+   
 
