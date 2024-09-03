@@ -22,7 +22,7 @@ router
     UserController.updateUser
   );
 router
-  .route("/delete-user")
+  .route("/delete-user/:userId")
   .delete(
     accessTokenAutoRefresh,
     passport.authenticate("jwt", { session: false }),

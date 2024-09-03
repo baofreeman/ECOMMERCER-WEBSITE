@@ -32,6 +32,7 @@ class ProductController {
     }
   }
 
+  // POST /v1/product/:category
   async getProductsCategory(req, res) {
     try {
       const { category } = req.params;
@@ -52,7 +53,7 @@ class ProductController {
     }
   }
 
-  // POST /v1/create-product
+  // POST /v1/product/create-product
   async createProduct(req, res) {
     try {
       const { name, description, category, subCategory } = req.body;
@@ -91,7 +92,7 @@ class ProductController {
     }
   }
 
-  // PATCH /v1/update-product
+  // PATCH /v1/product/update-product
   async updateProduct(req, res) {
     try {
       const { id, name, description, category } = req.body;
@@ -117,10 +118,10 @@ class ProductController {
     }
   }
 
-  // DELETE /v1/delete-product
+  // DELETE /v1/product/delete-product
   async deleteProduct(req, res) {
     try {
-      const { productId } = req.body;
+      const { productId } = req.params;
       if (!productId) {
         return res.status(401).json({ message: "Không có dữ liệu" });
       }
@@ -156,8 +157,8 @@ class ProductController {
     }
   }
 
-  // GET v1/product/:itemId
-  async getProduct(req, res) {
+  // GET v1/variants/:itemId
+  async getVariants(req, res) {
     try {
       const { itemId } = req.params;
       if (!itemId) {

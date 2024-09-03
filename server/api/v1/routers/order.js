@@ -8,7 +8,7 @@ const passport = require("passport");
 
 // Public route Order
 router.route("/create-order").post(OrderController.createOrder);
-router.route("/order-detail").get(OrderController.getOrderDetail);
+router.route("/order-detail/${orderId}").get(OrderController.getOrderDetail);
 
 router
   .route("/all-order")

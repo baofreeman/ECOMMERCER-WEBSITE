@@ -52,10 +52,9 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
     // Delete a user with admin role
     deleteUser: builder.mutation({
-      query: (body) => ({
-        url: "/user/delete-user",
+      query: (userId) => ({
+        url: `/user/delete-user/${userId}`,
         method: "DELETE",
-        body,
       }),
       invalidatesTags: (result, error, arg) => [{ type: "User", id: arg?._id }],
     }),

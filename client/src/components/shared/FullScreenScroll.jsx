@@ -54,7 +54,7 @@ const FullScreenScroll = ({ children }) => {
   }, [handleScroll]);
 
   return (
-    <div className="public-scroll" ref={containerRef}>
+    <div className="public-scroll no-scrollbar" ref={containerRef}>
       {React.Children.map(children, (child) => (
         <div className="section">{child}</div>
       ))}

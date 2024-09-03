@@ -49,7 +49,7 @@ class UserController {
   // DELETE path: /v1/user
   async deleteUser(req, res, next) {
     try {
-      const { userId } = req.body;
+      const { userId } = req.params;
       if (!userId) {
         return res.status(400).json({ message: "userId bắt buộc" });
       }

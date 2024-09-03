@@ -29,7 +29,7 @@ const ProductExtent = ({ productId }) => {
   // Delete product based on productId.
   const handleDelete = async () => {
     try {
-      const res = await deleteProduct({ productId });
+      const res = await deleteProduct(productId);
       if (res.data) {
         toast.success(res.data.message);
       }

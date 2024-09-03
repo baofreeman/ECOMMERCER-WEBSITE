@@ -27,11 +27,10 @@ const UserExtent = ({ userId }) => {
 
   const handleChange = (e) => {
     const selectedRole = e.target.value;
-    setRoles(
-      (prevRoles) =>
-        prevRoles.includes(selectedRole)
-          ? prevRoles.filter((role) => role !== selectedRole) // Nếu role đã có trong mảng, loại bỏ nó
-          : [...prevRoles, selectedRole] // Nếu role chưa có, thêm nó vào mảng
+    setRoles((prevRoles) =>
+      prevRoles.includes(selectedRole)
+        ? prevRoles.filter((role) => role !== selectedRole)
+        : [...prevRoles, selectedRole]
     );
   };
 
@@ -48,7 +47,7 @@ const UserExtent = ({ userId }) => {
   // Delete user
   const handleDelete = async () => {
     try {
-      const res = await deleteUser({ userId });
+      const res = await deleteUser(userId);
       toast.success(res?.data?.message);
       closeModal();
     } catch (error) {

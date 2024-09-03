@@ -19,10 +19,7 @@ router.route("/").get(ProductController.getProducts);
 router.route("/:category").get(ProductController.getFilterProducts);
 router.route("/search/:key").get(ProductController.searchProduct);
 // router.route("/:category").get(ProductController.getProductsCategory);
-router
-  .route("/variants/:itemId")
-  .get(ProductController.getProduct)
-  .delete(ProductController.deleteProduct);
+router.route("/variants/:itemId").get(ProductController.getVariants);
 
 // Protected router Product. Is Admin
 router
@@ -43,7 +40,7 @@ router
   );
 
 router
-  .route("/delete-product")
+  .route("/delete-product/:productId")
   .delete(
     accessTokenAutoRefresh,
     passport.authenticate("jwt", { session: false }),

@@ -15,7 +15,7 @@ const PublicLayout = () => {
   );
 
   return (
-    <main className="w-full relative dark:bg-black h-full no-scrollbar overflow-hidden">
+    <main className="w-full relative dark:bg-black h-full overflow-hidden">
       <FullScreenScroll>
         {IMAGE_CATEGORIES.map((item) => (
           <article

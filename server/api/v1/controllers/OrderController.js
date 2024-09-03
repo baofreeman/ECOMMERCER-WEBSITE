@@ -65,7 +65,7 @@ class OrderController {
   // GET /v1/order/order-detail
   async getOrderDetail(req, res) {
     try {
-      const { orderId } = req.body;
+      const { orderId } = req.params;
 
       // Validate input
       if (!orderId) {
