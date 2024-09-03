@@ -3,6 +3,8 @@ const app = express();
 const cors = require("cors");
 const helmet = require("helmet");
 const cookieParser = require("cookie-parser");
+const swaggerUi = require("swagger-ui-express");
+const { swaggerDocument } = require("./v1/config/swagger.js");
 require("dotenv").config({ path: ".env.local" });
 require("dotenv").config();
 
@@ -24,7 +26,7 @@ app.use(helmet());
 
 // Cors
 const corsOptions = {
-  origin: [`${process.env.CLIENT_URL}`],
+  origin: [process.env.CLIENT_URL],
   credentials: true,
   optionsSuccessStatus: 200,
 };
@@ -54,5 +56,6 @@ app.use("/api/v1/order", order);
 app.use("/api/v1/country", country);
 app.use("/api/v1/user", user);
 app.use("/uploads", express.static("uploads"));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 module.exports = app;

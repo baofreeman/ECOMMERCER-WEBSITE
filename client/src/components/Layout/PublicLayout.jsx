@@ -16,8 +16,12 @@ const PublicLayout = () => {
   );
 
   return (
+<<<<<<< HEAD
     <main className="w-full relative dark:bg-black h-full no-scrollbar">
       {/* Container for the scrollable slides */}
+=======
+    <main className="w-full relative dark:bg-black h-full overflow-hidden">
+>>>>>>> 10dbcd3 (all)
       <FullScreenScroll>
         {IMAGE_CATEGORIES.map((item) => (
           <article
