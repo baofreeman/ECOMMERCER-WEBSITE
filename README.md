@@ -6,11 +6,11 @@
 
 ## **Live Demo**
 
-- [Visit Live Site](https://clothes-freeman.store)
+- [Visit the Live Site](https://clothes-freeman.store)
 
 ## **Project Overview**
 
-"Clothes by Freeman" is a comprehensive eCommerce platform designed for selling fashion products. This is a personal project, providing a complete suite of functionalities expected from a modern online store, with a user interface inspired by blur.io.
+"Clothes by Freeman" is a comprehensive eCommerce platform designed specifically for fashion retail. This personal project aims to provide a full suite of functionalities expected from a modern online store, featuring an intuitive user interface inspired by the design principles of blur.io.
 
 ## **Team Size**
 
@@ -23,16 +23,19 @@
 - **Languages & Frameworks**: HTML, CSS, JavaScript, React JS, React Router, Redux Toolkit
 - **Styling**: Tailwind CSS
 - **Form Management**: React Hook Form
-- **Deployment**: Vercel
+- **Deployment**: AWS EC2
 
 ### **Backend**
 
 - **Framework**: Express.js
 - **Authentication**: JSON Web Token (JWT)
-- **File Upload**: Multer
-- **Database**: MongoDB with Mongoose ODM
+- **File Handling**: Multer for file uploads
 - **Image Storage**: Cloudinary
-- **Deployment**: Render
+- **Deployment**: AWS EC2
+
+### **Database**
+
+- **Service**: MongoDB Atlas with Mongoose ODM
 
 ### **Docker**
 
@@ -42,21 +45,21 @@
 
 ### **Frontend**
 
-- **User Authentication**: Login and logout functionalities to secure user sessions.
-- **API Integration**: Communicates with backend APIs to fetch and manage data.
-- **Admin Panel**: Comprehensive admin dashboard to add, edit, delete, and update products.
-- **Shopping Cart**: Enables users to add products to their cart and proceed to checkout.
-- **Order Management**: Allows users to place orders and view their order history.
-- **Product Search and Filtering**: Users can search for products and apply filters based on product variants like size, color, etc.
-- **Responsive Design**: Optimized for both mobile and desktop devices to ensure a seamless user experience.
+- **User Authentication**: Secure user sessions with features such as login, logout, email verification, password reset, and password change.
+- **API Integration**: Seamless communication with backend APIs for data retrieval and manipulation.
+- **Admin Panel**: A robust admin dashboard to manage products, users, and orders (Add, Edit, Delete, Update).
+- **Shopping Cart**: Allows users to add products to their cart and proceed with the checkout process.
+- **Order Management**: Users can place orders and review their order history.
+- **Product Search and Filtering**: Search functionality with filters for product variants such as size and color.
+- **Responsive Design**: Optimized for both mobile and desktop devices to provide a consistent user experience across all platforms.
 
 ### **Backend**
 
-- **Secure Authentication**: Implements both access tokens and refresh tokens for secure user authentication.
-- **RESTful APIs**: Provides APIs for managing products, users, and orders.
-- **Image Upload**: Supports image uploads using Multer, with images stored on Cloudinary.
-- **Advanced Search and Filtering**: APIs support searching and filtering of products by different variants.
-- **Geolocation Data**: Integrates with APIs to fetch Province and District data in Vietnam.
+- **Secure Authentication**: Implements access tokens and refresh tokens for enhanced security.
+- **RESTful APIs**: Provides robust APIs for managing products, users, and orders.
+- **Image Upload**: Supports efficient image uploads with Multer, utilizing Cloudinary for storage.
+- **Advanced Search and Filtering**: Comprehensive search and filter options through APIs to improve product discovery.
+- **Geolocation Data**: Integrates with third-party APIs to fetch detailed geographical data (provinces and districts in Vietnam).
 
 ## **How to Run the Project Locally**
 
