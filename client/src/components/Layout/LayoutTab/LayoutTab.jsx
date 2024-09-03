@@ -36,7 +36,7 @@ const LayoutTab = () => {
     if (isUninitialized) {
       trigger({});
     }
-  }, []);
+  }, [isUninitialized]);
 
   const isSidebarLeftOpen = useSelector(selectSidebarLeft);
   const isSidebarRightOpen = useSelector(selectSidebarRight);
@@ -100,9 +100,6 @@ const LayoutTab = () => {
       <Footer id="FOOTER_LAYOUT" />
     </main>
   );
-
-  // Return null if data is not yet available
-  return null;
 };
 
 export default memo(LayoutTab);

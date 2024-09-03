@@ -21,8 +21,6 @@ const ListFilterProducts = () => {
   const [trigger, { data: products, isFetching, isSuccess, isLoading }] =
     useLazyGetFilterProductsQuery();
 
-  console.log(page, products?.totalPages);
-
   useEffect(() => {
     setPage(1);
     // Trigger API call when category or search changes
