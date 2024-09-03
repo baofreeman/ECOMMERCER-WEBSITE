@@ -4,37 +4,37 @@
   "description": "API documentation for the Express application."
   "version": "1.0.0"
 "servers":
-  - "url": "http://localhost:3000/api"
+  - "url": "https://clothes-freeman.store/api/v1"
     "description": "Local server"
 "tags":
   - "name": "auth"
     "description": "Authenticantion user"
     "externalDocs":
       "description": "Find out more"
-      "url": "http://swagger.io"
+      "url": "https://clothes-freeman.store/api/v1"
   - "name": "product"
     "description": "Access to products"
     "externalDocs":
       "description": "Find out more about our store"
-      "url": "http://swagger.io"
+      "url": "https://clothes-freeman.store/api/v1"
   - "name": "orders"
     "description": "Access to orders"
     "externalDocs":
       "description": "Find out more about our store"
-      "url": "http://swagger.io"
+      "url": "https://clothes-freeman.store/api/v1"
   - "name": "users"
     "description": "Access to users"
     "externalDocs":
       "description": "Find out more about our store"
-      "url": "http://swagger.io"
+      "url": "https://clothes-freeman.store/api/v1"
   - "name": "country"
     "description": "Access to country"
     "externalDocs":
       "description": "Find out more about our store"
-      "url": "http://swagger.io"
+      "url": "https://clothes-freeman.store/api/v1"
 
 "paths":
-  "/v1/auth/register":
+  "/auth/register":
     "post":
       "tags":
         - "auth"
@@ -67,7 +67,7 @@
           "description": "Bad request"
         "500":
           "description": "Internal server error"
-  "/v1/auth/verify-email":
+  "/auth/verify-email":
     "post":
       "tags":
         - "auth"
@@ -96,7 +96,7 @@
           "description": "Email not found"
         "500":
           "description": "Internal server error"
-  "/v1/auth/login":
+  "/auth/login":
     "post":
       "tags":
         - "auth"
@@ -125,7 +125,7 @@
           "description": "Unauthorized"
         "500":
           "description": "Internal server error"
-  "/v1/auth/reset-password-link":
+  "/auth/reset-password-link":
     "post":
       "tags":
         - "auth"
@@ -151,7 +151,7 @@
           "description": "Email not found"
         "500":
           "description": "Internal server error"
-  "/v1/auth/reset-password/{id}/{token}":
+  "/auth/reset-password/{id}/{token}":
     "post":
       "tags":
         - "auth"
@@ -191,7 +191,7 @@
           "description": "User not found"
         "500":
           "description": "Internal server error"
-  "/v1/auth/logout":
+  "/auth/logout":
     "post":
       "tags":
         - "auth"
@@ -201,7 +201,7 @@
           "description": "Logout successful"
         "500":
           "description": "Internal server error"
-  "/v1/auth/me":
+  "/auth/me":
     "get":
       "tags":
         - "auth"
@@ -215,7 +215,7 @@
           "description": "Unauthorized"
         "500":
           "description": "Internal server error"
-  "/v1/auth/change-password":
+  "/auth/change-password":
     "post":
       "tags":
         - "auth"
@@ -244,7 +244,8 @@
           "description": "Bad request"
         "500":
           "description": "Internal server error"
-  "/v1/products":
+
+  "/products":
     "get":
       "tags":
         - "product"
@@ -294,7 +295,7 @@
                     "type": "integer"
         "500":
           "description": "Internal server error"
-  "/v1/products/category/{category}":
+  "/products/{category}":
     "get":
       "tags":
         - "product"
@@ -347,7 +348,7 @@
           "description": "No data found"
         "500":
           "description": "Internal server error"
-  "/v1/create-product":
+  "/create-product":
     "post":
       "tags":
         - "product"
@@ -383,7 +384,7 @@
           "description": "Invalid data"
         "500":
           "description": "Internal server error"
-  "/v1/update-product":
+  "/update-product":
     "patch":
       "tags":
         - "product"
@@ -418,25 +419,22 @@
           "description": "Invalid data"
         "500":
           "description": "Internal server error"
-  "/v1/delete-product":
+  "/product/{productId}":
     "delete":
       "tags":
         - "product"
       "summary": "Delete a product"
-      "description": "Delete a product by its ID."
-      "requestBody":
-        "required": true
-        "content":
-          "application/json":
-            "schema":
-              "type": "object"
-              "properties":
-                "productId":
-                  "type": "string"
-                  "description": "The ID of the product to delete"
+      "description": "Deletes a product by its productId. It also deletes images from Cloudinary and the related folder, and then removes the product from the MongoDB database."
+      "parameters":
+        - "name": "productId"
+          "in": "path"
+          "required": true
+          "schema":
+            "type": "string"
+          "description": "ID of the product to delete"
       "responses":
         "200":
-          "description": "Product deleted successfully"
+          "description": "Product successfully deleted"
           "content":
             "application/json":
               "schema":
@@ -444,15 +442,42 @@
                 "properties":
                   "message":
                     "type": "string"
-        "401":
-          "description": "Data cannot be deleted"
+                    "example": "Product name has been successfully deleted"
+        "400":
+          "description": "Missing productId or unable to delete images and folder"
+          "content":
+            "application/json":
+              "schema":
+                "type": "object"
+                "properties":
+                  "message":
+                    "type": "string"
+                    "example": "Missing data or images cannot be deleted"
+        "404":
+          "description": "Product not found"
+          "content":
+            "application/json":
+              "schema":
+                "type": "object"
+                "properties":
+                  "message":
+                    "type": "string"
+                    "example": "Product does not exist"
         "500":
-          "description": "Internal server error"
-  "/v1/product/{itemId}":
+          "description": "Server error while deleting product"
+          "content":
+            "application/json":
+              "schema":
+                "type": "object"
+                "properties":
+                  "message":
+                    "type": "string"
+                    "example": "Server error"
+  "/variants/{itemId}":
     "get":
       "tags":
         - "product"
-      "summary": "Get a product by ID"
+      "summary": "Get a variants by itemId based in Product"
       "description": "Fetch a single product by its ID."
       "parameters":
         - "in": "path"
@@ -493,7 +518,7 @@
           "description": "No data found"
         "500":
           "description": "Internal server error"
-  "/v1/product/traits":
+  "/product/traits":
     "get":
       "tags":
         - "product"
@@ -563,7 +588,7 @@
           "description": "No products found"
         "500":
           "description": "Internal server error"
-  "/v1/product/search/{key}":
+  "/product/search/{key}":
     "get":
       "tags":
         - "product"
@@ -610,393 +635,382 @@
           "description": "No products found"
         "500":
           "description": "Internal server error"
-  "/v1/order/all-order":
-    "get":
-      "summary": "Lấy tất cả đơn hàng"
-      "tags":
+
+  /order/all-order:
+    get:
+      summary: "Retrieve all orders"
+      tags:
         - "orders"
-      "responses":
+      responses:
         "200":
-          "description": "Danh sách đơn hàng"
-          "content":
-            "application/json":
-              "schema":
-                "type": "array"
-                "items":
-                  "type": "object"
-                  "properties":
-                    "_id":
-                      "type": "string"
-                      "example": "610b1d7f2f8fb814b56fa183"
-                    "billingAddress":
-                      "type": "object"
-                      "properties":
-                        "name":
-                          "type": "string"
-                          "example": "Nguyen Van A"
-                        "phone":
-                          "type": "string"
-                          "example": "0901234567"
-                        "district":
-                          "type": "string"
-                          "example": "Quan 1"
-                        "province":
-                          "type": "string"
-                          "example": "Ho Chi Minh"
-                        "address":
-                          "type": "string"
-                          "example": "123 Le Loi"
-                    "userId":
-                      "type": "string"
-                      "example": "60f8b5b35b9bfa0015b1a89d"
-                    "items":
-                      "type": "array"
-                      "items":
-                        "type": "object"
-                    "paymentMethod":
-                      "type": "string"
-                      "example": "COD"
-                    "shippingPrice":
-                      "type": "number"
-                      "example": 50000
-                    "note":
-                      "type": "string"
-                      "example": "Giao hàng cẩn thận"
-                    "itemsPrice":
-                      "type": "number"
-                      "example": 450000
-                    "totalPrice":
-                      "type": "number"
-                      "example": 500000
-                    "totalQuantity":
-                      "type": "integer"
-                      "example": 3
-                    "deliveryStatus":
-                      "type": "string"
-                      "example": "Đang giao"
+          description: "List of orders"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    _id:
+                      type: string
+                      example: "610b1d7f2f8fb814b56fa183"
+                    billingAddress:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                          example: "Nguyen Van A"
+                        phone:
+                          type: string
+                          example: "0901234567"
+                        district:
+                          type: string
+                          example: "District 1"
+                        province:
+                          type: string
+                          example: "Ho Chi Minh"
+                        address:
+                          type: string
+                          example: "123 Le Loi"
+                    userId:
+                      type: string
+                      example: "60f8b5b35b9bfa0015b1a89d"
+                    items:
+                      type: array
+                      items:
+                        type: object
+                    paymentMethod:
+                      type: string
+                      example: "COD"
+                    shippingPrice:
+                      type: number
+                      example: 50000
+                    note:
+                      type: string
+                      example: "Handle with care"
+                    itemsPrice:
+                      type: number
+                      example: 450000
+                    totalPrice:
+                      type: number
+                      example: 500000
+                    totalQuantity:
+                      type: integer
+                      example: 3
+                    deliveryStatus:
+                      type: string
+                      example: "In delivery"
         "401":
-          "description": "Không có dữ liệu"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Không có dữ liệu"
-  "/v1/order/create-order":
-    "post":
-      "summary": "Tạo mới đơn hàng"
-      "tags":
+          description: "No data available"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "No data available"
+  /order/create-order:
+    post:
+      summary: "Create a new order"
+      tags:
         - "orders"
-      "requestBody":
-        "required": true
-        "content":
-          "application/json":
-            "schema":
-              "type": "object"
-              "properties":
-                "name":
-                  "type": "string"
-                  "example": "Nguyen Van A"
-                "phone":
-                  "type": "string"
-                  "example": "0901234567"
-                "district":
-                  "type": "string"
-                  "example": "Quan 1"
-                "province":
-                  "type": "string"
-                  "example": "Ho Chi Minh"
-                "address":
-                  "type": "string"
-                  "example": "123 Le Loi"
-                "cart":
-                  "type": "array"
-                  "items":
-                    "type": "object"
-                    "properties":
-                      "productId":
-                        "type": "string"
-                        "example": "610b1d7f2f8fb814b56fa183"
-                      "quantity":
-                        "type": "integer"
-                        "example": 2
-                "note":
-                  "type": "string"
-                  "example": "Giao hàng vào buổi sáng"
-                "totalPrice":
-                  "type": "number"
-                  "example": 500000
-                "itemsPrice":
-                  "type": "number"
-                  "example": 450000
-                "shippingPrice":
-                  "type": "number"
-                  "example": 50000
-                "totalQuantity":
-                  "type": "integer"
-                  "example": 3
-                "paymentMethod":
-                  "type": "string"
-                  "example": "COD"
-                "userId":
-                  "type": "string"
-                  "example": "60f8b5b35b9bfa0015b1a89d"
-      "responses":
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: "Nguyen Van A"
+                phone:
+                  type: string
+                  example: "0901234567"
+                district:
+                  type: string
+                  example: "District 1"
+                province:
+                  type: string
+                  example: "Ho Chi Minh"
+                address:
+                  type: string
+                  example: "123 Le Loi"
+                cart:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      productId:
+                        type: string
+                        example: "610b1d7f2f8fb814b56fa183"
+                      quantity:
+                        type: integer
+                        example: 2
+                note:
+                  type: string
+                  example: "Deliver in the morning"
+                totalPrice:
+                  type: number
+                  example: 500000
+                itemsPrice:
+                  type: number
+                  example: 450000
+                shippingPrice:
+                  type: number
+                  example: 50000
+                totalQuantity:
+                  type: integer
+                  example: 3
+                paymentMethod:
+                  type: string
+                  example: "COD"
+                userId:
+                  type: string
+                  example: "60f8b5b35b9bfa0015b1a89d"
+      responses:
         "200":
-          "description": "Tạo đơn hàng thành công"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "url":
-                    "type": "string"
-                    "example": "/checkout/success"
+          description: "Order created successfully"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  url:
+                    type: string
+                    example: "/checkout/success"
         "400":
-          "description": "Không thể tạo đơn hàng"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Không thể tạo đơn hàng"
+          description: "Unable to create order"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Unable to create order"
         "500":
-          "description": "Lỗi server khi tạo đơn hàng"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Đã xảy ra lỗi trong quá trình tạo đơn hàng"
-  "/v1/order/order-detail":
-    "get":
-      "summary": "Lấy chi tiết đơn hàng"
-      "tags":
-        - "orders"
-      "requestBody":
-        "required": true
-        "content":
-          "application/json":
-            "schema":
-              "type": "object"
-              "properties":
-                "orderId":
-                  "type": "string"
-                  "example": "610b1d7f2f8fb814b56fa183"
-      "responses":
+          description: "Server error while creating order"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "An error occurred while creating the order"
+  /order/{orderId}:
+    get:
+      tags:
+        - orders
+      summary: "Get order details"
+      description: "Fetches the details of an order by its orderId."
+      parameters:
+        - name: orderId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: "ID of the order to retrieve"
+      responses:
         "200":
-          "description": "Chi tiết đơn hàng"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "_id":
-                    "type": "string"
-                    "example": "610b1d7f2f8fb814b56fa183"
-                  "billingAddress":
-                    "type": "object"
-                    "properties":
-                      "name":
-                        "type": "string"
-                        "example": "Nguyen Van A"
-                      "phone":
-                        "type": "string"
-                        "example": "0901234567"
-                      "district":
-                        "type": "string"
-                        "example": "Quan 1"
-                      "province":
-                        "type": "string"
-                        "example": "Ho Chi Minh"
-                      "address":
-                        "type": "string"
-                        "example": "123 Le Loi"
-                  "userId":
-                    "type": "string"
-                    "example": "60f8b5b35b9bfa0015b1a89d"
-                  "items":
-                    "type": "array"
-                    "items":
-                      "type": "object"
-                  "paymentMethod":
-                    "type": "string"
-                    "example": "COD"
-                  "shippingPrice":
-                    "type": "number"
-                    "example": 50000
-                  "note":
-                    "type": "string"
-                    "example": "Giao hàng cẩn thận"
-                  "itemsPrice":
-                    "type": "number"
-                    "example": 450000
-                  "totalPrice":
-                    "type": "number"
-                    "example": 500000
-                  "totalQuantity":
-                    "type": "integer"
-                    "example": 3
-                  "deliveryStatus":
-                    "type": "string"
-                    "example": "Đang giao"
+          description: "Order details retrieved successfully"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    example: "610b1d7f2f8fb814b56fa183"
+                  billingAddress:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                        example: "Nguyen Van A"
+                      phone:
+                        type: string
+                        example: "0901234567"
+                      district:
+                        type: string
+                        example: "District 1"
+                      province:
+                        type: string
+                        example: "Ho Chi Minh"
+                      address:
+                        type: string
+                        example: "123 Le Loi"
+                  userId:
+                    type: string
+                    example: "60f8b5b35b9bfa0015b1a89d"
+                  items:
+                    type: array
+                    items:
+                      type: object
+                  paymentMethod:
+                    type: string
+                    example: "COD"
+                  shippingPrice:
+                    type: number
+                    example: 50000
+                  note:
+                    type: string
+                    example: "Handle with care"
+                  itemsPrice:
+                    type: number
+                    example: 450000
+                  totalPrice:
+                    type: number
+                    example: 500000
+                  totalQuantity:
+                    type: integer
+                    example: 3
+                  deliveryStatus:
+                    type: string
+                    example: "In delivery"
         "400":
-          "description": "Thiếu thông tin orderId"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Thiếu thông tin orderId"
+          description: "Missing orderId in the request"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Missing orderId in the request"
         "404":
-          "description": "Đơn hàng không tồn tại"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Đơn hàng không tồn tại"
+          description: "Order not found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Order does not exist"
         "500":
-          "description": "Lỗi server khi truy vấn đơn hàng"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Đã xảy ra lỗi khi truy vấn đơn hàng"
-  "/v1/order/update-order":
-    "put":
-      "summary": "Cập nhật đơn hàng"
-      "tags":
+          description: "Server error while fetching the order"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "An error occurred while fetching the order"
+  /order/update-order:
+    put:
+      summary: "Update an order"
+      tags:
         - "orders"
-      "requestBody":
-        "required": true
-        "content":
-          "application/json":
-            "schema":
-              "type": "object"
-              "properties":
-                "orderId":
-                  "type": "string"
-                  "example": "610b1d7f2f8fb814b56fa183"
-                "deliveryStatus":
-                  "type": "string"
-                  "example": "Đang giao"
-                "note":
-                  "type": "string"
-                  "example": "Giao hàng cẩn thận"
-                "shippingPrice":
-                  "type": "number"
-                  "example": 55000
-                "totalPrice":
-                  "type": "number"
-                  "example": 555000
-      "responses":
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                orderId:
+                  type: string
+                  example: "610b1d7f2f8fb814b56fa183"
+                deliveryStatus:
+                  type: string
+                  example: "In delivery"
+                note:
+                  type: string
+                  example: "Handle with care"
+                shippingPrice:
+                  type: number
+                  example: 55000
+                totalPrice:
+                  type: number
+                  example: 555000
+      responses:
         "200":
-          "description": "Cập nhật đơn hàng thành công"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Cập nhật đơn hàng thành công"
-                  "order":
-                    "type": "object"
-                    "properties":
-                      "_id":
-                        "type": "string"
-                        "example": "610b1d7f2f8fb814b56fa183"
-                      "billingAddress":
-                        "type": "object"
-                        "properties":
-                          "name":
-                            "type": "string"
-                            "example": "Nguyen Van A"
-                          "phone":
-                            "type": "string"
-                            "example": "0901234567"
-                          "district":
-                            "type": "string"
-                            "example": "Quan 1"
-                          "province":
-                            "type": "string"
-                            "example": "Ho Chi Minh"
-                          "address":
-                            "type": "string"
-                            "example": "123 Le Loi"
-                      "userId":
-                        "type": "string"
-                        "example": "60f8b5b35b9bfa0015b1a89d"
-                      "items":
-                        "type": "array"
-                        "items":
-                          "type": "object"
-                      "paymentMethod":
-                        "type": "string"
-                        "example": "COD"
-                      "shippingPrice":
-                        "type": "number"
-                        "example": 50000
-                      "note":
-                        "type": "string"
-                        "example": "Giao hàng cẩn thận"
-                      "itemsPrice":
-                        "type": "number"
-                        "example": 450000
-                      "totalPrice":
-                        "type": "number"
-                        "example": 500000
-                      "totalQuantity":
-                        "type": "integer"
-                        "example": 3
-                      "deliveryStatus":
-                        "type": "string"
-                        "example": "Đang giao"
+          description: "Order updated successfully"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Order updated successfully"
+                  order:
+                    type: object
+                    properties:
+                      _id:
+                        type: string
+                        example: "610b1d7f2f8fb814b56fa183"
+                      billingAddress:
+                        type: object
+                        properties:
+                          name:
+                            type: string
+                            example: "Nguyen Van A"
+                          phone:
+                            type: string
+                            example: "0901234567"
+                          district:
+                            type: string
+                            example: "District 1"
+                          province:
+                            type: string
+                            example: "Ho Chi Minh"
+                          address:
+                            type: string
+                            example: "123 Le Loi"
+                      userId:
+                        type: string
+                        example: "60f8b5b35b9bfa0015b1a89d"
+                      items:
+                        type: array
+                        items:
+                          type: object
+                      paymentMethod:
+                        type: string
+                        example: "COD"
+                      shippingPrice:
+                        type: number
+                        example: 50000
+                      note:
+                        type: string
+                        example: "Handle with care"
+                      itemsPrice:
+                        type: number
+                        example: 450000
+                      totalPrice:
+                        type: number
+                        example: 500000
+                      totalQuantity:
+                        type: integer
+                        example: 3
+                      deliveryStatus:
+                        type: string
+                        example: "In delivery"
         "400":
-          "description": "Thiếu thông tin orderId"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Thiếu thông tin orderId"
+          description: "Missing orderId"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Missing orderId"
         "404":
-          "description": "Đơn hàng không tồn tại"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Đơn hàng không tồn tại"
-        "500":
-          "description": "Lỗi server khi cập nhật đơn hàng"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Lỗi server khi cập nhật đơn hàng"
-  "/v1/user":
+          description: "Order not found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+
+  "/user":
     "get":
       "summary": "Lấy danh sách người dùng"
       "tags":
@@ -1096,55 +1110,52 @@
                   "error":
                     "type": "string"
                     "example": "Error message details"
-    "delete":
-      "summary": "Xóa người dùng"
-      "tags":
-        - "users"
-      "requestBody":
-        "required": true
-        "content":
-          "application/json":
-            "schema":
-              "type": "object"
-              "properties":
-                "userId":
-                  "type": "string"
-                  "example": "60f8b5b35b9bfa0015b1a89d"
-      "responses":
+  /user/{userId}:
+    delete:
+      tags:
+        - users
+      summary: "Delete a user"
+      description: "Deletes a user by their userId."
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+          description: "ID of the user to delete"
+      responses:
         "200":
-          "description": "Xóa người dùng thành công"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Username user123 với Id 60f8b5b35b9bfa0015b1a89d đã được xóa"
+          description: "User successfully deleted"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Username john_doe with Id 1234567890 has been deleted"
         "400":
-          "description": "Thiếu userId hoặc người dùng không tồn tại"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "userId bắt buộc"
+          description: "Bad request, userId is required or user not found"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "UserId is required or User not found"
         "500":
-          "description": "Lỗi máy chủ"
-          "content":
-            "application/json":
-              "schema":
-                "type": "object"
-                "properties":
-                  "message":
-                    "type": "string"
-                    "example": "Lỗi máy chủ"
-                  "error":
-                    "type": "string"
-                    "example": "Error message details"
-  "/v1/country/provinces":
+          description: "Server error"
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: "Server error occurred while deleting the user"
+
+  "/country/provinces":
     "get":
       "summary": "Lấy danh sách tất cả các tỉnh/thành phố"
       "tags":
@@ -1175,7 +1186,7 @@
                   "message":
                     "type": "string"
                     "example": "Đã xảy ra lỗi khi lấy danh sách tỉnh/thành phố"
-  "/v1/country/districts/{provinceId}":
+  "/country/districts/{provinceId}":
     "get":
       "summary": "Lấy danh sách quận/huyện theo mã tỉnh/thành phố"
       "tags":
@@ -1224,6 +1235,7 @@
                   "message":
                     "type": "string"
                     "example": "Đã xảy ra lỗi khi lấy danh sách quận/huyện"
+
 "components":
   securitySchemes:
     bearerAuth:
