@@ -21,9 +21,15 @@ const PublicLayout = () => {
       <FullScreenScroll>
         {IMAGE_CATEGORIES.map((item) => (
           <article
+<<<<<<< HEAD
             key={item.link} // Use link as unique key
             onClick={() => handleLink(item.link)} // Navigate on click
             className="h-full"
+=======
+            key={item.link}
+            onClick={() => handleLink(item.link)}
+            className="w-full h-full transform duration-300 ease-in-out"
+>>>>>>> de15884 (public)
           >
             <img
               src={item.image}
