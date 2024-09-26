@@ -2,7 +2,7 @@
 
 ## **GitHub Repositories**
 
-- **Code**: [GitHub Repository](https://github.com/baofreeman/FINAL-CLOTHES-SHOP-ECOMMERCER)
+- **Code**: [GitHub Repository](https://github.com/baofreeman/ECOMMERCER-WEBSITE)
 
 ## **Live Demo**
 
@@ -100,7 +100,7 @@ This project leverages Docker and Gitflow to streamline the development and depl
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/baofreeman/FINAL-CLOTHES-SHOP-ECOMMERCER.git
+   git clone https://github.com/baofreeman/ECOMMERCER-WEBSITE.git
 
    ```
 
@@ -157,7 +157,7 @@ To make development and deployment easier, you can use Docker to containerize th
 2. Clone the repository:
 
    ```bash
-   git clone https://github.com/baofreeman/FINAL-CLOTHES-SHOP-ECOMMERCER.git
+   git clone https://github.com/baofreeman/ECOMMERCER-WEBSITE.git
 
    ```
 
