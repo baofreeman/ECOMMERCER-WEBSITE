@@ -17,6 +17,7 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.EC2_SSH_KEY }}
+
       - name: Clear npm cache
         run: npm cache clean --force
 
