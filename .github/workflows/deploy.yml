@@ -23,4 +23,4 @@ jobs:
 
       - name: Deploy to EC2
         run: |
-          ssh -o StrictHostKeyChecking=no ubuntu@clothes-freeman.store 'cd ~/FINAL-CLOTHES-SHOP-ECOMMERCER && git pull origin main'
+          ssh -o StrictHostKeyChecking=no ubuntu@clothes-freeman.store 'cd ~/ECOMMERCER-WEBSITE && git pull origin main'
