@@ -9,21 +9,29 @@ import {
   thatlung,
 } from "../assets/img";
 
-export const OPTION_CATEGORIES = ["tất cả", "áo", "quần", "thắt lưng", "giày"];
-export const COLOR = [
-  "xanh",
-  "nâu",
-  "đen",
-  "trắng",
-  "kem",
-  "đỏ",
-  "tím",
-  "vàng",
-  "xám",
-  "hồng",
-  "xanh lá",
-  "cam",
+export const OPTION_CATEGORIES = [
+  { name: "tất cả", slug: "tat-ca" },
+  { name: "áo", slug: "ao" },
+  { name: "quần", slug: "quan" },
+  { name: "thắt lưng", slug: "that-lung" },
+  { name: "giày", slug: "giay" },
 ];
+
+export const COLOR = [
+  { name: "xanh", slug: "xanh" },
+  { name: "nâu", slug: "nau" },
+  { name: "đen", slug: "den" },
+  { name: "trắng", slug: "trang" },
+  { name: "kem", slug: "kem" },
+  { name: "đỏ", slug: "do" },
+  { name: "tím", slug: "tim" },
+  { name: "vàng", slug: "vang" },
+  { name: "xám", slug: "xam" },
+  { name: "hồng", slug: "hong" },
+  { name: "xanh lá", slug: "xanh-la" },
+  { name: "cam", slug: "cam" },
+];
+
 export const SIZE = ["XS", "S", "M", "L", "XL", "XXL"];
 export const SIZENUMBER = [
   "36",
@@ -39,27 +47,57 @@ export const SIZENUMBER = [
 ];
 export const SHIPPINGFEE = [0, 30000];
 export const SUBCATEGORY = [
-  { category: "áo", data: ["áo thun", "áo sơ mi", "áo tay dài", "áo khoác"] },
+  {
+    category: "áo",
+    categorySlug: "ao",
+    data: [
+      { name: "áo thun", slug: "ao-thun" },
+      { name: "áo sơ mi", slug: "ao-so-mi" },
+      { name: "áo tay dài", slug: "ao-tay-dai" },
+      { name: "áo khoác", slug: "ao-khoac" },
+    ],
+  },
   {
     category: "quần",
-    data: ["quần tây", "quần jean", "quần short", "quần lót"],
+    categorySlug: "quan",
+    data: [
+      { name: "quần tây", slug: "quan-tay" },
+      { name: "quần jean", slug: "quan-jean" },
+      { name: "quần short", slug: "quan-short" },
+      { name: "quần lót", slug: "quan-lot" },
+    ],
   },
-  { category: "giày", data: ["giày thể thao", "xăng đan", "giày da"] },
-  { category: "thắt lưng", data: ["cổ điển", "hiện đại"] },
+  {
+    category: "giày",
+    categorySlug: "giay",
+    data: [
+      { name: "giày thể thao", slug: "giay-the-thao" },
+      { name: "xăng đan", slug: "xang-dan" },
+      { name: "giày da", slug: "giay-da" },
+    ],
+  },
+  {
+    category: "thắt lưng",
+    categorySlug: "that-lung",
+    data: [
+      { name: "cổ điển", slug: "co-dien" },
+      { name: "hiện đại", slug: "hien-dai" },
+    ],
+  },
 ];
 
 export const IMAGE_CATEGORIES = [
-  { category: "áo", image: image1, link: "/shop/áo" },
-  { category: "quần", image: image2, link: "/shop/quần" },
-  { category: "nón", image: image3, link: "/shop/nón" },
+  { category: "áo", image: image1, link: "/shop/ao" },
+  { category: "quần", image: image2, link: "/shop/quan" },
+  { category: "nón", image: image3, link: "/shop/non" },
 ];
 
 export const IMAGE_LIST = [
-  { category: "áo", image: ao, link: "/shop/áo" },
-  { category: "quần", image: quan, link: "/shop/quần" },
-  { category: "thắt lưng", image: thatlung, link: "/shop/thắt%20lưng" },
-  { category: "giày", image: giay, link: "/shop/giày" },
-  { category: "nón", image: non, link: "/shop/nón" },
+  { category: "áo", image: ao, link: "/shop/ao" },
+  { category: "quần", image: quan, link: "/shop/quan" },
+  { category: "thắt lưng", image: thatlung, link: "/shop/that-lung" },
+  { category: "giày", image: giay, link: "/shop/giay" },
+  { category: "nón", image: non, link: "/shop/non" },
 ];
 
 export const FOOTER_LINK = [

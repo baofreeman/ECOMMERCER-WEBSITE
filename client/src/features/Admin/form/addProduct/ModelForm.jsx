@@ -21,8 +21,8 @@ const ModelForm = ({
   });
 
   const optionColor = COLOR.map((item) => (
-    <option key={item} value={item}>
-      {item}
+    <option key={item.slug} value={item.slug}>
+      {item.name}
     </option>
   ));
   return (

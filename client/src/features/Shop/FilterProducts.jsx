@@ -26,22 +26,22 @@ const FilterProducts = () => {
 
   // Filter category.
   const subCategoryOption = SUBCATEGORY.find(
-    (item) => item.category === category
+    (item) => item.categorySlug === category
   );
 
   const optionCategies = convertCategies;
 
   // Filter tag.
   const optionSub = subCategoryOption?.data?.map((item) => (
-    <option key={item} value={item} className="custom-option">
-      {item}
+    <option key={item.slug} value={item.slug} className="custom-option">
+      {item.name}
     </option>
   ));
 
   // Filter color.
   const colorOption = COLOR.map((item) => (
-    <option key={item} value={item} className="custom-option">
-      {item}
+    <option key={item.slug} value={item.slug} className="custom-option">
+      {item.name}
     </option>
   ));
 
@@ -59,6 +59,7 @@ const FilterProducts = () => {
 
   const handleTag = (e) => {
     const value = e.target.value;
+    console.log(value);
     setState({ ...state, tag: value });
   };
 

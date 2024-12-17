@@ -12,8 +12,8 @@ class ProductController {
       const currentPage = page ? parseInt(page, 10) : 1;
       const skip = (currentPage - 1) * limit;
 
-      const total = await ProductModal.countDocuments(); // Tính tổng số sản phẩm
-      const totalPages = Math.ceil(total / limit); // Tính tổng số trang
+      const total = await ProductModal.countDocuments();
+      const totalPages = Math.ceil(total / limit);
 
       let products;
       if (page === undefined) {
@@ -56,9 +56,9 @@ class ProductController {
   // POST /v1/product/create-product
   async createProduct(req, res) {
     try {
-      const { name, description, category, subCategory } = req.body;
+      const { name, description, category, subCategory, stock } = req.body;
 
-      if (!name || !description || !category || !subCategory) {
+      if ((!name || !description || !category || !subCategory, stock)) {
         return res.status(401).json({ message: "Không có dữ liệu" });
       }
       const newProduct = new ProductModal({
@@ -95,8 +95,8 @@ class ProductController {
   // PATCH /v1/product/update-product
   async updateProduct(req, res) {
     try {
-      const { id, name, description, category } = req.body;
-      if (!id || !name || !description || !category) {
+      const { id, name, description, category, stock } = req.body;
+      if ((!id || !name || !description || !category, stock)) {
         return res.status(401).json({ message: "Không có dữ liệu" });
       }
       const product = await ProductModal.findOneAndUpdate(

@@ -14,6 +14,10 @@ const ProductSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    slug: {
+      type: String,
+      required: true,
+    },
     subCategory: [
       {
         tag: { type: String },
@@ -42,6 +46,10 @@ const ProductSchema = mongoose.Schema(
       required: true,
     },
     active: { type: Boolean, default: true },
+    stock: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,
