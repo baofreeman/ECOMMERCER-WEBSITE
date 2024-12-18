@@ -95,13 +95,8 @@ class ProductController {
   // PATCH /v1/product/update-product
   async updateProduct(req, res) {
     try {
-<<<<<<< HEAD
       const { id, name, description, category } = req.body;
       if (!id || !name || !description || !category) {
-=======
-      const { id, name, description, category, stock } = req.body;
-      if ((!id || !name || !description || !category, stock)) {
->>>>>>> main
         return res.status(401).json({ message: "Không có dữ liệu" });
       }
       const product = await ProductModal.findOneAndUpdate(
