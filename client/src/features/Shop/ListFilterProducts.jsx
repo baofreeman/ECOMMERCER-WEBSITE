@@ -16,6 +16,7 @@ const ListFilterProducts = () => {
   const { search } = useLocation();
   const searchParams = queryString.parse(search);
   const { category } = useParams();
+  console.log(category);
   const [page, setPage] = useState(1);
 
   const [trigger, { data: products, isFetching, isSuccess, isLoading }] =

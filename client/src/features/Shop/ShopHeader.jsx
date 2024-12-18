@@ -19,20 +19,20 @@ const ShopHeader = () => {
   // Handler for category change
   const handleCategoryChange = useCallback((value) => {
     resetSearch();
-    navigate(value === "tất cả" || "" ? "/shop" : `/shop/${value}`);
+    navigate(value === "tat-ca" || "" ? "/shop" : `/shop/${value}`);
   }, []);
 
   return (
     <ul className="flex w-full dark:text-silver">
       {OPTION_CATEGORIES.map((item) => (
-        <li key={item}>
+        <li key={item.slug}>
           <Button
             size="m"
-            design={category === item ? "link-active" : "link-basic"}
-            value={item}
-            onClick={() => handleCategoryChange(item)}
+            design={category === item.slug ? "link-active" : "link-basic"}
+            value={item.slug}
+            onClick={() => handleCategoryChange(item.slug)}
           >
-            {item}
+            {item.name}
           </Button>
         </li>
       ))}
