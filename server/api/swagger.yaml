@@ -4,58 +4,34 @@
   "description": "API documentation for the Express application."
   "version": "1.0.0"
 "servers":
-<<<<<<< HEAD
   - "url": "http://localhost:3000/api/v1"
-=======
-  - "url": "https://clothes-freeman.store/api/v1"
->>>>>>> main
     "description": "Local server"
 "tags":
   - "name": "auth"
     "description": "Authenticantion user"
     "externalDocs":
       "description": "Find out more"
-<<<<<<< HEAD
       "url": "http://localhost:3000/api/v1"
-=======
-      "url": "https://clothes-freeman.store/api/v1"
->>>>>>> main
   - "name": "product"
     "description": "Access to products"
     "externalDocs":
       "description": "Find out more about our store"
-<<<<<<< HEAD
       "url": "http://localhost:3000/api/v1"
-=======
-      "url": "https://clothes-freeman.store/api/v1"
->>>>>>> main
   - "name": "orders"
     "description": "Access to orders"
     "externalDocs":
       "description": "Find out more about our store"
-<<<<<<< HEAD
       "url": "http://localhost:3000/api/v1"
-=======
-      "url": "https://clothes-freeman.store/api/v1"
->>>>>>> main
   - "name": "users"
     "description": "Access to users"
     "externalDocs":
       "description": "Find out more about our store"
-<<<<<<< HEAD
       "url": "http://localhost:3000/api/v1"
-=======
-      "url": "https://clothes-freeman.store/api/v1"
->>>>>>> main
   - "name": "country"
     "description": "Access to country"
     "externalDocs":
       "description": "Find out more about our store"
-<<<<<<< HEAD
       "url": "http://localhost:3000/api/v1"
-=======
-      "url": "https://clothes-freeman.store/api/v1"
->>>>>>> main
 
 "paths":
   "/auth/register":
