@@ -14,16 +14,21 @@ const ProductSchema = mongoose.Schema(
       type: String,
       required: true,
     },
-    slug: {
+    categorySlug: {
       type: String,
       required: true,
     },
     subCategory: [
       {
-        tag: { type: String },
+        tag: { type: String, required: true },
+        tagSlug: { type: String, required: true },
         model: [
           {
             color: {
+              type: String,
+              required: true,
+            },
+            colorSlug: {
               type: String,
               required: true,
             },

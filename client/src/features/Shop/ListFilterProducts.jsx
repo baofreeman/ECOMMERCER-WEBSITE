@@ -15,8 +15,12 @@ import { Loading } from "../../components/shared";
 const ListFilterProducts = () => {
   const { search } = useLocation();
   const searchParams = queryString.parse(search);
+<<<<<<< HEAD
   const { category } = useParams();
   console.log(category);
+=======
+  const { categorySlug } = useParams();
+>>>>>>> ba58dcf (update slug)
   const [page, setPage] = useState(1);
 
   const [trigger, { data: products, isFetching, isSuccess, isLoading }] =
@@ -25,14 +29,14 @@ const ListFilterProducts = () => {
   useEffect(() => {
     setPage(1);
     // Trigger API call when category or search changes
-    trigger({ category, search: searchParams, page: 1 });
-  }, [category, search]);
+    trigger({ categorySlug, search: searchParams, page: 1 });
+  }, [categorySlug, search]);
 
   // Fetch filtered products when page changes
   useEffect(() => {
     // If page is greater than 1, fetch the products for that page
     if (page > 1) {
-      trigger({ category, search: searchParams, page });
+      trigger({ categorySlug, search: searchParams, page });
     }
   }, [page]);
 

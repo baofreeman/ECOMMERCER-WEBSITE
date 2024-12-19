@@ -21,7 +21,7 @@ const ProductExtend = ({ productId }) => {
   const dispatch = useDispatch();
   const location = useLocation();
   const search = queryString.parse(location.search);
-  const { category } = useParams();
+  const { categorySlug } = useParams();
   const openSidebarRight = useSelector(selectSidebarRight);
 
   // Fetch the product details.
@@ -39,7 +39,7 @@ const ProductExtend = ({ productId }) => {
       dispatch(setSidebarRight(true));
     }
     navigate({
-      pathname: category ? `/shop/${category}` : "/shop",
+      pathname: categorySlug ? `/shop/${categorySlug}` : "/shop",
       search: createSearchParams({
         ...search,
         productId: product?._id,

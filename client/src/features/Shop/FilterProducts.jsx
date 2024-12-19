@@ -19,14 +19,16 @@ const FilterProducts = () => {
     size: "",
   };
 
+  console.log(initialValues);
+
   // Set query params.
   const [state, setState] = useState(initialValues);
   const [searchParams, setSearchParams] = useSearchParams();
-  const { category } = useParams();
+  const { categorySlug } = useParams();
 
   // Filter category.
   const subCategoryOption = SUBCATEGORY.find(
-    (item) => item.categorySlug === category
+    (item) => item.categorySlug === categorySlug
   );
 
   const optionCategies = convertCategies;
@@ -83,7 +85,7 @@ const FilterProducts = () => {
 
   useEffect(() => {
     handleReset();
-  }, [category]);
+  }, [categorySlug]);
 
   useEffect(() => {
     const fn = (state) =>
@@ -91,14 +93,14 @@ const FilterProducts = () => {
     const result = fn(state);
     if (Object.keys(result).length > 0) {
       navigate({
-        pathname: `/shop/${category}`,
+        pathname: `/shop/${categorySlug}`,
         search: createSearchParams({ ...result }).toString(),
       });
     }
   }, [state]);
 
   // Css selected query.
-  const catCss = category
+  const catCss = categorySlug
     ? "text-active drop-shadow-md bg-gray rounded px-3 py-2"
     : "text-silver px-3 py-2";
   const tagCss = state.tag
@@ -119,7 +121,7 @@ const FilterProducts = () => {
           <h1 className={`sm:text-sm sm:px-3 sm:hidden ${catCss}`}>Danh mục</h1>
           <Select
             design="basic"
-            value={category || ""}
+            value={categorySlug || ""}
             onChange={(e) => handleCategory(e)}
             label={"Danh mục"}
           >
@@ -132,9 +134,9 @@ const FilterProducts = () => {
           </h1>
           <Select
             design="basic"
-            value={state.tag}
+            value={state.tagSlug}
             onChange={(e) => handleTag(e)}
-            disabled={!category}
+            disabled={!categorySlug}
             label={"Kiểu dáng"}
           >
             {optionSub}
@@ -146,8 +148,8 @@ const FilterProducts = () => {
           </h1>
           <Select
             design="basic"
-            value={state.color}
-            disabled={!category}
+            value={state.colorSlug}
+            disabled={!categorySlug}
             onChange={(e) => handleColor(e)}
             label={"Màu sắc"}
           >
@@ -159,7 +161,7 @@ const FilterProducts = () => {
           <Select
             design="basic"
             value={state.size}
-            disabled={!category}
+            disabled={!categorySlug}
             onChange={(e) => handleSize(e)}
             label={"Kích cỡ"}
           >
