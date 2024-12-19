@@ -4,7 +4,7 @@ import { Button } from "../../components/ui";
 import { useCallback } from "react";
 
 const ShopHeader = () => {
-  const { category } = useParams();
+  const { categorySlug } = useParams();
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -28,7 +28,7 @@ const ShopHeader = () => {
         <li key={item.slug}>
           <Button
             size="m"
-            design={category === item.slug ? "link-active" : "link-basic"}
+            design={categorySlug === item.slug ? "link-active" : "link-basic"}
             value={item.slug}
             onClick={() => handleCategoryChange(item.slug)}
           >

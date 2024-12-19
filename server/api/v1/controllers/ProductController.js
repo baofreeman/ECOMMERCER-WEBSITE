@@ -190,16 +190,16 @@ class ProductController {
   async getFilterProducts(req, res) {
     try {
       const { tag, color, size, page } = req.query;
-      const { category } = req.params;
+      console.log(tag);
+      const { categorySlug } = req.params;
       const limit = 8;
       const currentPage = page ? parseInt(page, 10) : 1;
       const skip = (currentPage - 1) * limit;
-
       // Build the query object
       let query = {};
-      if (category) query.category = category;
-      if (tag) query["subCategory.tag"] = tag;
-      if (color) query["subCategory.model.color"] = color;
+      if (categorySlug) query.categorySlug = categorySlug;
+      if (tag) query["subCategory.tagSlug"] = tag;
+      if (color) query["subCategory.model.colorSlug"] = color;
       if (size) query["subCategory.model.skus.size"] = size;
 
       // Fetch products and total count in parallel

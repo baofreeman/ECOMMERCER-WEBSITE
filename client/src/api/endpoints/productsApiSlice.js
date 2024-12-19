@@ -72,9 +72,9 @@ export const productsApiSlice = productSlice.injectEndpoints({
 
     // GET filter product with lazy loading
     getFilterProducts: builder.query({
-      query: ({ category, search, page }) => {
+      query: ({ categorySlug, search, page }) => {
         const parser = queryString.stringify(search);
-        const url = `/product/${category}?${parser}&page=${page}`;
+        const url = `/product/${categorySlug}?${parser}&page=${page}`;
         return {
           url: url,
           method: "GET",

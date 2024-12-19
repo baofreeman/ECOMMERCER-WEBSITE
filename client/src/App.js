@@ -75,7 +75,7 @@ function App() {
             {/* Shop routes */}
             <Route path="/shop" element={<Shop />}>
               <Route index element={<AllProducts />} />
-              <Route path=":category" element={<ListFilterProducts />} />
+              <Route path=":categorySlug" element={<ListFilterProducts />} />
             </Route>
 
             {/* Cart routes */}

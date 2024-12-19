@@ -37,11 +37,14 @@ const ModalDetail = () => {
     }
   }, [selectedSizeId, fetchVariants]);
 
-  const variants = product?.subCategory.flatMap(({ tag, model, _id }) => ({
-    tag,
-    model,
-    _id,
-  }));
+  const variants = product?.subCategory.flatMap(
+    ({ tag, tagSlug, model, _id }) => ({
+      tag,
+      tagSlug,
+      model,
+      _id,
+    })
+  );
 
   const handleSizeChange = (e) => {
     const sizeId = e.target.value;
