@@ -15,12 +15,7 @@ import { Loading } from "../../components/shared";
 const ListFilterProducts = () => {
   const { search } = useLocation();
   const searchParams = queryString.parse(search);
-<<<<<<< HEAD
-  const { category } = useParams();
-  console.log(category);
-=======
   const { categorySlug } = useParams();
->>>>>>> ba58dcf (update slug)
   const [page, setPage] = useState(1);
 
   const [trigger, { data: products, isFetching, isSuccess, isLoading }] =
