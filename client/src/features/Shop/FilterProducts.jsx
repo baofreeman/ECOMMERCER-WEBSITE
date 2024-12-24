@@ -19,8 +19,6 @@ const FilterProducts = () => {
     size: "",
   };
 
-  console.log(initialValues);
-
   // Set query params.
   const [state, setState] = useState(initialValues);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -61,7 +59,6 @@ const FilterProducts = () => {
 
   const handleTag = (e) => {
     const value = e.target.value;
-    console.log(value);
     setState({ ...state, tag: value });
   };
 

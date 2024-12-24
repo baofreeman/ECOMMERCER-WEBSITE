@@ -10,7 +10,7 @@ require("dotenv").config();
 
 // Cors
 const corsOptions = {
-  origin: ["http://localhost:3000", process.env.CLIENT_URL],
+  origin: ["https://clothes-freeman.store"],
   credentials: true,
   optionsSuccessStatus: 200,
 };
