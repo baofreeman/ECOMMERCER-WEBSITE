@@ -8,6 +8,14 @@ const { swaggerDocument } = require("./v1/config/swagger.js");
 require("dotenv").config({ path: ".env.local" });
 require("dotenv").config();
 
+// Cors
+const corsOptions = {
+  origin: ["http://localhost:3000", process.env.CLIENT_URL],
+  credentials: true,
+  optionsSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
+
 const product = require("./v1/routers/product.js");
 const order = require("./v1/routers/order.js");
 const auth = require("./v1/routers/auth.js");
@@ -23,14 +31,6 @@ dbConnect();
 
 // Helmet
 app.use(helmet());
-
-// Cors
-const corsOptions = {
-  origin: ["http://localhost:3000", process.env.CLIENT_URL],
-  credentials: true,
-  optionsSuccessStatus: 200,
-};
-app.use(cors(corsOptions));
 
 // JSON
 app.use(
