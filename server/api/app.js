@@ -9,10 +9,7 @@ require("dotenv").config({ path: ".env.local" });
 require("dotenv").config();
 
 // Cors
-const allowedOrigins = [
-  "https://clothes-freeman.store",
-  "http://localhost:3000",
-];
+const allowedOrigins = [process.env.CLIENT_URL, "http://localhost:3000"];
 const corsOptions = {
   origin: (origin, callback) => {
     if (allowedOrigins.includes(origin) || !origin) {
