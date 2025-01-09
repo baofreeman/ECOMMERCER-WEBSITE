@@ -5,8 +5,7 @@ services:
       dockerfile: Dockerfile
     restart: always
     environment:
-      - DATABASE=host.docker.internal
-      - CLIENT_URL=https://clothes-freeman.store
+      - DATABASE=172.17.0.1
     ports:
       - "8000:8000"
     expose:
@@ -21,4 +20,3 @@ services:
       - ./nginx/prod/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - backend
-
