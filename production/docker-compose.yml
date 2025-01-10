@@ -17,5 +17,7 @@ services:
     volumes:
       - ../client/build:/usr/share/nginx/html
       - ./nginx/prod/default.conf:/etc/nginx/conf.d/default.conf
+      - /opt/certs/cloudflare.key:/etc/ssl/private/cloudflare.key:ro
+      - /opt/certs/cloudflare.pem:/etc/ssl/certs/cloudflare.pem:ro
     depends_on:
       - backend
