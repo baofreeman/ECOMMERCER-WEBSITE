@@ -189,15 +189,15 @@ class ProductController {
   // GET v1/product/traits
   async getFilterProducts(req, res) {
     try {
+      console.log(req.params);
       const { tag, color, size, page } = req.query;
-      console.log(tag);
-      const { categorySlug } = req.params;
+      const { category } = req.params;
       const limit = 8;
       const currentPage = page ? parseInt(page, 10) : 1;
       const skip = (currentPage - 1) * limit;
       // Build the query object
       let query = {};
-      if (categorySlug) query.categorySlug = categorySlug;
+      if (category) query.categorySlug = category;
       if (tag) query["subCategory.tagSlug"] = tag;
       if (color) query["subCategory.model.colorSlug"] = color;
       if (size) query["subCategory.model.skus.size"] = size;

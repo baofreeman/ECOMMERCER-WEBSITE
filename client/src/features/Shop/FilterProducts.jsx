@@ -25,6 +25,7 @@ const FilterProducts = () => {
   const [state, setState] = useState(initialValues);
   const [searchParams, setSearchParams] = useSearchParams();
   const { categorySlug } = useParams();
+  console.log(categorySlug);
 
   // Filter category.
   const subCategoryOption = SUBCATEGORY.find(
