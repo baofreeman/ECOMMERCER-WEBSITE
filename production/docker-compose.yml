@@ -6,8 +6,6 @@ services:
     restart: always
     environment:
       - DATABASE=172.17.0.1
-    ports:
-      - "8000:8000"
     expose:
       - "8000"
   nginx:
