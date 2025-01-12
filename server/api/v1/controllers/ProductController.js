@@ -190,7 +190,6 @@ class ProductController {
   async getFilterProducts(req, res) {
     try {
       const { tag, color, size, page } = req.query;
-      console.log(tag);
       const { categorySlug } = req.params;
       const limit = 8;
       const currentPage = page ? parseInt(page, 10) : 1;
