@@ -57,7 +57,7 @@ const countrySlice = createSlice({
         state.error = null;
       })
       .addCase(fetchProvince.fulfilled, (state, action) => {
-        state.province = action.payload.results || [];
+        state.province = action.payload || [];
         state.loading = false;
       })
       .addCase(fetchProvince.rejected, (state, action) => {
@@ -69,7 +69,7 @@ const countrySlice = createSlice({
         state.error = null;
       })
       .addCase(fetchDistrict.fulfilled, (state, action) => {
-        state.district = action.payload.results || [];
+        state.district = action.payload || [];
         state.loading = false;
       })
       .addCase(fetchDistrict.rejected, (state, action) => {
