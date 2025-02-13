@@ -35,7 +35,7 @@ class AuthController {
         .lean()
         .exec();
       if (duplicate) {
-        return res.status(400).json({ message: "Tên đăng nhập đã có" });
+        return res.status(400).json({ message: "Email đã được đăng ký" });
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -66,7 +66,7 @@ class AuthController {
       if (!email || !otp) {
         return res
           .status(400)
-          .json({ status: "failed", message: "Cần nhập tất cả ô" });
+          .json({ status: "failed", message: "Cần nhập tất cả trường" });
       }
       const existingUser = await UserModel.findOne({ email });
       if (!existingUser) {

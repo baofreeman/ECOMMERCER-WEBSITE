@@ -37,10 +37,16 @@ const sendEmailOrder = async (req, order) => {
       <p>Clothes Store Team</p>
     `;
 
+    const recipientEmail = user?.userId?.email || "freeman.dev10@gmail.com";
+
+    if (!recipientEmail) {
+      throw new Error("Không tìm thấy địa chỉ email người nhận.");
+    }
+
     // Send email
     await transporter.sendMail({
       from: process.env.EMAIL_FROM,
-      to: user.userId.email,
+      to: recipientEmail,
       subject: "Clothes - Xác nhận đơn hàng",
       html: emailContent,
     });

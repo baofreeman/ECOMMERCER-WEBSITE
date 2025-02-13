@@ -78,7 +78,6 @@ const CheckoutForm = () => {
     setProvince(e.target.value);
     clearErrors("province");
   };
-  console.log(province);
   const handleDistrict = (e) => {
     setDistrict(e.target.value);
     clearErrors("district");
@@ -106,15 +105,19 @@ const CheckoutForm = () => {
       paymentMethod,
       shippingPrice,
     } = data;
-    const valueProvince = provinces.find(({ code }) => code === province);
-    const valueDistrict = districts.find(({ code }) => code === district);
+    const valueProvince = provinces.find(
+      ({ code }) => Number(code) === Number(province)
+    );
+    const valueDistrict = districts.find(
+      ({ code }) => Number(code) === Number(district)
+    );
     let totalPrice = Number(itemsPrice) + Number(shippingPrice);
     const newData = {
       cart,
       name,
       phone,
-      province: valueProvince.province_name,
-      district: valueDistrict.district_name,
+      province: valueProvince.name,
+      district: valueDistrict.name,
       userId: userId,
       address,
       note,

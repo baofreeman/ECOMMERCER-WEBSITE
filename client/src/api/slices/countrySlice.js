@@ -13,7 +13,7 @@ export const fetchProvince = createAsyncThunk(
   async () => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}country/provinces`
+        `${process.env.REACT_APP_SERVER_URL}/country/provinces`
       );
       return res.data; // Result
     } catch (error) {
@@ -28,7 +28,7 @@ export const fetchDistrict = createAsyncThunk(
   async (provinceId) => {
     try {
       const res = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}country/districts/${provinceId}`,
+        `${process.env.REACT_APP_SERVER_URL}/country/districts/${provinceId}`,
         {
           params: { provinceId }, // Pass provinceId as query parameter
         }
