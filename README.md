@@ -53,11 +53,19 @@ The user interface design for this project is done on Figma. You can view the fu
 
 - **Service**: MongoDB Atlas with Mongoose ODM
 
-### **Docker**
+### **Deployment**
 
-- **Containerization**: Docker, Docker Compose
+#### **Frontend Deployment (Vercel)**
 
-### **Deployment**: Docker, Nginx, EC2, Certbot for SSL
+- **Platform**: Vercel
+- **Deployment URL**: [Clothes by Freeman](https://clothes-freeman.store)
+- **Automatic Deployment**: Vercel automatically builds and deploys the frontend when changes are pushed to GitHub.
+
+#### **Backend Deployment (Render)**
+
+- **Platform**: Render
+- **API Base URL**: `https://clothes-freeman-api.onrender.com`
+- **Automatic Deployment**: Render automatically deploys the backend when changes are pushed to the main branch in GitHub.
 
 ## **Key Features**
 
@@ -81,17 +89,7 @@ The user interface design for this project is done on Figma. You can view the fu
 
 ## **Deployment and Containerization**
 
-This project leverages Docker and Gitflow to streamline the development and deployment processes for both the frontend and backend.
-
-### **Docker Containerization**
-
-- **Consistent Environments**: Both the frontend and backend of the project are containerized using Docker, ensuring that the application runs consistently across different environments, from development to production.
-- **Docker Compose**: Docker Compose is used to manage multiple containers efficiently. It orchestrates the containers for the client (`frontend`) and server (`backend`) directories, simplifying the process of building, running, and managing the application as a whole.
-
-### **Gitflow Deployment Workflow**
-
-- **Structured Development**: The project follows the Gitflow branching model to organize and streamline the development process. This approach facilitates better collaboration and continuous integration/delivery (CI/CD) practices by using feature branches, release branches, and pull requests.
-- **Automated Deployment to EC2**: The deployment to EC2 is automated using the CI/CD pipeline, which integrates with GitHub Actions. This ensures that every change that gets merged into the main branch is automatically tested, built, and deployed to the EC2 instance without manual intervention.
+This project is deployed using Vercel for the frontend and Render for the backend, ensuring seamless and efficient deployment.
 
 ## **How to Run the Project Locally**
 
@@ -147,43 +145,6 @@ This project leverages Docker and Gitflow to streamline the development and depl
 
    ```bash
    npm run dev
-   ```
-
-Running with Docker
-To make development and deployment easier, you can use Docker to containerize the application.
-
-1. Ensure Docker and Docker Compose are installed on your machine.
-
-2. Clone the repository:
-
-   ```bash
-   git clone https://github.com/baofreeman/ECOMMERCER-WEBSITE.git
-
-   ```
-
-3. Navigate to the project directory:
-
-   ```bash
-   cd clothes
-
-   ```
-
-4. Build and start the Docker containers:
-
-   ```bash
-   docker compose up --build
-
-   ```
-
-5. Access the application:
-
-   - **Frontend**: Open http://localhost:3000 in your web browser.
-   - **Backend**: The backend server will be running on http://localhost:8000.
-
-6. Stop the Docker containers:
-
-   ```bash
-   docker compose down
    ```
 
 ## **Contribution**
