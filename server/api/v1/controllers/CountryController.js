@@ -13,7 +13,6 @@ class CountryController {
   async districts(req, res) {
     try {
       const { provinceId } = req.params;
-      console.log(provinceId);
       const result = await axios.get(`https://provinces.open-api.vn/api/d/`);
       const districts = result.data;
       const filterDistrict = districts.filter((district) => {
