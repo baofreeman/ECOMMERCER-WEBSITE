@@ -40,12 +40,13 @@ const CartDetail = () => {
         callback={() => handleDelete(item)}
         data={item}
         title={"Bạn có muốn xóa sản phẩm khỏi giỏ hàng?"}
-      />
+      />,
+      "cart"
     );
   };
 
   return (
-    <section className="w-full h-[100%]">
+    <section className="w-full h-full">
       {cart.length > 0 ? (
         <table className="w-full">
           <thead className="w-full uppercase">
@@ -117,7 +118,7 @@ const CartDetail = () => {
           </tbody>
         </table>
       ) : (
-        <div className="w-full flex flex-col justify-center items-center h-[100%]">
+        <div className="w-full flex flex-col justify-center items-center h-full">
           <span>Không có sản phẩm</span>
           <Button size="m" design="link-primary" width="max" to={"/shop"}>
             Tiếp tục mua sắm

@@ -21,7 +21,7 @@ const Search = () => {
   const handleSearch = (e) => {
     const key = e.target.value;
     trigger(key); // Trigger the search
-    openModal();
+    openModal("search");
   };
 
   const handleLink = (item) => {

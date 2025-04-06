@@ -3,7 +3,7 @@ import { Button, Errors } from "../ui";
 
 const SearchResults = ({ data, isLoading, isError, error, onLinkClick }) => {
   return (
-    <div className="absolute top-[36px] left-0 w-full h-[210px] bg-black border rounded z-50 overflow-hidden">
+    <div className="absolute top-[52px] w-full h-[210px] bg-black border rounded z-50 overflow-hidden">
       <div className="relative w-full h-full bg-white dark:bg-black border rounded">
         <div className="px-[20px] py-[10px] h-full overflow-scroll no-scrollbar">
           {isLoading && <Loading />}
