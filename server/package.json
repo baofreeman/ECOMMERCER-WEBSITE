@@ -5,10 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node api/server.js",
-    "dev": "nodemon api/server.js",
+    "dev": "nodemon --exec babel-node api/server.js",
     "build-api": "babel api -d build --copy-files",
-    "build": "node build/server.js"
+    "build": "node build/server.js",
+    "start": "node build/server.js",
+    "postinstall": "npm run build-api"
   },
   "author": "freeman.dev10",
   "license": "ISC",
