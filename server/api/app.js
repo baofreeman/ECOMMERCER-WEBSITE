@@ -23,6 +23,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+const ping = require("./v1/routers/ping.js");
 const product = require("./v1/routers/product.js");
 const order = require("./v1/routers/order.js");
 const auth = require("./v1/routers/auth.js");
@@ -57,6 +58,7 @@ app.use(passport.initialize());
 app.disable("x-powered-by");
 
 // Router
+app.use("/api/v1/ping", ping);
 app.use("/api/v1/auth", auth);
 app.use("/api/v1/product", product);
 app.use("/api/v1/order", order);
