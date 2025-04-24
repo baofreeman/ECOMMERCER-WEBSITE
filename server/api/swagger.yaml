@@ -4,34 +4,34 @@
   "description": "API documentation for the Express application."
   "version": "1.0.0"
 "servers":
-  - "url": "https://clothes-freeman.store/api/v1"
+  - "url": "https://api.clothes-freeman.store/api/v1"
     "description": "Local server"
 "tags":
   - "name": "auth"
     "description": "Authenticantion user"
     "externalDocs":
       "description": "Find out more"
-      "url": "https://clothes-freeman.store/api/v1"
+      "url": "https://api.clothes-freeman.store/api/v1"
   - "name": "product"
     "description": "Access to products"
     "externalDocs":
       "description": "Find out more about our store"
-      "url": "https://clothes-freeman.store/api/v1"
+      "url": "https://api.clothes-freeman.store/api/v1"
   - "name": "orders"
     "description": "Access to orders"
     "externalDocs":
       "description": "Find out more about our store"
-      "url": "https://clothes-freeman.store/api/v1"
+      "url": "https://api.clothes-freeman.store/api/v1"
   - "name": "users"
     "description": "Access to users"
     "externalDocs":
       "description": "Find out more about our store"
-      "url": "https://clothes-freeman.store/api/v1"
+      "url": "https://api.clothes-freeman.store/api/v1"
   - "name": "country"
     "description": "Access to country"
     "externalDocs":
       "description": "Find out more about our store"
-      "url": "https://clothes-freeman.store/api/v1"
+      "url": "https://api.clothes-freeman.store/api/v1"
 
 "paths":
   "/auth/register":
@@ -1012,12 +1012,12 @@
 
   "/user":
     "get":
-      "summary": "Lấy danh sách người dùng"
+      "summary": "Get all users"
       "tags":
         - "users"
       "responses":
         "200":
-          "description": "Danh sách người dùng"
+          "description": "A list of users"
           "content":
             "application/json":
               "schema":
@@ -1048,7 +1048,7 @@
                       "format": "date-time"
                       "example": "2024-09-01T12:00:00Z"
         "400":
-          "description": "Không tìm thấy dữ liệu"
+          "description": "No data found"
           "content":
             "application/json":
               "schema":
@@ -1056,9 +1056,9 @@
                 "properties":
                   "message":
                     "type": "string"
-                    "example": "Không tìm thấy dữ liệu"
+                    "example": "No data found"
     "put":
-      "summary": "Cập nhật vai trò người dùng"
+      "summary": "Update user roles"
       "tags":
         - "users"
       "requestBody":
@@ -1078,7 +1078,7 @@
                     "example": "admin"
       "responses":
         "200":
-          "description": "Cập nhật vai trò thành công"
+          "description": "Update user roles successfully"
           "content":
             "application/json":
               "schema":
@@ -1086,9 +1086,9 @@
                 "properties":
                   "message":
                     "type": "string"
-                    "example": "Username user123 với Id 60f8b5b35b9bfa0015b1a89d đã cập nhật vai trò"
+                    "example": "Username user123 with Id 60f8b5b35b9bfa0015b1a89d has been updated"
         "400":
-          "description": "Thiếu UserId hoặc người dùng không tồn tại"
+          "description": "Missing userId or roles"
           "content":
             "application/json":
               "schema":
@@ -1157,12 +1157,12 @@
 
   "/country/provinces":
     "get":
-      "summary": "Lấy danh sách tất cả các tỉnh/thành phố"
+      "summary": "Get list of provinces/cities"
       "tags":
         - "country"
       "responses":
         "200":
-          "description": "Thành công - Trả về danh sách các tỉnh/thành phố"
+          "description": "Success - Returns a list of provinces/cities"
           "content":
             "application/json":
               "schema":
@@ -1177,7 +1177,7 @@
                       "type": "string"
                       "example": "Hà Nội"
         "500":
-          "description": "Lỗi máy chủ khi lấy danh sách tỉnh/thành phố"
+          "description": "Server error when fetching provinces/cities"
           "content":
             "application/json":
               "schema":
@@ -1185,10 +1185,10 @@
                 "properties":
                   "message":
                     "type": "string"
-                    "example": "Đã xảy ra lỗi khi lấy danh sách tỉnh/thành phố"
+                    "example": "Server error occurred while fetching provinces/cities"
   "/country/districts/{provinceId}":
     "get":
-      "summary": "Lấy danh sách quận/huyện theo mã tỉnh/thành phố"
+      "summary": "Get list of districts of a province/city"
       "tags":
         - "country"
       "parameters":
@@ -1197,11 +1197,11 @@
           "schema":
             "type": "string"
           "required": true
-          "description": "Mã tỉnh/thành phố"
+          "description": "Province/City ID"
           "example": "01"
       "responses":
         "200":
-          "description": "Thành công - Trả về danh sách các quận/huyện của tỉnh/thành phố"
+          "description": "Success - Returns a list of districts"
           "content":
             "application/json":
               "schema":
@@ -1216,7 +1216,7 @@
                       "type": "string"
                       "example": "Quận Ba Đình"
         "400":
-          "description": "Yêu cầu không hợp lệ - Mã tỉnh/thành phố không tồn tại"
+          "description": "Request error - Invalid province/city ID"
           "content":
             "application/json":
               "schema":
@@ -1224,9 +1224,9 @@
                 "properties":
                   "message":
                     "type": "string"
-                    "example": "Mã tỉnh/thành phố không hợp lệ"
+                    "example": "ProviceId is required or invalid"
         "500":
-          "description": "Lỗi máy chủ khi lấy danh sách quận/huyện"
+          "description": "Server error when fetching districts"
           "content":
             "application/json":
               "schema":
@@ -1234,7 +1234,7 @@
                 "properties":
                   "message":
                     "type": "string"
-                    "example": "Đã xảy ra lỗi khi lấy danh sách quận/huyện"
+                    "example": "Missing provinceId or server error"
 
 "components":
   securitySchemes:
